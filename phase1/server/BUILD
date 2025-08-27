@@ -12,7 +12,10 @@ go_library(
     importpath = "home/phase1/server",
     visibility = ["//visibility:private"],
     deps = [
+        "//phase1/server/handler",
+        "//phase1/server/service",
         "@com_github_labstack_echo_v4//:go_default_library",
         "@com_github_labstack_echo_v4//middleware:go_default_library",
+        "@com_github_lib_pq//:go_default_library",
     ],
 )

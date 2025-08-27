@@ -1,0 +1,23 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "tdd_lib",
+    srcs = [
+        "main.go",
+        "server.go",
+    ],
+    importpath = "home/phase1/tdd",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "tdd",
+    embed = [":tdd_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "tdd_test",
+    srcs = ["server_test.go"],
+    embed = [":tdd_lib"],
+)

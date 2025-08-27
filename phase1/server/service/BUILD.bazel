@@ -1,0 +1,12 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "service",
+    srcs = [
+        "message_service.go",
+        "message_service_cockroachdbimpl.go",
+    ],
+    importpath = "home/phase1/server/service",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_cockroachdb_cockroach_go_v2//crdb:go_default_library"],
+)

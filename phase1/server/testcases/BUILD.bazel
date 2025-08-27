@@ -1,0 +1,20 @@
+load("@rules_go//go:def.bzl", "go_test")
+
+go_test(
+    name = "testcases_test",
+    srcs = [
+        "main_cockroach_container_test.go",
+        "main_test.go",
+    ],
+    deps = [
+        "//phase1/server/handler",
+        "//phase1/server/service",
+        "@com_github_cockroachdb_cockroach_go_v2//crdb/crdbpgxv5:go_default_library",
+        "@com_github_cockroachdb_cockroach_go_v2//testserver:go_default_library",
+        "@com_github_jackc_pgx_v5//:go_default_library",
+        "@com_github_labstack_echo_v4//:go_default_library",
+        "@com_github_stretchr_testify//assert:go_default_library",
+        "@com_github_testcontainers_testcontainers_go//:go_default_library",
+        "@com_github_testcontainers_testcontainers_go_modules_cockroachdb//:go_default_library",
+    ],
+)

@@ -1,0 +1,17 @@
+FROM golang:1.23-alpine AS build-stage
+WORKDIR /home
+COPY go.mod go.sum ./
+RUN go mod download
+COPY phase1/server/ phase1/server/
+RUN go build -o main ./phase1/server
+
+# Run the tests in the container
+FROM build-stage AS run-test-stage
+RUN go test -v ./...
+
+# Deploy the application binary into a clean image
+FROM alpine:latest AS build-release-stage
+WORKDIR /
+COPY --from=build-stage /home/main /main
+EXPOSE 8080
+ENTRYPOINT ["/main"]
