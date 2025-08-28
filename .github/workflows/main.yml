@@ -22,5 +22,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+          context: .
+          file: ./docker/Dockerfile.multistage
+          target: run-test-stage
+          progress: plain
+          no-cache: true
+          push: false
