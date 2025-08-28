@@ -1,36 +1,11 @@
-version: "3.8"
-
 services:
-  docker-gs-ping-roach:
-    depends_on:
-      - roach
-    build:
-      context: .
-    container_name: rest-server
-    hostname: rest-server
-    networks:
-      - mynet
-    ports:
-      - 9090:9090
-    env_file:
-      - .env
-    deploy:
-      restart_policy:
-        condition: on-failure
-  roach:
-    image: cockroachdb/cockroach:latest
-    container_name: roach
-    hostname: db
-    networks:
-      - mynet
-    ports:
-      - 26257:26257
-      - 8080:8080
+  tests:
+    image: golang:1.23
+    stop_signal: SIGKILL
+    stdin_open: true
+    tty: true
+    working_dir: $PWD
     volumes:
-      - roach:/cockroach/cockroach-data
-    command: start-single-node --insecure
-volumes:
-  roach:
-networks:
-  mynet:
-    driver: bridge
+      - $PWD:$PWD
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: go test -v phase1/server/testcases/main_cockroach_container_test.go

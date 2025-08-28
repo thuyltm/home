@@ -1,4 +1,4 @@
-FROM golang:1.23-alpine AS build-stage
+FROM golang:1.23 AS build-stage
 WORKDIR /home
 COPY go.mod go.sum ./
 RUN go mod download
@@ -7,7 +7,9 @@ RUN go build -o main ./phase1/server
 
 # Run the tests in the container
 FROM build-stage AS run-test-stage
-RUN go test -v ./...
+RUN apt-get update && apt-get install -y wget
+RUN go test -v ./phase1/server/testcases/main_test.go
+
 
 # Deploy the application binary into a clean image
 FROM alpine:latest AS build-release-stage
