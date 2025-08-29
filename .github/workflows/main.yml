@@ -28,3 +28,7 @@ jobs:
           progress: plain
           no-cache: true
           push: false
+          tags: docker-gs-ping-test:latest
+          
+      - name: Run tests container
+        run: docker compose run --rm tests
