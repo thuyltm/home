@@ -1,0 +1,20 @@
+load("@rules_go//go:def.bzl", "go_test")
+
+go_test(
+    name = "echo_testcases_test",
+    srcs = ["echo_websocket_test.go"],
+    deps = [
+        "@com_github_gorilla_websocket//:go_default_library",
+    ],
+)
+
+go_test(
+    name = "complex_testcases_test",
+    srcs = [
+        "complex_websocket_test.go",
+    ],
+    deps = [
+        "@com_github_gorilla_websocket//:go_default_library",
+         "//phase1/websocket/conn"
+    ],
+)

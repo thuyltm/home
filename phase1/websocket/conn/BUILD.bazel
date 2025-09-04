@@ -1,0 +1,12 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "conn",
+    srcs = [
+        "client.go",
+        "hub.go",
+    ],
+    importpath = "home/phase1/websocket/conn",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_gorilla_websocket//:go_default_library"],
+)
