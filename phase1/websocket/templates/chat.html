@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Go WebSocket Client</title>
+</head>
+<body>
+    <h1>Go WebSocket Client</h1>
+    <input type="text" id="messageInput" placeholder="Enter message">
+    <button onclick="sendMessage()">Send</button>
+    <div id="messages"></div>
+
+    <script>
+        const ws = new WebSocket("ws://localhost:8080/ws");
+        const messagesDiv = document.getElementById("messages");
+        const messageInput = document.getElementById("messageInput");
+
+        ws.onopen = function(event) {
+            messagesDiv.innerHTML += "<p>Connected to WebSocket server.</p>";
+        };
+
+        ws.onmessage = function(event) {
+            messagesDiv.innerHTML += `<p>Received: ${event.data}</p>`;
+        };
+
+        ws.onclose = function(event) {
+            messagesDiv.innerHTML += "<p>Disconnected from WebSocket server.</p>";
+        };
+
+        ws.onerror = function(error) {
+            messagesDiv.innerHTML += `<p style="color: red;">WebSocket Error: ${error.message}</p>`;
+        };
+
+        function sendMessage() {
+            const message = messageInput.value;
+            if (message) {
+                ws.send(message);
+                messagesDiv.innerHTML += `<p>Sent: ${message}</p>`;
+                messageInput.value = "";
+            }
+        }
+    </script>
+</body>
+</html>

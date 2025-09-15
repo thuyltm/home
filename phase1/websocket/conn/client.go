@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
+	"github.com/markbates/goth"
 )
 
 const (
@@ -37,13 +38,14 @@ var upgrader = websocket.Upgrader{
 }
 
 type Client struct {
-	hub  *Hub
-	conn *websocket.Conn
-	send chan []byte
+	hub      *Hub
+	conn     *websocket.Conn
+	send     chan []byte
+	userInfo *goth.User
 }
 
-func NewClient(hub *Hub, conn *websocket.Conn) *Client {
-	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
+func NewClient(hub *Hub, conn *websocket.Conn, userInfo *goth.User) *Client {
+	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256), userInfo: userInfo}
 	hub.register <- client
 	return client
 }
@@ -106,7 +108,7 @@ func (c *Client) WritePump() {
 	}
 }
 
-func ServeWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
+func ServeWs(hub *Hub, w http.ResponseWriter, r *http.Request, userInfo *goth.User) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
@@ -116,11 +118,11 @@ func ServeWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
 		log.Println("write ping:", err)
 		return
 	}
-	if err := conn.WriteMessage(websocket.TextMessage, []byte("connected")); err != nil {
+	if err := conn.WriteMessage(websocket.TextMessage, fmt.Appendf(nil, "Hi %s", userInfo.Name)); err != nil {
 		log.Println("write connection established:", err)
 		return
 	}
-	client := NewClient(hub, conn)
+	client := NewClient(hub, conn, userInfo)
 	go client.WritePump()
 	go client.ReadPump()
 }
