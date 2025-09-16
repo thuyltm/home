@@ -1,4 +1,19 @@
 services:
+  home-websocket:
+    depends_on:
+      - redis
+    build:
+      context: ../..
+      dockerfile: docker/websocket/Dockerfile.multistage
+      target: websocket-release-stage
+    container_name: websocket-server
+    hostname: websocket-server
+    networks:
+      - websocket-net
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
   redis:
     image: redis:latest
     restart: always

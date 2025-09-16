@@ -26,3 +26,7 @@ Run
 ```sh
 bazel run @rules_go//go run bamboo/server/main.go
 ```
+
+```sh
+docker compose -f docker/http/compose.yaml up --build --force-recreate
+```

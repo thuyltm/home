@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"home/bamboo/websocket/conn"
+	"home/caddi/websocket/conn"
 	"log"
 	"net/http"
 	"os"
@@ -17,7 +17,7 @@ import (
 	"github.com/markbates/goth/providers/github"
 )
 
-var addr = flag.String("addr", ":8080", "http service address")
+var addr = flag.String("addr", ":9090", "http service address")
 
 type ProviderIndex struct {
 	Providers    []string
@@ -39,7 +39,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 }
 
 func loadChatPage(res http.ResponseWriter, req *http.Request) {
-	chatTemplate, _ := template.ParseFiles("templates/chat.html")
+	chatTemplate, _ := template.ParseFiles("caddi/websocket/templates/chat.html")
 	chatTemplate.Execute(res, nil)
 }
 
@@ -64,7 +64,7 @@ func main() {
 	}
 	sort.Strings(keys)
 	router := mux.NewRouter()
-	userTemplate, err := template.ParseFiles("templates/userprofile.html")
+	userTemplate, err := template.ParseFiles("caddi/websocket/templates/userprofile.html")
 	if err != nil {
 		log.Fatalf("Error parsing template: %v", err)
 	}

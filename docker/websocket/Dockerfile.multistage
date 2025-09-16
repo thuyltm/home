@@ -13,5 +13,5 @@ RUN go test -v ./caddi/websocket/testcases/complex_websocket_test.go
 FROM alpine:latest AS websocket-release-stage
 WORKDIR /
 COPY --from=websocket-build-stage /home/websocket-server /websocket-server
-EXPOSE 8080
+EXPOSE 9090
 ENTRYPOINT ["/websocket-server"]

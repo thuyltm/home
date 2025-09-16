@@ -1,0 +1,10 @@
+services:
+  docker-http-test:
+    build:
+      context: ../..
+      dockerfile: docker/http/Dockerfile.multistage
+      target: http-build-stage
+    container_name: http-server
+    hostname: http-server
+    ports:
+      - 9090:9090

@@ -9,12 +9,13 @@ import (
 	"testing"
 
 	"github.com/gorilla/websocket"
+	"github.com/markbates/goth"
 )
 
 var hub = NewHub()
 
 func complexHandler(w http.ResponseWriter, r *http.Request) {
-	ServeWs(hub, w, r)
+	ServeWs(hub, w, r, &goth.User{})
 
 }
 

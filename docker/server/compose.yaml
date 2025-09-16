@@ -3,7 +3,9 @@ services:
     depends_on:
       - roach
     build:
-      context: .
+      context: ../..
+      dockerfile: docker/server/Dockerfile.multistage
+      target: build-release-stage
     container_name: rest-server
     hostname: rest-server
     networks:

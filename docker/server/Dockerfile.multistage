@@ -15,5 +15,5 @@ RUN go test -v ./bamboo/server/testcases/main_test.go
 FROM alpine:latest AS build-release-stage
 WORKDIR /
 COPY --from=build-stage /home/main /main
-EXPOSE 8080
-ENTRYPOINT ["/main"]
+EXPOSE 9090
+ENTRYPOINT ["./main"]

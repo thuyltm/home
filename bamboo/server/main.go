@@ -2,12 +2,14 @@ package main
 
 import (
 	"database/sql"
+	"flag"
 	"fmt"
 	. "home/bamboo/server/handler"
 	. "home/bamboo/server/service"
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -41,7 +43,11 @@ func initStore() (*sql.DB, error) {
 }
 
 func main() {
+	// Define a flag for the port number with a default value
+	portPtr := flag.Int("port", 9090, "Port number for the Echo server")
 
+	// Parse the command-line flags
+	flag.Parse()
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -57,9 +63,7 @@ func main() {
 	e.POST("/send", messageHandler.CreateMessage)
 	e.GET("/ping", servePingRequest)
 
-	httpPort := os.Getenv("HTTP_PORT")
-	if httpPort == "" {
-		httpPort = "9090"
-	}
-	e.Logger.Fatal(e.Start(":" + httpPort))
+	// Start the server on the specified port
+	addr := ":" + strconv.Itoa(*portPtr)
+	e.Logger.Fatal(e.Start(addr))
 }
