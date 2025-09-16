@@ -8,4 +8,4 @@ services:
     volumes:
       - $PWD:$PWD
       - /var/run/docker.sock:/var/run/docker.sock
-    command: go test -v phase1/server/testcases/main_cockroach_container_test.go
+    command: go test -v bamboo/server/testcases/main_cockroach_container_test.go

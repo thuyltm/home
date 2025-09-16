@@ -6,7 +6,7 @@ go_library(
         "message_service.go",
         "message_service_cockroachdbimpl.go",
     ],
-    importpath = "home/phase1/server/service",
+    importpath = "home/bamboo/server/service",
     visibility = ["//visibility:public"],
     deps = ["@com_github_cockroachdb_cockroach_go_v2//crdb:go_default_library"],
 )

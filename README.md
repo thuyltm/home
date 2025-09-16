@@ -24,5 +24,5 @@ bazel run @rules_go//go get github.com/labstack/echo/v4
 Run
 
 ```sh
-bazel run @rules_go//go run phase1/server/main.go
+bazel run @rules_go//go run bamboo/server/main.go
 ```

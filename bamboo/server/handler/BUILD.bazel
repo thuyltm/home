@@ -1,0 +1,9 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "handler",
+    srcs = ["message_handler.go"],
+    importpath = "home/bamboo/server/handler",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_labstack_echo_v4//:go_default_library"],
+)

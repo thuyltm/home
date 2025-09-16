@@ -2,7 +2,7 @@ package handler
 
 import (
 	"fmt"
-	"home/phase1/server/service"
+	"home/bamboo/server/service"
 	"net/http"
 
 	"github.com/labstack/echo/v4"

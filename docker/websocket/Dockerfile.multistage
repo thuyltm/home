@@ -2,12 +2,12 @@ FROM golang:1.23-alpine AS websocket-build-stage
 WORKDIR /home
 COPY go.mod go.sum ./
 RUN go mod download
-COPY phase1/websocket/ phase1/websocket/
-RUN go build -o websocket-server ./phase1/websocket
+COPY caddi/websocket/ caddi/websocket/
+RUN go build -o websocket-server ./caddi/websocket
 
 # Run the tests in the container
 FROM websocket-build-stage AS run-websocket-test-stage
-RUN go test -v ./phase1/websocket/testcases/complex_websocket_test.go
+RUN go test -v ./caddi/websocket/testcases/complex_websocket_test.go
 
 # Deploy the application binary into a clean image
 FROM alpine:latest AS websocket-release-stage

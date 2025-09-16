@@ -1,0 +1,15 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "conn",
+    srcs = [
+        "client.go",
+        "hub.go",
+    ],
+    importpath = "home/caddi/websocket/conn",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_gorilla_websocket//:go_default_library",
+        "@com_github_markbates_goth//:go_default_library",
+    ],
+)

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	. "home/phase1/websocket/conn"
+	. "home/caddi/websocket/conn"
 	"net/http"
 	"net/http/httptest"
 	"strings"

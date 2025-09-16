@@ -3,8 +3,8 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	. "home/phase1/server/handler"
-	. "home/phase1/server/service"
+	. "home/bamboo/server/handler"
+	. "home/bamboo/server/service"
 	"log"
 	"net/http"
 	"os"

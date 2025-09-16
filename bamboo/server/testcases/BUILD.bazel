@@ -7,8 +7,6 @@ go_test(
         "main_test.go",
     ],
     deps = [
-        "//phase1/server/handler",
-        "//phase1/server/service",
         "@com_github_cockroachdb_cockroach_go_v2//crdb/crdbpgxv5:go_default_library",
         "@com_github_cockroachdb_cockroach_go_v2//testserver:go_default_library",
         "@com_github_google_uuid//:go_default_library",

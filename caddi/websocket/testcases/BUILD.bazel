@@ -10,11 +10,18 @@ go_test(
 
 go_test(
     name = "complex_testcases_test",
+    srcs = ["complex_websocket_test.go"],
+    deps = [
+        "//phase1/websocket/conn",
+        "@com_github_gorilla_websocket//:go_default_library",
+    ],
+)
+
+go_test(
+    name = "testcases_test",
     srcs = [
         "complex_websocket_test.go",
+        "echo_websocket_test.go",
     ],
-    deps = [
-        "@com_github_gorilla_websocket//:go_default_library",
-         "//phase1/websocket/conn"
-    ],
+    deps = ["@com_github_gorilla_websocket//:go_default_library"],
 )

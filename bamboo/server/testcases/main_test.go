@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	. "home/phase1/server/handler"
-	. "home/phase1/server/service"
+	. "home/bamboo/server/handler"
+	. "home/bamboo/server/service"
 
 	"github.com/cockroachdb/cockroach-go/v2/testserver"
 	"github.com/labstack/echo/v4"

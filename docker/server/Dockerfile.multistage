@@ -2,13 +2,13 @@ FROM golang:1.23 AS build-stage
 WORKDIR /home
 COPY go.mod go.sum ./
 RUN go mod download
-COPY phase1/server/ phase1/server/
-RUN go build -o main ./phase1/server
+COPY bamboo/server/ bamboo/server/
+RUN go build -o main ./bamboo/server
 
 # Run the tests in the container
 FROM build-stage AS run-test-stage
 RUN apt-get update && apt-get install -y wget
-RUN go test -v ./phase1/server/testcases/main_test.go
+RUN go test -v ./bamboo/server/testcases/main_test.go
 
 
 # Deploy the application binary into a clean image
