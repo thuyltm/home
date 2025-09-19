@@ -35,6 +35,7 @@ require (
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/gofrs/flock v0.12.1 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
+	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/context v1.1.2 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
@@ -72,7 +73,7 @@ require (
 	go.opentelemetry.io/otel v1.35.0 // indirect
 	go.opentelemetry.io/otel/metric v1.35.0 // indirect
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
-	golang.org/x/image v0.0.0-20190523035834-f03afa92d3ff // indirect
+	golang.org/x/image v0.0.0-20200927104501-e162460cd6b5 // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
 	golang.org/x/sync v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
@@ -81,7 +82,9 @@ require (
 require (
 	github.com/cenkalti/backoff/v4 v4.3.0
 	github.com/cockroachdb/cockroach-go/v2 v2.4.1
+	github.com/esimov/pigo v1.4.6
 	github.com/faiface/pixel v0.10.0
+	github.com/fogleman/gg v1.3.0
 	github.com/giorgisio/goav v0.1.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/gorilla/csrf v1.7.3
@@ -95,6 +98,7 @@ require (
 	github.com/testcontainers/testcontainers-go/modules/cockroachdb v0.38.0
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
+	github.com/vladimirvivien/go4vl v0.0.5
 	golang.org/x/crypto v0.38.0 // indirect
 	golang.org/x/net v0.40.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect

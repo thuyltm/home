@@ -17,7 +17,7 @@ import (
 	"github.com/markbates/goth/providers/github"
 )
 
-var addr = flag.String("addr", ":9090", "http service address")
+var addr = flag.String("addr", ":8080", "http service address")
 
 type ProviderIndex struct {
 	Providers    []string

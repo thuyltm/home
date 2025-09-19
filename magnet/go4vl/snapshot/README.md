@@ -1,0 +1,1 @@
+This program is a simple example that shows how to use the go4vl API to capture a single frame, from an attached camera device, and save it to a file

@@ -1,0 +1,1 @@
+This is a simple examples shows how easy it is to use go4vl to stream camera to web page

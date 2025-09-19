@@ -1,0 +1,1 @@
+This example shows how to use the go4vl API to create a simple program that captures several video frames, from an attached input (camera) device, and save them to files
