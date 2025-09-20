@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: docker/http/Dockerfile.multistage
-      target: http-build-stage
+      target: http-release-stage
     container_name: http-server
     hostname: http-server
     ports:

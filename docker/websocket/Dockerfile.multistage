@@ -10,9 +10,8 @@ FROM websocket-build-stage AS run-websocket-test-stage
 RUN go test -v ./caddi/websocket/testcases/complex_websocket_test.go
 
 # Deploy the application binary into a clean image
-FROM alpine:latest AS websocket-release-stage
+FROM golang:1.23-alpine  AS websocket-release-stage
 WORKDIR /
-COPY --from=websocket-build-stage /home/websocket-server /websocket-server
-COPY --from=websocket-build-stage /home/caddi/websocket/templates /home/caddi/websocket/templates
+COPY --from=websocket-build-stage /home/ ./
 EXPOSE 9090
-ENTRYPOINT ["/websocket-server"]
+ENTRYPOINT ["./websocket-server"]
