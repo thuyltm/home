@@ -10,8 +10,8 @@ import (
 	"sort"
 	"text/template"
 
-	"github.com/gorilla/csrf"
 	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/github"
@@ -25,7 +25,15 @@ type ProviderIndex struct {
 }
 
 func isAuthenticated(req *http.Request) bool {
-	_, err := req.Cookie(USERID)
+	cookie, err := req.Cookie(USERID)
+	switch err {
+	case nil:
+		log.Printf("Received cookie: %s = %s", cookie.Name, cookie.Value)
+	case http.ErrNoCookie:
+		log.Println("No 'cookie' received")
+	default:
+		log.Printf("Error getting cookie: %v", err)
+	}
 	return err == nil
 }
 
@@ -43,18 +51,36 @@ func loadChatPage(res http.ResponseWriter, req *http.Request) {
 	chatTemplate.Execute(res, nil)
 }
 
+func loadUserInfo(res http.ResponseWriter, req *http.Request, user goth.User) {
+	encoded, err := redisStore.Save(req, res, user)
+	if err != nil {
+		fmt.Fprintln(res, err)
+		return
+	}
+	http.SetCookie(res, sessions.NewCookie(USERID, encoded, &sessions.Options{
+		Path:   "/",
+		MaxAge: 60 * 60, //1hour
+	}))
+	userTemplate, err := template.ParseFiles("caddi/websocket/templates/userprofile.html")
+	if err != nil {
+		log.Fatalf("Error parsing template: %v", err)
+	}
+	userTemplate.Execute(res, user)
+}
+
+var redisStore *RedisStore
+
 func main() {
 	flag.Parse()
 	hub := conn.NewHub()
 	go hub.Run()
+	redisStore = NewRedisStore([]byte(os.Getenv("SESSION_SECRET")))
 	os.Setenv("GITHUB_KEY", "Ov23lirxru6CJTb3ICG5")
 	os.Setenv("GITHUB_SECRET", "af6421654c19c60d200fb610107ee9ea4c58d68e")
-	os.Setenv("SESSION_SECRET", "something")
 	goth.UseProviders(
 		github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), "http://localhost:8080/auth/github/callback"),
 	)
-	key := []byte(os.Getenv("SESSION_SECRET"))
-	redisStore := NewRedisStore(key)
+
 	m := map[string]string{
 		"github": "Github",
 	}
@@ -64,10 +90,7 @@ func main() {
 	}
 	sort.Strings(keys)
 	router := mux.NewRouter()
-	userTemplate, err := template.ParseFiles("caddi/websocket/templates/userprofile.html")
-	if err != nil {
-		log.Fatalf("Error parsing template: %v", err)
-	}
+	var err error
 
 	router.HandleFunc("/auth/{provider}/callback", func(res http.ResponseWriter, req *http.Request) {
 		user, err := gothic.CompleteUserAuth(res, req)
@@ -75,14 +98,12 @@ func main() {
 			fmt.Fprintln(res, err)
 			return
 		}
-		redisStore.Save(req, res, user)
-		userTemplate.Execute(res, user)
+		loadUserInfo(res, req, user)
 	})
 	router.HandleFunc("/auth/{provider}", func(res http.ResponseWriter, req *http.Request) {
 		//try to get the user without re-authenticating
-		if gothUser, err := gothic.CompleteUserAuth(res, req); err == nil {
-			redisStore.Save(req, res, gothUser)
-			userTemplate.Execute(res, gothUser)
+		if user, err := gothic.CompleteUserAuth(res, req); err == nil {
+			loadUserInfo(res, req, user)
 		} else {
 			gothic.BeginAuthHandler(res, req)
 		}
@@ -93,14 +114,15 @@ func main() {
 		res.WriteHeader(http.StatusTemporaryRedirect)
 	})
 	router.Handle("/chat", AuthMiddleware(http.HandlerFunc(loadChatPage)))
-	router.Handle("/ws", AuthMiddleware(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+	//router.Handle("/chat", http.HandlerFunc(loadChatPage))
+	router.Handle("/ws", http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		cookie, err := req.Cookie(USERID)
 		switch err {
 		case nil:
 			log.Printf("Received cookie: %s = %s", cookie.Name, cookie.Value)
 		case http.ErrNoCookie:
-			log.Println("No 'github' received")
-			http.Error(res, "No 'github' received", http.StatusInternalServerError)
+			log.Println("No 'cookie' received")
+			http.Error(res, "No 'cookie' received", http.StatusInternalServerError)
 		default:
 			log.Printf("Error getting cookie: %v", err)
 			http.Error(res, "Error getting cookie", http.StatusInternalServerError)
@@ -112,10 +134,11 @@ func main() {
 		} else {
 			conn.ServeWs(hub, res, req, &goth.User{})
 		}
-	})))
+	}))
 
-	CSRF := csrf.Protect([]byte("32-byte-long-auth-key"), csrf.Secure(false))
-	err = http.ListenAndServe(*addr, CSRF(router))
+	/* CSRF := csrf.Protect([]byte("32-byte-long-auth-key"), csrf.Secure(false))
+	err = http.ListenAndServe(*addr, CSRF(router)) */
+	err = http.ListenAndServe(*addr, router)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}

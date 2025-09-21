@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/go-redis/redis/v8"
@@ -21,7 +21,7 @@ type RedisStore struct {
 
 func NewRedisStore(keyPairs ...[]byte) *RedisStore {
 	redisClient := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
+		Addr:     os.Getenv("REDIS_URL"),
 		Password: "", // no password set
 		DB:       0,  // use default DB
 	})
@@ -48,15 +48,14 @@ func (s *RedisStore) Get(r *http.Request) (*goth.User, error) {
 	var user goth.User
 	values, err := s.RedisClient.HGetAll(context.TODO(), userId).Result()
 	if err != nil {
-		log.Fatal(err)
 		return nil, err
 	}
-	user.Name = values["name"]
-	user.UserID = values["id"]
+	user.Name = values["Name"]
+	user.UserID = values["UserID"]
 	return &user, nil
 }
 
-func (s *RedisStore) Save(r *http.Request, w http.ResponseWriter, gothUser goth.User) error {
+func (s *RedisStore) Save(r *http.Request, w http.ResponseWriter, gothUser goth.User) (string, error) {
 	var err error
 	key := "user:" + gothUser.UserID
 	s.RedisClient.Expire(context.TODO(), key, time.Duration(s.Options.MaxAge)*time.Minute)
@@ -64,12 +63,11 @@ func (s *RedisStore) Save(r *http.Request, w http.ResponseWriter, gothUser goth.
 		"UserID", gothUser.UserID,
 		"Name", gothUser.Name).Result()
 	if err != nil {
-		return err
+		return "", err
 	}
 	encoded, err := securecookie.EncodeMulti(USERID, key, s.Codecs...)
 	if err != nil {
-		return err
+		return "", err
 	}
-	http.SetCookie(w, sessions.NewCookie(USERID, encoded, s.Options))
-	return nil
+	return encoded, nil
 }

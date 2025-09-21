@@ -31,6 +31,6 @@ bazel run @rules_go//go run bamboo/server/main.go
 docker compose -f docker/http/compose.yaml up --build --force-recreate
 ```
 
-```
+```sh
 docker run -it --entrypoint sh http-docker-http-test
 ```
