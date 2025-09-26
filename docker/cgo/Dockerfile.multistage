@@ -1,0 +1,12 @@
+FROM golang:1.23-bookworm AS cgo-build-stage
+# Update package lists and install uuid tools
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends uuid-runtime uuid-dev && \
+    rm -rf /var/lib/apt/lists/*
+WORKDIR /home
+COPY go.mod go.sum ./
+RUN go mod download
+COPY phase1/cgo phase1/cgo
+WORKDIR /home/phase1/cgo
+RUN go build -o main .
+CMD ["./main"]
