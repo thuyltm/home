@@ -5,4 +5,5 @@ bazel-*
 TODO.md
 .vscode/
 magnet/images/
+magnet/video/
 magnet/go4vl/webcam/facefinder.model
