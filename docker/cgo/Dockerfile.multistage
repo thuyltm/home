@@ -9,4 +9,9 @@ RUN go mod download
 COPY phase1/cgo phase1/cgo
 WORKDIR /home/phase1/cgo
 RUN go build -o main .
-CMD ["./main"]
+
+# Deploy the application binary into a clean image
+FROM golang:1.23 AS cgo-release-stage
+WORKDIR /
+COPY --from=cgo-build-stage /home/phase1/cgo/main /main
+ENTRYPOINT ["./main"]

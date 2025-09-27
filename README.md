@@ -33,4 +33,5 @@ docker compose -f docker/http/compose.yaml up --build --force-recreate
 
 ```sh
 docker run -it --entrypoint sh http-docker-http-test
+docker run --rm gocv/opencv:4.12.0-alpine-ffmpeg-gstreamer go version
 ```

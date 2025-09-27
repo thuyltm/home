@@ -1,0 +1,6 @@
+services:
+  docker-gocv-test:
+    build:
+      context: ../..
+      dockerfile: docker/gocv/Dockerfile.multistage
+      target: gocv-build-stage

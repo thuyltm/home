@@ -1,0 +1,7 @@
+FROM docker.io/library/local-gocv-image AS gocv-build-stage
+WORKDIR /home
+COPY go.mod go.sum ./
+RUN go mod download
+COPY magnet/ffmpeg/ffmpeg-go/gocv/ ./
+RUN go build -o main .
+ENTRYPOINT ["./main"]

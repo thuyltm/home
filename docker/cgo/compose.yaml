@@ -1,0 +1,6 @@
+services:
+  docker-cgo-test:
+    build:
+      context: ../..
+      dockerfile: docker/cgo/Dockerfile.multistage
+      target: cgo-release-stage
