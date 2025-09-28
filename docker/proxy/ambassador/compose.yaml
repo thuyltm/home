@@ -1,0 +1,13 @@
+services:
+  ambassador:
+    image: docker.io/datawire/aes:latest # Or a specific version like 3.7.0
+    ports:
+      - "80:8080" # Map host port 80 to Ambassador's HTTP port
+      - "443:8443" # Map host port 443 to Ambassador's HTTPS port
+    environment:
+      # Optional: Configure Ambassador with environment variables
+      # For example, to enable debug logging:
+      # - AES_LOG_LEVEL=debug
+    volumes:
+      # Optional: Mount a volume for persistent configuration if needed
+      # - ./ambassador-config:/etc/ambassador-config

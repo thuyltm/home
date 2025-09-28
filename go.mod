@@ -28,9 +28,10 @@ require (
 	github.com/faiface/mainthread v0.0.0-20171120011319-8b78f0a41ae3 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-chi/chi/v5 v5.2.2 // indirect
-	github.com/go-gl/gl v0.0.0-20190320180904-bf2b1f2f34d7 // indirect
-	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20191125211704-12ad95a8df72 // indirect
-	github.com/go-gl/mathgl v0.0.0-20190416160123-c4601bc793c7 // indirect
+	github.com/go-gl/example v0.0.0-20220216040751-d71b0d9f823d // indirect
+	github.com/go-gl/gl v0.0.0-20231021071112-07e5d0ea2e71 // indirect
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20250301202403-da16c1255728 // indirect
+	github.com/go-gl/mathgl v1.2.0 // indirect
 	github.com/go-gst/go-glib v1.4.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -80,7 +81,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
 	gocv.io/x/gocv v0.42.0 // indirect
 	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0 // indirect
-	golang.org/x/image v0.0.0-20200927104501-e162460cd6b5 // indirect
+	golang.org/x/image v0.0.0-20210220032944-ac19c3e999fb // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
 	golang.org/x/sync v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect

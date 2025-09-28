@@ -1,0 +1,16 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17 # Or a specific version like latest-jdk21
+    privileged: true # Required for Docker-in-Docker scenarios
+    user: root # Can be adjusted for production if needed
+    ports:
+      - "8080:8080" # Jenkins web interface
+      - "50000:50000" # Jenkins agent communication port
+    volumes:
+      - jenkins_home:/var/jenkins_home # Persist Jenkins data
+      - /var/run/docker.sock:/var/run/docker.sock # Allow Jenkins to interact with Docker daemon
+    environment:
+      - JENKINS_OPTS=-Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.recurrencePeriod=3000
+
+volumes:
+  jenkins_home:

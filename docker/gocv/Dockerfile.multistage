@@ -1,4 +1,12 @@
-FROM docker.io/library/local-gocv-image AS gocv-build-stage
+FROM ghcr.io/hybridgroup/opencv:4.12.0 AS local-gocv-image
+ENV GOPATH /go
+COPY . /go/src/gocv.io/x/gocv/
+WORKDIR /go/src/gocv.io/x/gocv
+RUN go build -tags example -o /build/gocv_version ./cmd/version/
+CMD ["/build/gocv_version"]
+
+
+FROM local-gocv-image AS gocv-build-stage
 WORKDIR /home
 COPY go.mod go.sum ./
 RUN go mod download

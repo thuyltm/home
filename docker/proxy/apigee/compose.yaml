@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  registry-server:
+    image: ghcr.io/apigee/registry-server:latest
+    ports:
+      - "8080:8080"
+  registry-viewer:
+    image: ghcr.io/apigee/registry-viewer:latest
+    ports:
+      - "8085:8080"
+  registry-envoy:
+    image: ghcr.io/apigee/registry-envoy:latest
+    ports:
+      - "8000:8000"
