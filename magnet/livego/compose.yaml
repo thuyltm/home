@@ -1,0 +1,20 @@
+services:
+  livego:
+    image: gwuhaolin/livego:latest
+    container_name: livego
+    hostname: livego
+    networks:
+      - mynet
+    volumes:
+      - ./config/:/app/config
+      - ./config/server.crt:/app/server.crt
+      - ./config/server.key:/app/server.key
+    ports:
+      - 1935:1935
+      - 7001:7001
+      - 7002:7002
+      - 8090:8090
+    command: livego --config_file /app/config/livego.yaml --level debug --enable_tls_verify true
+networks:
+  mynet:
+    driver: bridge
