@@ -41,3 +41,8 @@ docker run --rm gocv/opencv:4.12.0-alpine-ffmpeg-gstreamer go version
 docker system prune
 docker system prune --volumes
 ```
+
+```sh
+#in the same directory as your compose.yml, this will delete all volumes (as well as containers/network) defined in the configuration file
+docker compose down --volumes
+```

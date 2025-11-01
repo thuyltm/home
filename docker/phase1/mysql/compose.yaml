@@ -1,0 +1,19 @@
+services:
+  db:
+    image: mysql:8.0 # You can specify a different version if needed
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: home # Replace with a strong password
+      MYSQL_DATABASE: mydb # Optional: create a default database
+      MYSQL_USER: me # Optional: create a default user
+      MYSQL_PASSWORD: home # Optional: password for the default user
+    ports:
+      - "3306:3306" # Map host port 3306 to container port 3306
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql # Persist data using a named volume
+    #restart: unless-stopped # Restart the container unless manually stopped
+    #command: --init-file /docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  mysql_data: # Define the named volume

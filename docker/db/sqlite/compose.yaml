@@ -1,7 +1,0 @@
-services:  
-  sqlite_db:
-    image: hibitdev/sqlite:latest # Or another suitable SQLite image
-    container_name: sqlite_database
-    volumes:
-      - ./sqlite_data:/db # Mount a host directory to persist the database file
-    command: ["tail", "-f", "/dev/null"] # Keeps the container running

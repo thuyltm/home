@@ -2,9 +2,13 @@ package main
 
 import (
 	"context"
+	"database/sql"
 	"encoding/json"
 	"fmt"
+	"home/phase1/uberfx/database"
+	"home/phase1/uberfx/repository"
 	"io"
+	"log"
 	"net"
 	"net/http"
 	"os"
@@ -191,11 +195,21 @@ func main() {
 			),
 			AsRoute(NewGreetHandler),
 			AsRoute(newWelcomeHandler),
+			database.NewMySQLDB,
+			repository.NewUserRepository,
 		),
-		fx.Invoke(func(*http.Server) {}),
+		fx.Invoke(func(*http.Server) {}), // This ensures the server is constructed and its lifecycle hooks run
 		//you can use the same Zap logger for Fx's own logs as well
 		fx.WithLogger(func(log *zap.Logger) fxevent.Logger {
 			return &fxevent.ZapLogger{Logger: log}
+		}),
+		fx.Invoke(func(db *sql.DB) {
+			log.Println("Database connection successfully established.")
+			// You can now use 'db' for your database operations
+		}),
+		fx.Invoke(func(userRespository *repository.UserRepository) {
+			name, _ := userRespository.GetUserByID(1)
+			log.Printf("Found %s", name)
 		}),
 	).Run()
 }
