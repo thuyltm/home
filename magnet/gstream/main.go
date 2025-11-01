@@ -12,7 +12,9 @@ import (
 
 func main() {
 	if len(os.Args) == 1 {
-		fmt.Println("Pipeline string cannot be empty")
+		fmt.Println("Usage: go run main.go <pipeline-string>")
+		//command gstream gst-launch-1.0 videotestsrc ! videoconvert ! autovideosink
+		fmt.Println("Example: go run main.go videotestsrc ! videoconvert ! autovideosink")
 		os.Exit(1)
 	}
 	//Initialize GStreamer with the arguments passed to the program. Gstreamer
