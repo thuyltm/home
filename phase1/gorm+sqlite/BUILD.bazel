@@ -1,0 +1,18 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "gorm+sqlite_lib",
+    srcs = ["main.go"],
+    importpath = "home/phase1/gorm+sqlite",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@io_gorm_driver_sqlite//:go_default_library",
+        "@io_gorm_gorm//:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "gorm+sqlite",
+    embed = [":gorm+sqlite_lib"],
+    visibility = ["//visibility:public"],
+)

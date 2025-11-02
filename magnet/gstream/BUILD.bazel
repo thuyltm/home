@@ -1,0 +1,18 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "gstream_lib",
+    srcs = ["main.go"],
+    importpath = "home/magnet/gstream",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_go_gst_go_glib//glib:go_default_library",
+        "@com_github_go_gst_go_gst//gst:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "gstream",
+    embed = [":gstream_lib"],
+    visibility = ["//visibility:public"],
+)

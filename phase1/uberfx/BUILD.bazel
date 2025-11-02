@@ -1,0 +1,21 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "uberfx_lib",
+    srcs = ["main.go"],
+    importpath = "home/phase1/uberfx",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//phase1/uberfx/database",
+        "//phase1/uberfx/repository",
+        "@org_uber_go_fx//:go_default_library",
+        "@org_uber_go_fx//fxevent:go_default_library",
+        "@org_uber_go_zap//:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "uberfx",
+    embed = [":uberfx_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,15 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "aio_lib",
+    srcs = ["main.go"],
+    importpath = "home/magnet/ffmpeg/aio",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_alexeidt_aio//:go_default_library"],
+)
+
+go_binary(
+    name = "aio",
+    embed = [":aio_lib"],
+    visibility = ["//visibility:public"],
+)

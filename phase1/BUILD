@@ -11,5 +11,5 @@ go_library(
     srcs = ["hello.go"],
     importpath = "home/phase1",
     visibility = ["//visibility:private"],
-    deps = ["//phase1/fortune"],
+    deps = ["//phase1/fortune:fortune_lib"],
 )

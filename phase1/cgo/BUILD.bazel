@@ -1,0 +1,24 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "cgo_lib",
+    srcs = [
+        "libadd.c",
+        "libadd.h",
+        "main.go",
+    ],
+    cgo = True,
+    clinkopts = [
+        "-Lphase1/cgo -ladd",
+        "-luuid",
+    ],
+    copts = ["-g -Wall -Iphase1/cgo"],
+    importpath = "home/phase1/cgo",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "cgo",
+    embed = [":cgo_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,15 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "snapshot_lib",
+    srcs = ["main.go"],
+    importpath = "home/magnet/go4vl/snapshot",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_vladimirvivien_go4vl//device:go_default_library"],
+)
+
+go_binary(
+    name = "snapshot",
+    embed = [":snapshot_lib"],
+    visibility = ["//visibility:public"],
+)

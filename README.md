@@ -1,3 +1,4 @@
+# Bazel
 [Specifying external dependencies](https://github.com/bazel-contrib/rules_go/blob/master/docs/go/core/bzlmod.md#external-dependencies)<br/>
 
 
@@ -21,11 +22,32 @@ A dependency can be added via
 bazel run @rules_go//go get github.com/labstack/echo/v4
 ```
 
-Run
+please add these lines into MODULE.bazel [GUILINE](https://stackoverflow.com/questions/78983979/bzlmod-golang-missing-package-and-incorrect-function) in order for gazzelie automatically adds dependencies using in the BUILD file
+```sh
+go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
+go_deps.from_file(go_mod = "//:go.mod")
+
+# All *direct* Go dependencies of the module have to be listed explicitly.
+use_repo(
+    go_deps,
+    "com_github_alexeidt_aio",
+    ...
+)
+```
+
+Next Run
 
 ```sh
-bazel run @rules_go//go run bamboo/server/main.go
+bazel run @rule_go//go --mod tidy
 ```
+
+Run Target (Example)
+
+```sh
+bazel run //phase1/echo:echo
+```
+
+# Docker
 
 ```sh
 docker compose -f docker/http/compose.yaml up --build --force-recreate

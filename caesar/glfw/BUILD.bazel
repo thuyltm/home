@@ -1,0 +1,15 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "glfw_lib",
+    srcs = ["window.go"],
+    importpath = "home/caesar/glfw",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_go_gl_glfw_v3_3_glfw//:go_default_library"],
+)
+
+go_binary(
+    name = "glfw",
+    embed = [":glfw_lib"],
+    visibility = ["//visibility:public"],
+)

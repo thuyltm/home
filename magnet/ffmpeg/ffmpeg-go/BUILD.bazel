@@ -1,0 +1,19 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "ffmpeg-go_lib",
+    srcs = [
+        "main.go",
+        "showProgress.go",
+        "stream.go",
+    ],
+    importpath = "home/magnet/ffmpeg/ffmpeg-go",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_u2takey_ffmpeg_go//:go_default_library"],
+)
+
+go_binary(
+    name = "ffmpeg-go",
+    embed = [":ffmpeg-go_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,19 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "gl41core-cube_lib",
+    srcs = ["cube.go"],
+    importpath = "home/caesar/gl/gl41core-cube",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_go_gl_gl//v4.1-core/gl:go_default_library",
+        "@com_github_go_gl_glfw_v3_3_glfw//:go_default_library",
+        "@com_github_go_gl_mathgl//mgl32:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "gl41core-cube",
+    embed = [":gl41core-cube_lib"],
+    visibility = ["//visibility:public"],
+)
