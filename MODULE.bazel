@@ -4,6 +4,7 @@ bazel_dep(name = "platforms", version = "1.0.0")
 bazel_dep(name = "rules_docker_compose_test", version = "1.2.0")
 bazel_dep(name = "rules_oci", version = "2.2.0")
 bazel_dep(name = "rules_pkg", version = "1.0.1")
+bazel_dep(name = "aspect_bazel_lib", version = "2.10.0")
 
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 go_sdk.download(
@@ -16,11 +17,22 @@ register_toolchains("@go_sdk//:all")
 
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 oci.pull(
-    name = "golang_base",
-    image = "golang:1.23",
+    name = "golang",
+    image = "golang",
+    digest = "sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f",
     platforms = ["linux/amd64"],
+    tag = "1.23-alpine"
 )
-use_repo(oci, "golang_base", "golang_base_linux_amd64")
+oci.pull(
+    name = "distroless_base",
+    digest = "sha256:ccaef5ee2f1850270d453fdf700a5392534f8d1a8ca2acda391fbb6a06b81c86",
+    image = "gcr.io/distroless/base",
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+    ],
+)
+use_repo(oci, "golang", "distroless_base",  "distroless_base_linux_amd64", "distroless_base_linux_arm64", "golang_linux_amd64")
 
 go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
 go_deps.from_file(go_mod = "//:go.mod")

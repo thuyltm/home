@@ -47,6 +47,7 @@ Run Target (Example)
 bazel run //phase1/echo:echo
 ```
 
+[Include Other External Dependencies](https://github.com/aspect-build/bazel-examples/blob/main/MODULE.bazel)
 # Docker
 
 ```sh

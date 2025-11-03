@@ -1,4 +1,4 @@
-FROM golang:1.23 AS phase1-build-stage
+FROM golang:1.23-alpine
 WORKDIR /home
 COPY go.mod go.sum ./
 RUN go mod download
