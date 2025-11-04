@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-skaffold-example-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-skaffold-app
+  template:
+    metadata:
+      labels:
+        app: my-skaffold-app
+    spec:
+      containers:
+      - name: my-skaffold-app
+        image: my-skaffold-app
+        ports:
+        - containerPort: 8080

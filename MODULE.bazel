@@ -32,7 +32,17 @@ oci.pull(
         "linux/arm64",
     ],
 )
-use_repo(oci, "golang", "distroless_base",  "distroless_base_linux_amd64", "distroless_base_linux_arm64", "golang_linux_amd64")
+oci.pull(
+    name = "alpine",
+    digest = "sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f",
+    image = "alpine",
+    platforms = [
+        "linux/amd64"
+    ],
+    tag = "3.18"
+)
+use_repo(oci, "golang", "distroless_base",  "distroless_base_linux_amd64", "distroless_base_linux_arm64", "golang_linux_amd64",
+        "alpine", "alpine_linux_amd64")
 
 go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
 go_deps.from_file(go_mod = "//:go.mod")

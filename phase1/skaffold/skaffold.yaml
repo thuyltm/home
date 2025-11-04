@@ -1,0 +1,12 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: skaffold
+build:
+  artifacts:
+    - image: my-skaffold-app
+      ko: {}
+manifests:
+  rawYaml:
+    - k8s-deployment.yaml
+    - k8s-service.yaml

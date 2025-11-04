@@ -24,7 +24,7 @@ pkg_tar(
 
 oci_image(
     name = "echo_image",
-    base = "@golang_linux_amd64",  # Or another base image, defined via oci.pull in MODULE.bazel
+    base = "@golang_linux_amd64", 
     entrypoint = ["/echo"],
     tars = [":echo_layer"],
 )
@@ -40,7 +40,7 @@ platform_transition_filegroup(
 )
 
 # $ bazel run //phase1/echo:load
-# $ docker run --rm echo:v0
+# $ docker run --rm thuyltm2201/echo:v0
 oci_load(
     name = "load",
     # Use the image built for the target platform

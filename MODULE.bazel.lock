@@ -239,7 +239,7 @@
     "@@rules_oci+//oci:extensions.bzl%oci": {
       "general": {
         "bzlTransitiveDigest": "aUWYwQu8rVAyuYJsB2kKvm8pCI63p9nryZ9OMMup0z0=",
-        "usagesDigest": "gfMoTRHZTNj1x5u7KXshzXwQjYxWFjtrZjjJIKc206M=",
+        "usagesDigest": "eN40Lj9U0YqDDYNeGM3jbwm6SlKRLf8XAct9Ufwxj/A=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -308,6 +308,33 @@
                 "@@platforms//cpu:arm64": "@distroless_base_linux_arm64"
               },
               "bzlmod_repository": "distroless_base",
+              "reproducible": true
+            }
+          },
+          "alpine_linux_amd64": {
+            "repoRuleId": "@@rules_oci+//oci/private:pull.bzl%oci_pull",
+            "attributes": {
+              "scheme": "https",
+              "registry": "index.docker.io",
+              "repository": "library/alpine",
+              "identifier": "sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f",
+              "platform": "linux/amd64",
+              "target_name": "alpine_linux_amd64",
+              "bazel_tags": []
+            }
+          },
+          "alpine": {
+            "repoRuleId": "@@rules_oci+//oci/private:pull.bzl%oci_alias",
+            "attributes": {
+              "target_name": "alpine",
+              "scheme": "https",
+              "registry": "index.docker.io",
+              "repository": "library/alpine",
+              "identifier": "sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f",
+              "platforms": {
+                "@@platforms//cpu:x86_64": "@alpine_linux_amd64"
+              },
+              "bzlmod_repository": "alpine",
               "reproducible": true
             }
           },
@@ -663,7 +690,9 @@
             "golang_linux_amd64",
             "distroless_base",
             "distroless_base_linux_amd64",
-            "distroless_base_linux_arm64"
+            "distroless_base_linux_arm64",
+            "alpine",
+            "alpine_linux_amd64"
           ],
           "explicitRootModuleDirectDevDeps": [],
           "useAllRepos": "NO",
