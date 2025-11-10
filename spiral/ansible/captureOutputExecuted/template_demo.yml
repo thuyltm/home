@@ -1,0 +1,15 @@
+---
+- name: Create files using templates
+  hosts: local
+  vars:
+    web_port: 80
+    server_name: "example.com"
+    doc_root: "/var/www/html"
+    enable_ssl: true
+    ssl_cert: "/etc/ssl/certs/example.com.crt"
+    ssl_key: "/etc/ssl/private/example.com.key"
+  tasks:
+    - name: Create web server config from template
+      template:
+        src: templates/web_config.j2
+        dest: web_server.conf

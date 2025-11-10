@@ -1,0 +1,31 @@
+---
+- name: Handle Script Errors
+  hosts: local
+  gather_facts: no
+  
+  tasks:
+   - name: Execute the error script
+     command: "./error.sh"
+     register: script_output
+     ignore_errors: yes
+
+   - name: Display standard output
+     debug:
+      var: script_output.stdout_lines
+
+   - name: Display standard error
+     debug:
+      var: script_output.stderr_lines
+
+   - name: Display return code
+     debug:
+       var: script_output.rc
+
+   - name: Display return code in msg
+     debug:
+       msg: "Return code: {{ script_output.rc }}"
+
+   - name: Check if script failed
+     debug:
+      msg: "The script failed with return code {{ script_output.rc }}"
+     when: script_output.rc != 0

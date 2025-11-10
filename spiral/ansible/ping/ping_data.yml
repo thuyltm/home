@@ -1,0 +1,7 @@
+---
+- hosts: webservers
+  gather_facts: no
+  tasks:
+   - name: Ping with custom data
+     ping:
+       data: "Hello from Ansible Lab"

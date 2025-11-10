@@ -1,0 +1,37 @@
+---
+- name: Capture Script Output
+  hosts: local
+  gather_facts: no
+  
+  tasks:
+    - name: Execute the info.sh script
+      command: "{{ playbook_dir }}/info.sh"
+      register: script_output
+
+    - name: Display stdout content
+      debug:
+        var: script_output.stdout
+    
+    - name: Display the script output
+      debug:
+        var: script_output.stdout_lines
+    
+    - name: Display standard error
+      debug:
+        msg: "Standard Error (stderr):"
+
+    - name: Display stderr content
+      debug:
+        var: script_output.stderr_lines
+    
+    - name: Display return code
+      debug:
+        msg: "Return code: {{ script_output.rc }}"
+    
+    - name: other shell output
+      shell: ps -eo pcpu,user,args | sort -r -k1 | head -n5
+      register: ps
+    
+    - name: Display other shell output
+      debug:
+        var: ps.stdout_lines

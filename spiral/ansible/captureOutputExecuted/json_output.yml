@@ -1,0 +1,47 @@
+---
+- name: Handling JSON output
+  hosts: local
+  gather_facts: no
+
+  tasks:
+    - name: Create a JSON file for testing
+      copy:
+        dest: /tmp/services.json
+        content: |
+          {
+            "services": [
+              {
+                "name": "web",
+                "status": "running",
+                "port": 80
+              },
+              {
+                "name": "database",
+                "status": "stopped",
+                "port": 5432
+              },
+              {
+                "name": "cache",
+                "status": "running",
+                "port": 6379
+              }
+            ] 
+          }
+    - name: Read JSON file with shell
+      shell: cat /tmp/services.json
+      register: json_output
+
+    - name: Parse and display JSON content
+      debug:
+        msg: "{{ json_output.stdout | from_json }}"
+
+    - name: Extract and display service information
+      debug:
+        msg: "Service: {{ item.name }}, Status: {{ item.status }}, Port: {{ item.port }}"
+      loop: "{{ (json_output.stdout | from_json).services }}"
+
+    - name: Show only running services
+      debug:
+        msg: "Running service: {{ item.name}} on port {{ item.port }}"
+      loop: "{{ (json_output.stdout | from_json).services }}"
+      when: item.status == "running"

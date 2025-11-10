@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+   - name: Ping all hosts
+     ping:
+     register: ping_result
+     ignore_errors: yes
+  
+   - name: Display success message
+     debug:
+       msg: "Successfully connected to {{ inventory_hostname }}"
+     when: ping_result is succeeded
+
+   - name: Display failure message
+     debug:
+      msg: "Failed to connect to {{ inventory_hostname }}: {{ ping_result.msg if 'msg' in ping_result else 'Unknown error' }}"
+     when: ping_result is failed

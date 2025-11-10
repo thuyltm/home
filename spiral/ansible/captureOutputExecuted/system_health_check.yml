@@ -1,0 +1,93 @@
+---
+- name: System Health Check
+  hosts: local
+  gather_facts: no
+
+  tasks:
+    - name: Execute health check script
+      command: "{{ playbook_dir }}/health_check.sh"
+      register: health_check
+
+    - name: Display raw health check output
+      debug:
+        var: health_check.stdout_lines
+    
+    ## Parse metrics from the health check output
+    - name: Parse CPU load
+      set_fact:
+        cpu_load: "{{ health_check.stdout | regex_search('CPU_LOAD: ([0-9.]+)', '\\1') | first | float }}"
+        cpu_status: "{{ health_check.stdout | regex_search('CPU_STATUS: (\\w+)', '\\1') | first }}"
+
+    - name: Parse memory usage
+      set_fact:
+        mem_usage: "{{ health_check.stdout | regex_search('MEM_USAGE_PCT: ([0-9.]+)', '\\1') | first | float }}"
+        mem_status: "{{ health_check.stdout | regex_search('MEM_STATUS: (\\w+)', '\\1') | first }}"
+
+    - name: Parse disk usage
+      set_fact:
+        disk_usage: "{{ health_check.stdout | regex_search('DISK_USAGE_PCT: (\\d+)', '\\1') | first | int }}"
+        disk_status: "{{ health_check.stdout | regex_search('DISK_STATUS: (\\w+)', '\\1') | first }}"
+
+    - name: Parse zoombie processes
+      set_fact:
+        zoombie_count: "{{ health_check.stdout | regex_search('ZOOMBIE_PROCESSES: (\\d+)', '\\1') | first | int }}"
+        zoombie_status: "{{ health_check.stdout | regex_search('ZOOMBIE_STATUS: (\\w+)', '\\1') | first }}"
+
+    - name: Determine overall system Status
+      set_fact:
+        overall_status: "{{ 'WARNING' if (cpu_status == 'WARNING' or mem_status == 'WARNING' or disk_status == 'WARNING' or zoombie_status == 'WARNING' ) else 'OK' }}"
+
+    ## Generate health report file
+    - name: Create health report directory
+      file:
+        path: "{{ playbook_dir }}/reports"
+        state: directory
+    
+    - name: Get current timestamp
+      command: date "+%Y%m%d_%H%M%S"
+      register: timestamp
+
+    - name: Create health report file
+      copy:
+        content: |
+          System Health Report - {{ timestamp.stdout }}
+          ---------------------------------------------
+
+          CPU:
+            Load Average: {{ cpu_load }}
+            Status: {{ cpu_status }}
+
+          Memory:
+            Usage: {{ mem_usage }}%
+            Status: {{ mem_status }}
+
+          Disk:
+            Usage: {{ disk_usage }}%
+            Status: {{ disk_status }}
+
+          Processes:
+            Zoombie Count: {{ zoombie_count }}
+            Status: {{ zoombie_status }}
+          
+          Overall Status: {{ overall_status }}
+          
+          Recommendations:
+          {% if cpu_status == "WARNING" %}
+          - CPU: Check for resource-intensive process using 'top' or 'htop'
+          {% endif %}
+          {% if mem_status == "WARNING" %}
+          - Memory: Free up memory by restarting services or clearing cache
+          {% endif %}
+          {% if disk_status == "WARNING" %}
+          - Disk: Clean up disk space using 'du -sh /* | sort -hr' to identify large directories
+          {% endif %}
+          {% if zoombie_status == "WARNING" %}
+          -- Processes: Identify and restart parent processes of zoombies
+          {% endif %}
+          {% if overall_status == "OK" %}
+          - System is healthy. No action required.
+          {% endif %}
+        dest: "{{ playbook_dir }}/reports/health_report_{{ timestamp.stdout}}.txt"
+    - name: Display report location
+      debug:
+        msg: "Health report saved to {{ playbook_dir }}/reports/health_report_{{ timestamp.stdout }}.txt"
