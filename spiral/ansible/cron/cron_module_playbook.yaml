@@ -1,0 +1,16 @@
+- hosts: localhost
+  tasks:
+   - name: Create a simple cron job
+     cron:
+       name: my_cron_job
+       minute: "*/5"
+       job: script.sh
+
+- hosts: localhost
+  tasks:
+    - name: Remove the cron job
+      cron:
+        name: my_cron_job
+        state: absent
+      tags:
+        - remove_cron
