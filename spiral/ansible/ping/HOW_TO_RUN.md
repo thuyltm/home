@@ -1,3 +1,4 @@
+```sh
 #!/bin/bash
 ansible-playbook -i hosts ping.yml
 ansible-playbook -i hosts ping.yml -v
@@ -11,3 +12,4 @@ ansible 'webservers:local' -i hosts -m ping
 ansible all -i hosts -m ping -a data=Command line test
 ansible-inventory -i hosts --list
 ansible-inventory -i hosts ping_comprehensive.yml
+```
