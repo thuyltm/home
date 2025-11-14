@@ -1,0 +1,7 @@
+learn-terraform-docker-container/.terraform/
+learn-terraform-docker-container/.terraform*
+learn-terraform-docker-container/terraform*
+
+minikube/.terraform
+minikube/.terraform*
+minikube/terraform*
