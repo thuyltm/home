@@ -22,7 +22,7 @@ terraform validate
 #(if any resources are alerady deployed and manageed by Terraform), and display the proposed changes
 terraform plan -out=example.tfplan
 #Crate or Update infrastructe
-terraform apply
+terraform apply "example.tfplan"
 terraform destroy
 ```
 
