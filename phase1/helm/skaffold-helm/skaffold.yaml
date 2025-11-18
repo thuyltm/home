@@ -1,0 +1,16 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: skaffold-helm
+build:
+  artifacts:
+    - image: skaffold-helm
+      ko: {}
+deploy:
+  helm:
+    releases:
+      - name: skaffold-helm
+        chartPath: .
+        valuesFiles:
+          - values.yaml
+        version: 0.1.0
