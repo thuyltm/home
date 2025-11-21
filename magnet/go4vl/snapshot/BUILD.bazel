@@ -5,7 +5,7 @@ go_library(
     srcs = ["main.go"],
     importpath = "home/magnet/go4vl/snapshot",
     visibility = ["//visibility:private"],
-    deps = ["@com_github_vladimirvivien_go4vl//device:go_default_library"],
+    deps = ["@com_github_vladimirvivien_go4vl//device"],
 )
 
 go_binary(

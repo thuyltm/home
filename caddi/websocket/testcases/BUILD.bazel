@@ -25,7 +25,7 @@ go_test(
     ],
     deps = [
         "//caddi/websocket/conn",
-        "@com_github_gorilla_websocket//:go_default_library",
-        "@com_github_markbates_goth//:go_default_library",
+        "@com_github_gorilla_websocket//:websocket",
+        "@com_github_markbates_goth//:goth",
     ],
 )

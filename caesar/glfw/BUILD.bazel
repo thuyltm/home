@@ -5,7 +5,7 @@ go_library(
     srcs = ["window.go"],
     importpath = "home/caesar/glfw",
     visibility = ["//visibility:private"],
-    deps = ["@com_github_go_gl_glfw_v3_3_glfw//:go_default_library"],
+    deps = ["@com_github_go_gl_glfw_v3_3_glfw//:glfw"],
 )
 
 go_binary(

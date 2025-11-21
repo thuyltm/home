@@ -6,8 +6,8 @@ go_library(
     importpath = "home/magnet/go4vl/capture",
     visibility = ["//visibility:private"],
     deps = [
-        "@com_github_vladimirvivien_go4vl//device:go_default_library",
-        "@com_github_vladimirvivien_go4vl//v4l2:go_default_library",
+        "@com_github_vladimirvivien_go4vl//device",
+        "@com_github_vladimirvivien_go4vl//v4l2",
     ],
 )
 

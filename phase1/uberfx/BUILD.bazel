@@ -8,9 +8,9 @@ go_library(
     deps = [
         "//phase1/uberfx/database",
         "//phase1/uberfx/repository",
-        "@org_uber_go_fx//:go_default_library",
-        "@org_uber_go_fx//fxevent:go_default_library",
-        "@org_uber_go_zap//:go_default_library",
+        "@org_uber_go_fx//:fx",
+        "@org_uber_go_fx//fxevent",
+        "@org_uber_go_zap//:zap",
     ],
 )
 

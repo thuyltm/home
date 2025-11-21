@@ -239,7 +239,7 @@
     "@@rules_oci+//oci:extensions.bzl%oci": {
       "general": {
         "bzlTransitiveDigest": "aUWYwQu8rVAyuYJsB2kKvm8pCI63p9nryZ9OMMup0z0=",
-        "usagesDigest": "eN40Lj9U0YqDDYNeGM3jbwm6SlKRLf8XAct9Ufwxj/A=",
+        "usagesDigest": "SCPXF7oyn9PyPakjEpCn73CcpFobtKOrBebfVbFeZZ8=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},

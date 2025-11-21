@@ -1,0 +1,18 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "minio_lib",
+    srcs = ["main.go"],
+    importpath = "home/magnet/minio",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_minio_minio_go_v7//:minio-go",
+        "@com_github_minio_minio_go_v7//pkg/credentials",
+    ],
+)
+
+go_binary(
+    name = "minio",
+    embed = [":minio_lib"],
+    visibility = ["//visibility:public"],
+)

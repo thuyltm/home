@@ -5,7 +5,7 @@ go_library(
     srcs = ["main.go"],
     importpath = "home/magnet/ffmpeg/vidio",
     visibility = ["//visibility:private"],
-    deps = ["@com_github_alexeidt_vidio//:go_default_library"],
+    deps = ["@com_github_alexeidt_vidio//:Vidio"],
 )
 
 go_binary(

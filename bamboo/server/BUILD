@@ -14,8 +14,8 @@ go_library(
     deps = [
         "//bamboo/server/handler",
         "//bamboo/server/service",
-        "@com_github_labstack_echo_v4//:go_default_library",
-        "@com_github_labstack_echo_v4//middleware:go_default_library",
-        "@com_github_lib_pq//:go_default_library",
+        "@com_github_labstack_echo_v4//:echo",
+        "@com_github_labstack_echo_v4//middleware",
+        "@com_github_lib_pq//:pq",
     ],
 )

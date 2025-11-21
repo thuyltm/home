@@ -5,7 +5,7 @@ go_library(
     srcs = ["hello.go"],
     importpath = "home/magnet/ffmpeg/ffmpeg-go/gocv",
     visibility = ["//visibility:private"],
-    deps = ["@io_gocv_x_gocv//:go_default_library"],
+    deps = ["@io_gocv_x_gocv//:gocv"],
 )
 
 go_binary(

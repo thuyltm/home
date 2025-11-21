@@ -35,3 +35,25 @@ But using --dry-run will make it easier to test your code, but it won't ensure t
 
 # Example
 https://github.com/GoogleContainerTools/skaffold/tree/main/examples/helm-deployment
+
+# Create my-docker-secret for pull Docker Image from my Docker Hub
+[Guideline](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+```sh
+k create secret generic my-docker-secret --from-file=.dockerconfigjson=/home/thuy/.docker/config.json --type=kubernetes.io/dockerconfigjson
+```
+You add the below infor in Values.yaml of Helm
+```sh
+# This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets:
+  - name: my-docker-secret
+```
+
+# Skaffold
+If you have a below error, upgrader Skaffold version 1.17
+```sh
+skaffold run
+creating runner: creating deployer: failed to determine binary version: helm version command failed "": running [helm version --client]
+ - stdout: ""
+ - stderr: "Error: unknown flag: --client\n"
+ - cause: exit status 1. Please install helm via https://helm.sh/docs/intro/install.
+```

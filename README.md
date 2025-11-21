@@ -38,7 +38,7 @@ use_repo(
 Next Run
 
 ```sh
-bazel run @rule_go//go --mod tidy
+bazel run @rules_go//go mod tidy
 ```
 
 Run Target (Example)

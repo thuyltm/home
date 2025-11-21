@@ -9,7 +9,7 @@ go_library(
     ],
     importpath = "home/magnet/ffmpeg/ffmpeg-go",
     visibility = ["//visibility:private"],
-    deps = ["@com_github_u2takey_ffmpeg_go//:go_default_library"],
+    deps = ["@com_github_u2takey_ffmpeg_go//:ffmpeg-go"],
 )
 
 go_binary(

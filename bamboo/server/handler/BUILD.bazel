@@ -7,6 +7,6 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//bamboo/server/service",
-        "@com_github_labstack_echo_v4//:go_default_library",
+        "@com_github_labstack_echo_v4//:echo",
     ],
 )

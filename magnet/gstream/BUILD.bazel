@@ -6,8 +6,8 @@ go_library(
     importpath = "home/magnet/gstream",
     visibility = ["//visibility:private"],
     deps = [
-        "@com_github_go_gst_go_glib//glib:go_default_library",
-        "@com_github_go_gst_go_gst//gst:go_default_library",
+        "@com_github_go_gst_go_glib//glib",
+        "@com_github_go_gst_go_gst//gst",
     ],
 )
 

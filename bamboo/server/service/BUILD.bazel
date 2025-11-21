@@ -8,5 +8,5 @@ go_library(
     ],
     importpath = "home/bamboo/server/service",
     visibility = ["//visibility:public"],
-    deps = ["@com_github_cockroachdb_cockroach_go_v2//crdb:go_default_library"],
+    deps = ["@com_github_cockroachdb_cockroach_go_v2//crdb"],
 )

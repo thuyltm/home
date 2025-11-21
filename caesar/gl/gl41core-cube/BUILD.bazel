@@ -6,9 +6,9 @@ go_library(
     importpath = "home/caesar/gl/gl41core-cube",
     visibility = ["//visibility:private"],
     deps = [
-        "@com_github_go_gl_gl//v4.1-core/gl:go_default_library",
-        "@com_github_go_gl_glfw_v3_3_glfw//:go_default_library",
-        "@com_github_go_gl_mathgl//mgl32:go_default_library",
+        "@com_github_go_gl_gl//v4.1-core/gl",
+        "@com_github_go_gl_glfw_v3_3_glfw//:glfw",
+        "@com_github_go_gl_mathgl//mgl32",
     ],
 )
 

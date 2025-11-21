@@ -6,9 +6,9 @@ go_library(
     importpath = "home/magnet/webrtc/pion/reflect",
     visibility = ["//visibility:private"],
     deps = [
-        "@com_github_pion_interceptor//:go_default_library",
-        "@com_github_pion_interceptor//pkg/intervalpli:go_default_library",
-        "@com_github_pion_webrtc_v4//:go_default_library",
+        "@com_github_pion_interceptor//:interceptor",
+        "@com_github_pion_interceptor//pkg/intervalpli",
+        "@com_github_pion_webrtc_v4//:webrtc",
     ],
 )
 

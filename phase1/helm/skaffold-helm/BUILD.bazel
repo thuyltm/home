@@ -1,15 +1,14 @@
 load("@rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
-    name = "aio_lib",
+    name = "skaffold-helm_lib",
     srcs = ["main.go"],
-    importpath = "home/magnet/ffmpeg/aio",
+    importpath = "home/phase1/helm/skaffold-helm",
     visibility = ["//visibility:private"],
-    deps = ["@com_github_alexeidt_aio//:aio"],
 )
 
 go_binary(
-    name = "aio",
-    embed = [":aio_lib"],
+    name = "skaffold-helm",
+    embed = [":skaffold-helm_lib"],
     visibility = ["//visibility:public"],
 )

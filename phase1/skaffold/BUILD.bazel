@@ -5,6 +5,7 @@ go_library(
     srcs = ["main.go"],
     importpath = "home/phase1/skaffold",
     visibility = ["//visibility:private"],
+    deps = ["@com_github_gin_gonic_gin//:gin"],
 )
 
 go_binary(

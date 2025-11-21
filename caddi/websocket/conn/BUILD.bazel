@@ -9,7 +9,7 @@ go_library(
     importpath = "home/caddi/websocket/conn",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_gorilla_websocket//:go_default_library",
-        "@com_github_markbates_goth//:go_default_library",
+        "@com_github_gorilla_websocket//:websocket",
+        "@com_github_markbates_goth//:goth",
     ],
 )

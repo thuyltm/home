@@ -10,13 +10,13 @@ go_library(
     visibility = ["//visibility:private"],
     deps = [
         "//caddi/websocket/conn",
-        "@com_github_go_redis_redis_v8//:go_default_library",
-        "@com_github_gorilla_mux//:go_default_library",
-        "@com_github_gorilla_securecookie//:go_default_library",
-        "@com_github_gorilla_sessions//:go_default_library",
-        "@com_github_markbates_goth//:go_default_library",
-        "@com_github_markbates_goth//gothic:go_default_library",
-        "@com_github_markbates_goth//providers/github:go_default_library",
+        "@com_github_go_redis_redis_v8//:redis",
+        "@com_github_gorilla_mux//:mux",
+        "@com_github_gorilla_securecookie//:securecookie",
+        "@com_github_gorilla_sessions//:sessions",
+        "@com_github_markbates_goth//:goth",
+        "@com_github_markbates_goth//gothic",
+        "@com_github_markbates_goth//providers/github",
     ],
 )
 
