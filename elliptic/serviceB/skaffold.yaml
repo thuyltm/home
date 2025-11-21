@@ -1,0 +1,12 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: serviceb
+deploy:
+  helm:
+    releases:
+      - name: serviceB
+        chartPath: serviceB
+        valuesFiles:
+          - serviceB/values.yaml
+        version: 0.1.0

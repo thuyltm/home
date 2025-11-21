@@ -1,0 +1,15 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: servicea
+build:
+  artifacts:
+    - image: thuyltm2201/servicea
+      ko: {}
+deploy:
+  helm:
+    releases:
+      - name: servicea
+        chartPath: .
+        valuesFiles:
+          - values.yaml

@@ -1,0 +1,15 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "serviceB_lib",
+    srcs = ["main.go"],
+    importpath = "home/elliptic/serviceB",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_gorilla_mux//:mux"],
+)
+
+go_binary(
+    name = "serviceB",
+    embed = [":serviceB_lib"],
+    visibility = ["//visibility:public"],
+)
