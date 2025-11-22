@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "serviceB.fullname" . }}
+  name: {{ include "serviceb.fullname" . }}
   labels:
-    {{- include "serviceB.labels" . | nindent 4 }}
+    {{- include "serviceb.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "serviceB.selectorLabels" . | nindent 4 }}
+    {{- include "serviceb.selectorLabels" . | nindent 4 }}

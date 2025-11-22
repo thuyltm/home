@@ -2,11 +2,22 @@ apiVersion: skaffold/v4beta13
 kind: Config
 metadata:
   name: serviceb
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: thuyltm2201/serviceb
+      context: .
+      custom:
+        buildCommand: ./build_image.sh
+        dependencies:
+          paths:
+            - .
 deploy:
   helm:
     releases:
-      - name: serviceB
-        chartPath: serviceB
+      - name: serviceb
+        chartPath: .
         valuesFiles:
-          - serviceB/values.yaml
+          - values.yaml
         version: 0.1.0
