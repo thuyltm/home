@@ -10,8 +10,11 @@ import (
 
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/serviceb", func(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(map[string]bool{"welcome form gorilla": true})
+	})
+	router.HandleFunc("/serviceb/hi", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]bool{"hi gorilla": true})
 	})
 	log.Fatal(http.ListenAndServe(":8000", router))
 }

@@ -3,6 +3,8 @@ kind: Config
 metadata:
   name: servicea
 build:
+  tagPolicy:
+    sha256: {}
   artifacts:
     - image: thuyltm2201/servicea
       ko: {}

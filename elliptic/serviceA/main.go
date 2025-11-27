@@ -10,8 +10,11 @@ import (
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/servicea", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcome Go Chi"))
+	})
+	r.Get("/servicea/hi", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("hi Go Chi"))
 	})
 	http.ListenAndServe(":3000", r)
 }
