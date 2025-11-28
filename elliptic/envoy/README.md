@@ -21,7 +21,7 @@ kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for
 ```
 
 # Information
-The file _ingress.yaml_, _httproute.yaml_ will create 3 classes: GatewayClass, Gateway, HTTPRoute
+3 classes: GatewayClass, Gateway, HTTPRoute
 - **GatewayClass** is cluster-scoped resource defined by the infrastructure provider. This resource presents a class of Gateways that can be instantiated. The **_GatewayClass.spec.controller_** field determines the controller implementation responsible for managing the _GatewayClass_.
 - When a user creates a **Gateway**, some load balancing infrastructure is provisioned or configured by the GatewayClass controller. The Gateway spec defines the following:
    - GatewayClassName: defines the name of a GatewayClass object used by this Gateway
@@ -42,8 +42,8 @@ $ k get gateway
 NAME   CLASS   ADDRESS          PROGRAMMED   AGE
 eg     eg      10.106.165.113   True         3m21s
 $ k get httproute
-NAME      HOSTNAMES   AGE
-backend               6m34s
+NAME              HOSTNAMES                AGE
+route-servicea    www.example.com          6m34s
 ```
 
 # Testing
@@ -57,5 +57,6 @@ export GATEWAY_HOST=$(kubectl get gateway/eg -o jsonpath='{.status.addresses[0].
 ```
 Test
 ```sh
-curl --verbose http://$GATEWAY_HOST
+curl --resolve "www.example.com:80:$( echo $GATEWAY_HOST )" -i www.example.com/servicea
+curl --resolve "www.example.com:80:$( echo $GATEWAY_HOST )" -i www.example.com/serviceb
 ```
