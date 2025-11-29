@@ -6,7 +6,7 @@ minikube addons enable ingress
 ```
 # Test directly from NodePort services
 ```sh
-k patch service serviceb -p '{"spec": {"type":"ClusterIP"}}'
+k patch service serviceb -p '{"spec": {"type":"NodePort"}}'
 minikube service serviceb --url
 curl ...
 ```

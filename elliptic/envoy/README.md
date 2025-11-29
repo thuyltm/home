@@ -60,3 +60,26 @@ Test
 curl --resolve "www.example.com:80:$( echo $GATEWAY_HOST )" -i www.example.com/servicea
 curl --resolve "www.example.com:80:$( echo $GATEWAY_HOST )" -i www.example.com/serviceb
 ```
+
+# Testing Local RateLimit
+```sh
+for i in {1..4}; do curl --resolve "www.example.com:80:$( echo $GATEWAY_HOST )" -i www.example.com/servicea/hi; sleep 1; done
+#Output
+HTTP/1.1 200 OK
+date: Fri, 28 Nov 2025 04:55:57 GMT
+content-length: 9
+content-type: text/plain; charset=utf-8
+x-ratelimit-limit: 1
+x-ratelimit-remaining: 0
+x-ratelimit-reset: 3599
+
+hi Go ChiHTTP/1.1 429 Too Many Requests
+content-length: 18
+content-type: text/plain
+x-ratelimit-limit: 1
+x-ratelimit-remaining: 0
+x-ratelimit-reset: 3598
+date: Fri, 28 Nov 2025 04:55:58 GMT
+
+local_rate_limitedHTTP/1.1 429 Too Many Requests
+```
