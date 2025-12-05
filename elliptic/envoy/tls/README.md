@@ -48,13 +48,7 @@ kubectl patch gateway eg --type=json --patch '
 ```
 Output
 ```sh
-spec:
-  gatewayClassName: eg
-  infrastructure:
-    parametersRef:
-      group: gateway.envoyproxy.io
-      kind: EnvoyProxy
-      name: graceful-shutdown-config
+spec:  
   listeners:
   - allowedRoutes:
       namespaces:
