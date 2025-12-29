@@ -1,0 +1,12 @@
+networks:
+  default:
+    name: opentelemetry-contrib_default
+    driver: bridge
+services:
+  dice:    
+    build:
+      context: ../../..
+      dockerfile: spiral/opentelemetry-contrib/dice/Dockerfile 
+    container_name: dice
+    ports:
+      - 8000:8000   

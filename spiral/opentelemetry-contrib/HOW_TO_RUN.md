@@ -24,3 +24,11 @@ In this example, the jaeger service can reach the otel-collector service using h
 
 
 When you do not specify a network in your compose.yaml file, Docker Compose automatically creates a single, default network for your entire application. All services defined within that file are connected to this network by default, allowing them to communicate with each other using their service names as hostnames.
+
+# How to LoadTest for Service `dice`
+They can communicate each other because of using the same default network `opentelemetry-contrib_default`
+```sh
+docker compose up
+docker compose -f ./dice/docker-compose.yml up
+docker compose -f locust/docker-compose.yml up
+```
