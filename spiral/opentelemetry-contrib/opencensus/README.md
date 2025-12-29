@@ -1,0 +1,5 @@
+OpenCensus makes getting critical telemetry out of your services easy and seamless. OpenCensus currently provides libraries for a number of language that allow you to capture, manipulate, and export metrics and distributed traces to the backend(s) of your choice
+
+The core functionality of OpenCensus is the ability to collect traces and metrics from your app, display them locally, and send them to any analysis tool (also called a 'backend')
+
+Context Propagation: In order to correlate activities and requests between services with an initial customer action, context (usually in the form of trace or correlation ID) must be propagated throughout your systems. OpenCensus provides automatic context propagation across its supported languages and frameworks, and provides simple APIs for manually propagation or manipulating context
