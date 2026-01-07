@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: my-skaffold-app
-        image: thuyltm2201/my-skaffold-app:latest
+        image: thuyltm2201/my-skaffold-app
         ports:
         - containerPort: 8080

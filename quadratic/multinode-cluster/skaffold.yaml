@@ -1,0 +1,16 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: skaffold
+build:
+  tagPolicy:
+    sha256: {}
+  local:
+    push: false
+  artifacts:
+    - image: thuyltm2201/my-multinode-cluster
+      ko: {}
+manifests:
+  rawYaml:
+    - deployment.yaml
+    - service.yaml

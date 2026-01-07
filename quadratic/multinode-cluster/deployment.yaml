@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-multinode-cluster
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+  selector:
+    matchLabels:
+      app: my-multinode-cluster
+  template:
+    metadata:
+      labels:
+        app: my-multinode-cluster
+    spec:
+      affinity:
+        # This ensures pods will land on separate hosts
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions: [{ key: app, operator: In, values: [my-multinode-cluster] }]
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: my-multinode-cluster
+          image: thuyltm2201/my-multinode-cluster
+          ports:
+          - containerPort: 3000
+      terminationGracePeriodSeconds: 1
