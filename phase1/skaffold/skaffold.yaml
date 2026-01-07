@@ -3,8 +3,12 @@ kind: Config
 metadata:
   name: skaffold
 build:
+  tagPolicy:
+    sha256: {}
+  local:
+    push: false
   artifacts:
-    - image: my-skaffold-app
+    - image: thuyltm2201/my-skaffold-app
       ko: {}
 manifests:
   rawYaml:

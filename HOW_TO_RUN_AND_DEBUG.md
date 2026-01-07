@@ -14,6 +14,7 @@ docker exec -it opensearch /bin/bash
 #remove all stopped containers, unused networks, dangling images, and optionally, volumes
 docker system prune
 docker system prune --volumes
+docker system prune -a
 ```
 
 ```sh
