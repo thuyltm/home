@@ -1,4 +1,8 @@
-Push Docker Image to Docker Hub for Helm to deploy
+Firstly, build docker image with tag `latest` and push to the Docker Hub
 ```sh
 skaffold build --push
+```
+Next deploy
+```sh
+skaffold run
 ```
