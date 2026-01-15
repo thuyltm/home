@@ -1,0 +1,21 @@
+networks:
+  default:
+    name: opentelemetry-contrib_default
+    driver: bridge
+    external: true
+services:
+  envoy:   
+    image: envoyproxy/envoy:dev-6c261a8848fc4ca3c3906c848db99dd3e3dbc33f
+    container_name: envoy
+    ports:
+      - "9901:9901"
+      - "10000:10000"
+    environment:
+      - ENVOY_UID=777
+    volumes:
+      - ./envoy-demo.yaml:/envoy-demo.yaml
+      - ./logs:/logs:rw
+    command:
+      - --config-path /envoy-demo.yaml
+      - --log-path logs/custom.log
+      - --component-log-level upstream:debug,connection:trace

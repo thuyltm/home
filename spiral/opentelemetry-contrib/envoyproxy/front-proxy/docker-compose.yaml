@@ -1,0 +1,72 @@
+services:
+  front-envoy:
+    image:  envoyproxy/envoy:dev-6c261a8848fc4ca3c3906c848db99dd3e3dbc33f
+    container_name: front-envoy
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+      - "8001:8001"
+    environment:
+      - ENVOY_UID=777
+    volumes:
+      - ./front-envoy.yaml:/front-envoy.yaml
+    command:
+      - --config-path /front-envoy.yaml
+    depends_on:
+      service-envoy-1:
+        condition: service_started
+      service-envoy-2:
+        condition: service_started
+
+  service-envoy-1:
+    image: envoyproxy/envoy:dev-6c261a8848fc4ca3c3906c848db99dd3e3dbc33f
+    container_name: service-envoy-1
+    environment:
+      - ENVOY_UID=777
+    volumes:
+      - ./service-envoy-1.yaml:/service-envoy-1.yaml
+    command:
+      - --config-path /service-envoy-1.yaml
+    depends_on:
+      service1:
+        condition: service_healthy
+
+  service1:
+    build:
+      context: ../../../..
+      dockerfile: docker/http/Dockerfile.multistage
+      target: http-release-stage
+    container_name: service1
+    healthcheck:
+      test: curl -i http://localhost:9090/healthz
+      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 1
+
+  service-envoy-2:
+    image: envoyproxy/envoy:dev-6c261a8848fc4ca3c3906c848db99dd3e3dbc33f
+    container_name: service-envoy-2
+    environment:
+      - ENVOY_UID=777
+    volumes:
+      - ./service-envoy-2.yaml:/service-envoy-2.yaml
+    command:
+      - --config-path /service-envoy-2.yaml
+    depends_on:
+      service2:
+        condition: service_healthy
+
+  service2:
+    build:
+      context: ../../../..
+      dockerfile: docker/http/Dockerfile.multistage
+      target: http-release-stage
+    container_name: service2
+    healthcheck:
+      test: curl -i http://localhost:9090/healthz
+      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 1
+    

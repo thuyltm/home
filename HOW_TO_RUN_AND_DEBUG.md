@@ -21,3 +21,8 @@ docker system prune -a
 #in the same directory as your compose.yml, this will delete all volumes (as well as containers/network) defined in the configuration file
 docker compose down --volumes
 ```
+
+```sh
+# Health Check
+docker inspect --format='{{json .State.Health}}' service2
+```

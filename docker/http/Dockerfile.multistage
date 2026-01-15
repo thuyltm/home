@@ -1,4 +1,4 @@
-FROM golang:1.23 AS http-build-stage
+FROM golang:1.25-alpine AS http-build-stage
 WORKDIR /home
 COPY go.mod go.sum ./
 RUN go mod download
@@ -6,7 +6,10 @@ COPY phase1/echo/ phase1/echo/
 RUN go build -o main ./phase1/echo
 
 # Deploy the application binary into a clean image
-FROM golang:1.23 AS http-release-stage
+FROM alpine:latest AS http-release-stage
+# Install curl and remove the apk cache to minimize image size
+RUN apk --no-cache add curl
+CMD ["curl", "https://www.google.com"]
 WORKDIR /
 COPY --from=http-build-stage /home/ ./
 EXPOSE 9090
