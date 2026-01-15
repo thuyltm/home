@@ -21,26 +21,11 @@ exporters:
   otlp:
     endpoint: jaeger:4317
     tls:
-      insecure: true
-  otlp/2:
-    endpoint: data-prepper:21890
-    tls:
-      insecure: true
-      insecure_skip_verify: true
+      insecure: true  
   otlphttp/prometheus:
     endpoint: "http://prometheus:9090/api/v1/otlp"
     tls:
       insecure: true
-  opensearch:
-    logs_index: otel-logs
-    logs_index_time_format: "yyyy-MM-dd"
-    traces_index: "otel-traces-%{yyyy.MM.dd}"
-    http:
-      endpoint: "http://opensearch:9200"
-      tls:
-        insecure: true
-    sending_queue:
-      batch:
   debug:
    verbosity: detailed
 
@@ -50,7 +35,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/2, opensearch, otlp, debug]
+      exporters: [otlp, debug]
     metrics:
       receivers: [otlp]
       processors: [batch]
@@ -58,7 +43,7 @@ service:
     logs:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/2, opensearch, debug]
+      exporters: [debug]
   telemetry:
     logs:
       level: debug

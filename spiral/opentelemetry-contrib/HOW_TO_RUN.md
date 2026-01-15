@@ -1,5 +1,5 @@
 ```sh
-docker compose -f telemetry-components.yaml up --build opensearch
+docker compose up --build opensearch
 ```
 # Internal Service Communication
 Within a default or user-defined Docker network created by Compose, services can automatically discover and communicate with each other using their service names as hostnames

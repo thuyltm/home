@@ -1,0 +1,337 @@
+otel-collector  | 2026-01-15T03:14:36.798Z      info    Traces  {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces", "resource spans": 1, "spans": 2}
+otel-collector  | 2026-01-15T03:14:36.799Z      info    ResourceSpans #0
+otel-collector  | Resource SchemaURL: 
+otel-collector  | Resource attributes:
+otel-collector  |      -> service.name: Str(dice-service)
+otel-collector  | ScopeSpans #0
+otel-collector  | ScopeSpans SchemaURL: 
+otel-collector  | InstrumentationScope go.opentelemetry.io/otel/consoleservice/dice 
+otel-collector  | Span #0
+otel-collector  |     Trace ID       : 750d7e9c571a3d1b8efb6d6bd2ebb8db
+otel-collector  |     Parent ID      : fc52265ccb448f42
+otel-collector  |     ID             : 51373cdaf7752a17
+otel-collector  |     Name           : roll
+otel-collector  |     Kind           : Internal
+otel-collector  |     Start time     : 2026-01-15 03:14:33.3654122 +0000 UTC
+otel-collector  |     End time       : 2026-01-15 03:14:33.365570575 +0000 UTC
+otel-collector  |     Status code    : Unset
+otel-collector  |     Status message : 
+otel-collector  | Attributes:
+otel-collector  |      -> roll.value: Int(1)
+otel-collector  | ScopeSpans #1
+otel-collector  | ScopeSpans SchemaURL: 
+otel-collector  | InstrumentationScope go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp 0.64.0
+otel-collector  | Span #0
+otel-collector  |     Trace ID       : 750d7e9c571a3d1b8efb6d6bd2ebb8db
+otel-collector  |     Parent ID      : 
+otel-collector  |     ID             : fc52265ccb448f42
+otel-collector  |     Name           : /
+otel-collector  |     Kind           : Server
+otel-collector  |     Start time     : 2026-01-15 03:14:33.365377462 +0000 UTC
+otel-collector  |     End time       : 2026-01-15 03:14:33.36562777 +0000 UTC
+otel-collector  |     Status code    : Unset
+otel-collector  |     Status message : 
+otel-collector  | Attributes:
+otel-collector  |      -> server.address: Str(localhost)
+otel-collector  |      -> http.request.method: Str(GET)
+otel-collector  |      -> url.scheme: Str(http)
+otel-collector  |      -> server.port: Int(8080)
+otel-collector  |      -> network.peer.address: Str(::1)
+otel-collector  |      -> network.peer.port: Int(49568)
+otel-collector  |      -> user_agent.original: Str(curl/8.5.0)
+otel-collector  |      -> client.address: Str(::1)
+otel-collector  |      -> url.path: Str(/rolldice)
+otel-collector  |      -> network.protocol.version: Str(1.1)
+otel-collector  |      -> http.response.body.size: Int(2)
+otel-collector  |      -> http.response.status_code: Int(200)
+otel-collector  |       {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
+otel-collector  | 2026-01-15T03:14:39.808Z      info    Logs    {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "logs", "resource logs": 1, "log records": 1}
+otel-collector  | 2026-01-15T03:14:39.808Z      info    ResourceLog #0
+otel-collector  | Resource SchemaURL: 
+otel-collector  | Resource attributes:
+otel-collector  |      -> service.name: Str(dice-service)
+otel-collector  | ScopeLogs #0
+otel-collector  | ScopeLogs SchemaURL: 
+otel-collector  | InstrumentationScope go.opentelemetry.io/otel/consoleservice/dice 
+otel-collector  | LogRecord #0
+otel-collector  | ObservedTimestamp: 2026-01-15 03:14:38.974966037 +0000 UTC
+otel-collector  | Timestamp: 2026-01-15 03:14:38.97492619 +0000 UTC
+otel-collector  | SeverityText: INFO
+otel-collector  | SeverityNumber: Info(9)
+otel-collector  | Body: Str(Alice is rolling the dice)
+otel-collector  | Attributes:
+otel-collector  |      -> result: Int(2)
+otel-collector  | Trace ID: ca53ab5fbc4d0b11c02317fdb43a0c30
+otel-collector  | Span ID: 755c219c4dd42893
+otel-collector  | Flags: 1
+otel-collector  |       {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "logs"}
+otel-collector  | 2026-01-15T03:14:41.814Z      info    Traces  {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces", "resource spans": 1, "spans": 2}
+otel-collector  | 2026-01-15T03:14:41.814Z      info    ResourceSpans #0
+otel-collector  | Resource SchemaURL: 
+otel-collector  | Resource attributes:
+otel-collector  |      -> service.name: Str(dice-service)
+otel-collector  | ScopeSpans #0
+otel-collector  | ScopeSpans SchemaURL: 
+otel-collector  | InstrumentationScope go.opentelemetry.io/otel/consoleservice/dice 
+otel-collector  | Span #0
+otel-collector  |     Trace ID       : ca53ab5fbc4d0b11c02317fdb43a0c30
+otel-collector  |     Parent ID      : 1d02203feff8e650
+otel-collector  |     ID             : 755c219c4dd42893
+otel-collector  |     Name           : roll
+otel-collector  |     Kind           : Internal
+otel-collector  |     Start time     : 2026-01-15 03:14:38.974891932 +0000 UTC
+otel-collector  |     End time       : 2026-01-15 03:14:38.975014578 +0000 UTC
+otel-collector  |     Status code    : Unset
+otel-collector  |     Status message : 
+otel-collector  | Attributes:
+otel-collector  |      -> roll.value: Int(2)
+otel-collector  | ScopeSpans #1
+otel-collector  | ScopeSpans SchemaURL: 
+otel-collector  | InstrumentationScope go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp 0.64.0
+otel-collector  | Span #0
+otel-collector  |     Trace ID       : ca53ab5fbc4d0b11c02317fdb43a0c30
+otel-collector  |     Parent ID      : 
+otel-collector  |     ID             : 1d02203feff8e650
+otel-collector  |     Name           : /
+otel-collector  |     Kind           : Server
+otel-collector  |     Start time     : 2026-01-15 03:14:38.974857925 +0000 UTC
+otel-collector  |     End time       : 2026-01-15 03:14:38.975060314 +0000 UTC
+otel-collector  |     Status code    : Unset
+otel-collector  |     Status message : 
+otel-collector  | Attributes:
+otel-collector  |      -> server.address: Str(localhost)
+otel-collector  |      -> http.request.method: Str(GET)
+otel-collector  |      -> url.scheme: Str(http)
+otel-collector  |      -> server.port: Int(8080)
+otel-collector  |      -> network.peer.address: Str(::1)
+otel-collector  |      -> network.peer.port: Int(50184)
+otel-collector  |      -> user_agent.original: Str(curl/8.5.0)
+otel-collector  |      -> client.address: Str(::1)
+otel-collector  |      -> url.path: Str(/rolldice/Alice)
+otel-collector  |      -> network.protocol.version: Str(1.1)
+otel-collector  |      -> http.response.body.size: Int(2)
+otel-collector  |      -> http.response.status_code: Int(200)
+otel-collector  |       {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
+otel-collector  | 2026-01-15T03:15:21.959Z      info    Metrics {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "metrics", "resource metrics": 1, "metrics": 4, "data points": 5}
+otel-collector  | 2026-01-15T03:15:21.959Z      debug   otlphttpexporter@v0.139.0/otlp.go:177   Preparing to make HTTP request  {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "otlphttp/prometheus", "otelcol.component.kind": "exporter", "otelcol.signal": "metrics", "url": "http://prometheus:9090/api/v1/otlp/v1/metrics"}
+otel-collector  | 2026-01-15T03:15:21.959Z      info    ResourceMetrics #0
+otel-collector  | Resource SchemaURL: 
+otel-collector  | Resource attributes:
+otel-collector  |      -> service.name: Str(dice-service)
+otel-collector  | ScopeMetrics #0
+otel-collector  | ScopeMetrics SchemaURL: 
+otel-collector  | InstrumentationScope go.opentelemetry.io/otel/consoleservice/dice 
+otel-collector  | Metric #0
+otel-collector  | Descriptor:
+otel-collector  |      -> Name: dice.rolls
+otel-collector  |      -> Description: The number of rolls by roll value
+otel-collector  |      -> Unit: {roll}
+otel-collector  |      -> DataType: Sum
+otel-collector  |      -> IsMonotonic: true
+otel-collector  |      -> AggregationTemporality: Cumulative
+otel-collector  | NumberDataPoints #0
+otel-collector  | Data point attributes:
+otel-collector  |      -> roll.value: Int(1)
+otel-collector  | StartTimestamp: 2026-01-15 03:14:21.757992347 +0000 UTC
+otel-collector  | Timestamp: 2026-01-15 03:15:21.758672327 +0000 UTC
+otel-collector  | Value: 1
+otel-collector  | Exemplars:
+otel-collector  | Exemplar #0
+otel-collector  |      -> Trace ID: 750d7e9c571a3d1b8efb6d6bd2ebb8db
+otel-collector  |      -> Span ID: 51373cdaf7752a17
+otel-collector  |      -> Timestamp: 2026-01-15 03:14:33.365556691 +0000 UTC
+otel-collector  |      -> Value: 1
+otel-collector  | NumberDataPoints #1
+otel-collector  | Data point attributes:
+otel-collector  |      -> roll.value: Int(2)
+otel-collector  | StartTimestamp: 2026-01-15 03:14:21.757992347 +0000 UTC
+otel-collector  | Timestamp: 2026-01-15 03:15:21.758672327 +0000 UTC
+otel-collector  | Value: 1
+otel-collector  | Exemplars:
+otel-collector  | Exemplar #0
+otel-collector  |      -> Trace ID: ca53ab5fbc4d0b11c02317fdb43a0c30
+otel-collector  |      -> Span ID: 755c219c4dd42893
+otel-collector  |      -> Timestamp: 2026-01-15 03:14:38.975003219 +0000 UTC
+otel-collector  |      -> Value: 1
+otel-collector  | ScopeMetrics #1
+otel-collector  | ScopeMetrics SchemaURL: 
+otel-collector  | InstrumentationScope go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp 0.64.0
+otel-collector  | Metric #0
+otel-collector  | Descriptor:
+otel-collector  |      -> Name: http.server.request.body.size
+otel-collector  |      -> Description: Size of HTTP server request bodies.
+otel-collector  |      -> Unit: By
+otel-collector  |      -> DataType: Histogram
+otel-collector  |      -> AggregationTemporality: Cumulative
+otel-collector  | HistogramDataPoints #0
+otel-collector  | Data point attributes:
+otel-collector  |      -> http.request.method: Str(GET)
+otel-collector  |      -> http.response.status_code: Int(200)
+otel-collector  |      -> network.protocol.name: Str(http)
+otel-collector  |      -> network.protocol.version: Str(1.1)
+otel-collector  |      -> server.address: Str(localhost)
+otel-collector  |      -> server.port: Int(8080)
+otel-collector  |      -> url.scheme: Str(http)
+otel-collector  | StartTimestamp: 2026-01-15 03:14:21.759275523 +0000 UTC
+otel-collector  | Timestamp: 2026-01-15 03:15:21.758817644 +0000 UTC
+otel-collector  | Count: 2
+otel-collector  | Sum: 0.000000
+otel-collector  | Min: 0.000000
+otel-collector  | Max: 0.000000
+otel-collector  | ExplicitBounds #0: 0.000000
+otel-collector  | ExplicitBounds #1: 5.000000
+otel-collector  | ExplicitBounds #2: 10.000000
+otel-collector  | ExplicitBounds #3: 25.000000
+otel-collector  | ExplicitBounds #4: 50.000000
+otel-collector  | ExplicitBounds #5: 75.000000
+otel-collector  | ExplicitBounds #6: 100.000000
+otel-collector  | ExplicitBounds #7: 250.000000
+otel-collector  | ExplicitBounds #8: 500.000000
+otel-collector  | ExplicitBounds #9: 750.000000
+otel-collector  | ExplicitBounds #10: 1000.000000
+otel-collector  | ExplicitBounds #11: 2500.000000
+otel-collector  | ExplicitBounds #12: 5000.000000
+otel-collector  | ExplicitBounds #13: 7500.000000
+otel-collector  | ExplicitBounds #14: 10000.000000
+otel-collector  | Buckets #0, Count: 2
+otel-collector  | Buckets #1, Count: 0
+otel-collector  | Buckets #2, Count: 0
+otel-collector  | Buckets #3, Count: 0
+otel-collector  | Buckets #4, Count: 0
+otel-collector  | Buckets #5, Count: 0
+otel-collector  | Buckets #6, Count: 0
+otel-collector  | Buckets #7, Count: 0
+otel-collector  | Buckets #8, Count: 0
+otel-collector  | Buckets #9, Count: 0
+otel-collector  | Buckets #10, Count: 0
+otel-collector  | Buckets #11, Count: 0
+otel-collector  | Buckets #12, Count: 0
+otel-collector  | Buckets #13, Count: 0
+otel-collector  | Buckets #14, Count: 0
+otel-collector  | Buckets #15, Count: 0
+otel-collector  | Exemplars:
+otel-collector  | Exemplar #0
+otel-collector  |      -> Trace ID: ca53ab5fbc4d0b11c02317fdb43a0c30
+otel-collector  |      -> Span ID: 1d02203feff8e650
+otel-collector  |      -> Timestamp: 2026-01-15 03:14:38.975051019 +0000 UTC
+otel-collector  |      -> Value: 0
+otel-collector  | Metric #1
+otel-collector  | Descriptor:
+otel-collector  |      -> Name: http.server.response.body.size
+otel-collector  |      -> Description: Size of HTTP server response bodies.
+otel-collector  |      -> Unit: By
+otel-collector  |      -> DataType: Histogram
+otel-collector  |      -> AggregationTemporality: Cumulative
+otel-collector  | HistogramDataPoints #0
+otel-collector  | Data point attributes:
+otel-collector  |      -> http.request.method: Str(GET)
+otel-collector  |      -> http.response.status_code: Int(200)
+otel-collector  |      -> network.protocol.name: Str(http)
+otel-collector  |      -> network.protocol.version: Str(1.1)
+otel-collector  |      -> server.address: Str(localhost)
+otel-collector  |      -> server.port: Int(8080)
+otel-collector  |      -> url.scheme: Str(http)
+otel-collector  | StartTimestamp: 2026-01-15 03:14:21.759288455 +0000 UTC
+otel-collector  | Timestamp: 2026-01-15 03:15:21.7588327 +0000 UTC
+otel-collector  | Count: 2
+otel-collector  | Sum: 4.000000
+otel-collector  | Min: 2.000000
+otel-collector  | Max: 2.000000
+otel-collector  | ExplicitBounds #0: 0.000000
+otel-collector  | ExplicitBounds #1: 5.000000
+otel-collector  | ExplicitBounds #2: 10.000000
+otel-collector  | ExplicitBounds #3: 25.000000
+otel-collector  | ExplicitBounds #4: 50.000000
+otel-collector  | ExplicitBounds #5: 75.000000
+otel-collector  | ExplicitBounds #6: 100.000000
+otel-collector  | ExplicitBounds #7: 250.000000
+otel-collector  | ExplicitBounds #8: 500.000000
+otel-collector  | ExplicitBounds #9: 750.000000
+otel-collector  | ExplicitBounds #10: 1000.000000
+otel-collector  | ExplicitBounds #11: 2500.000000
+otel-collector  | ExplicitBounds #12: 5000.000000
+otel-collector  | ExplicitBounds #13: 7500.000000
+otel-collector  | ExplicitBounds #14: 10000.000000
+otel-collector  | Buckets #0, Count: 0
+otel-collector  | Buckets #1, Count: 2
+otel-collector  | Buckets #2, Count: 0
+otel-collector  | Buckets #3, Count: 0
+otel-collector  | Buckets #4, Count: 0
+otel-collector  | Buckets #5, Count: 0
+otel-collector  | Buckets #6, Count: 0
+otel-collector  | Buckets #7, Count: 0
+otel-collector  | Buckets #8, Count: 0
+otel-collector  | Buckets #9, Count: 0
+otel-collector  | Buckets #10, Count: 0
+otel-collector  | Buckets #11, Count: 0
+otel-collector  | Buckets #12, Count: 0
+otel-collector  | Buckets #13, Count: 0
+otel-collector  | Buckets #14, Count: 0
+otel-collector  | Buckets #15, Count: 0
+otel-collector  | Exemplars:
+otel-collector  | Exemplar #0
+otel-collector  |      -> Trace ID: ca53ab5fbc4d0b11c02317fdb43a0c30
+otel-collector  |      -> Span ID: 1d02203feff8e650
+otel-collector  |      -> Timestamp: 2026-01-15 03:14:38.975053804 +0000 UTC
+otel-collector  |      -> Value: 2
+otel-collector  | Metric #2
+otel-collector  | Descriptor:
+otel-collector  |      -> Name: http.server.request.duration
+otel-collector  |      -> Description: Duration of HTTP server requests.
+otel-collector  |      -> Unit: s
+otel-collector  |      -> DataType: Histogram
+otel-collector  |      -> AggregationTemporality: Cumulative
+otel-collector  | HistogramDataPoints #0
+otel-collector  | Data point attributes:
+otel-collector  |      -> http.request.method: Str(GET)
+otel-collector  |      -> http.response.status_code: Int(200)
+otel-collector  |      -> network.protocol.name: Str(http)
+otel-collector  |      -> network.protocol.version: Str(1.1)
+otel-collector  |      -> server.address: Str(localhost)
+otel-collector  |      -> server.port: Int(8080)
+otel-collector  |      -> url.scheme: Str(http)
+otel-collector  | StartTimestamp: 2026-01-15 03:14:21.759295136 +0000 UTC
+otel-collector  | Timestamp: 2026-01-15 03:15:21.758847766 +0000 UTC
+otel-collector  | Count: 2
+otel-collector  | Sum: 0.000494
+otel-collector  | Min: 0.000241
+otel-collector  | Max: 0.000253
+otel-collector  | ExplicitBounds #0: 0.005000
+otel-collector  | ExplicitBounds #1: 0.010000
+otel-collector  | ExplicitBounds #2: 0.025000
+otel-collector  | ExplicitBounds #3: 0.050000
+otel-collector  | ExplicitBounds #4: 0.075000
+otel-collector  | ExplicitBounds #5: 0.100000
+otel-collector  | ExplicitBounds #6: 0.250000
+otel-collector  | ExplicitBounds #7: 0.500000
+otel-collector  | ExplicitBounds #8: 0.750000
+otel-collector  | ExplicitBounds #9: 1.000000
+otel-collector  | ExplicitBounds #10: 2.500000
+otel-collector  | ExplicitBounds #11: 5.000000
+otel-collector  | ExplicitBounds #12: 7.500000
+otel-collector  | ExplicitBounds #13: 10.000000
+otel-collector  | Buckets #0, Count: 2
+otel-collector  | Buckets #1, Count: 0
+otel-collector  | Buckets #2, Count: 0
+otel-collector  | Buckets #3, Count: 0
+otel-collector  | Buckets #4, Count: 0
+otel-collector  | Buckets #5, Count: 0
+otel-collector  | Buckets #6, Count: 0
+otel-collector  | Buckets #7, Count: 0
+otel-collector  | Buckets #8, Count: 0
+otel-collector  | Buckets #9, Count: 0
+otel-collector  | Buckets #10, Count: 0
+otel-collector  | Buckets #11, Count: 0
+otel-collector  | Buckets #12, Count: 0
+otel-collector  | Buckets #13, Count: 0
+otel-collector  | Buckets #14, Count: 0
+otel-collector  | Exemplars:
+otel-collector  | Exemplar #0
+otel-collector  |      -> Trace ID: ca53ab5fbc4d0b11c02317fdb43a0c30
+otel-collector  |      -> Span ID: 1d02203feff8e650
+otel-collector  |      -> Timestamp: 2026-01-15 03:14:38.975058311 +0000 UTC
+otel-collector  |      -> Value: 0.000241
+otel-collector  |       {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "metrics"}
+grafana         | logger=context userId=0 orgId=0 uname= t=2026-01-15T03:15:36.38760068Z level=info msg="Request Completed" method=GET path=/api/live/ws status=401 remote_addr=172.18.0.1 time_ms=1 duration=1.080224ms size=105 referer= handler=/api/live/ws status_source=server errorReason=Unauthorized errorMessageID=session.token.rotate error="token needs to be rotated"
+otel-collector  | 2026-01-15T03:16:21.765Z      info    Metrics {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "metrics", "resource metrics": 1, "metrics": 4, "data points": 5}
+otel-collector  | 2026-01-15T03:16:21.765Z      debug   otlphttpexporter@v0.139.0/otlp.go:177   Preparing to make HTTP request  {"resource": {"service.instance.id": "ccb7cd32-9e56-4aff-b063-642fdfa9f4a9", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "otlphttp/prometheus", "otelcol.component.kind": "exporter", "otelcol.signal": "metrics", "url": "http://prometheus:9090/api/v1/otlp/v1/metrics"}

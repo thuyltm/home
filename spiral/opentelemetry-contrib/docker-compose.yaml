@@ -22,10 +22,6 @@ services:
         condition: service_started
       prometheus:
         condition: service_started
-      opensearch:
-        condition: service_healthy
-      data-prepper:
-        condition: service_started
   
   prometheus:
     image: quay.io/prometheus/prometheus:v3.7.3
@@ -52,48 +48,6 @@ services:
       - "16686:16686"
     environment:
       - METRICS_STORAGE_TYPE=prometheus
-  
-  # OpenSearch
-  # OpenSearch cannot run as root. Please start your container as another user
-  opensearch:
-    image: opensearchproject/opensearch:latest
-    container_name: opensearch
-    #memory locking requested for opensearch process but memory is not locked
-    ulimits:
-      memlock:
-        soft: -1 # Set memlock to unlimited (no soft or hard limit)
-        hard: -1
-      nofile:
-        soft: 65536 # Maximum number of open files for the opensearch user - set to at least 65536
-        hard: 65536
-    environment:
-      - cluster.name=opensearch-cluster # Name the cluster
-      - node.name=opensearch # Name the node that will run in this container
-      - discovery.seed_hosts=opensearch # Nodes to look for when discovering the cluster
-      - cluster.initial_cluster_manager_nodes=opensearch # Nodes eligibile to serve as cluster manager
-      - bootstrap.memory_lock=true # Disable JVM heap memory swapping
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # Set min and max JVM heap sizes to at least 50% of system RAM
-      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD} # Sets the demo admin user password when using demo configuration (for OpenSearch 2.12 and later)
-      - DISABLE_SECURITY_PLUGIN=true
-      - plugins.query.datasources.encryption.masterkey=4241905e1bc4e11815fc0665
-    ports:
-      - "9200:9200"
-      - "9600:9600"    
-    healthcheck:
-      test: curl -s http://localhost:9200/_cluster/health | grep -E '"status":"(green|yello)"'
-      start_period: 10s
-      interval: 5s
-      timeout: 10s
-      retries: 10
-  opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:latest # Make sure the version of opensearch-dashboards matches the version of opensearch installed on other nodes
-    container_name: opensearch-dashboards
-    ports:
-      - 5601:5601 # Map host port 5601 to container port 5601
-    expose:
-      - "5601" # Expose port 5601 for web access to OpenSearch Dashboards
-    environment:
-      OPENSEARCH_HOSTS: '["http://opensearch:9200"]' # Define the OpenSearch nodes that OpenSearch Dashboards will query
   # Grafana
   grafana:
     image: grafana/grafana:12.2.0
@@ -106,16 +60,6 @@ services:
     depends_on:
       prometheus:
         condition: service_started
-  data-prepper:
-    image: opensearchproject/data-prepper:2
-    container_name: data-prepper
-    volumes:
-      - ./data-prepper/pipelines.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml
-      - ./data-prepper/data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
-    ports:
-      - "21890:21890"    
-    depends_on:
-      opensearch:
-        condition: service_healthy
+  
   
   
