@@ -1,0 +1,94 @@
+services:
+  envoy-front-proxy:
+    image:  envoyproxy/envoy:dev-6c261a8848fc4ca3c3906c848db99dd3e3dbc33f
+    container_name: envoy-front-proxy
+    ports:
+      - "10000:10000"
+    environment:
+      - ENVOY_UID=777
+    volumes:
+      - ./envoy-front-proxy.yaml:/envoy-front-proxy.yaml
+    command:
+      - --config-path /envoy-front-proxy.yaml
+    depends_on:
+      envoy-1:
+        condition: service_started
+      envoy-2:
+        condition: service_started
+      opentelemetry:
+        condition: service_started
+
+  envoy-1:
+    image: envoyproxy/envoy:dev-6c261a8848fc4ca3c3906c848db99dd3e3dbc33f
+    container_name: envoy-1
+    environment:
+      - ENVOY_UID=777
+    volumes:
+      - ./envoy-1.yaml:/envoy-1.yaml
+    command:
+      - --config-path /envoy-1.yaml
+    depends_on:
+      opentelemetry:
+        condition: service_started
+      service-1:
+        condition: service_healthy
+      envoy-2:
+        condition: service_started
+
+  service-1:
+    build:
+      context: ../../../..
+      dockerfile: docker/http/Dockerfile.multistage
+      target: http-release-stage
+    container_name: service-1
+    healthcheck:
+      test: curl -i http://localhost:9090/healthz
+      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 1
+
+  envoy-2:
+    image: envoyproxy/envoy:dev-6c261a8848fc4ca3c3906c848db99dd3e3dbc33f
+    container_name: envoy-2
+    environment:
+      - ENVOY_UID=777
+    volumes:
+      - ./envoy-2.yaml:/envoy-2.yaml
+    command:
+      - --config-path /envoy-2.yaml
+    depends_on:
+      opentelemetry:
+        condition: service_started
+      service-2:
+        condition: service_healthy
+
+  service-2:
+    build:
+      context: ../../../..
+      dockerfile: docker/http/Dockerfile.multistage
+      target: http-release-stage
+    container_name: service-2
+    healthcheck:
+      test: curl -i http://localhost:9090/healthz
+      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 1
+  
+  opentelemetry:
+    image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.139.0
+    container_name: opentelemetry
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "1888:1888"   # pprof extension
+      - "8888:8888"   # Prometheus metrics exposed by the collector
+      - "8889:8889"   # Prometheus exporter metrics
+      - "13133:13133" # health_check extension
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+      - "55679:55679" # zpages extension
+    
+    

@@ -1,0 +1,195 @@
+opentelemetry      | 2026-01-16T03:33:05.077Z   info    Traces  {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces", "resource spans": 1, "spans": 1}
+opentelemetry      | 2026-01-16T03:33:05.077Z   info    ResourceSpans #0
+opentelemetry      | Resource SchemaURL: 
+opentelemetry      | Resource attributes:
+opentelemetry      |      -> telemetry.sdk.version: Str(6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL)
+opentelemetry      |      -> telemetry.sdk.language: Str(cpp)
+opentelemetry      |      -> service.name: Str(envoy-1)
+opentelemetry      |      -> telemetry.sdk.name: Str(envoy)
+opentelemetry      | ScopeSpans #0
+opentelemetry      | ScopeSpans SchemaURL: 
+opentelemetry      | InstrumentationScope envoy 6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL
+opentelemetry      | Span #0
+opentelemetry      |     Trace ID       : ede71c1843b61970213aafc38ad85041
+opentelemetry      |     Parent ID      : 5bff19d77410cca4
+opentelemetry      |     ID             : d7e3ff4749c12817
+opentelemetry      |     Name           : routeToEnvoy1
+opentelemetry      |     Kind           : Server
+opentelemetry      |     Start time     : 2026-01-16 03:33:03.535796 +0000 UTC
+opentelemetry      |     End time       : 2026-01-16 03:33:03.539125 +0000 UTC
+opentelemetry      |     Status code    : Unset
+opentelemetry      |     Status message : 
+opentelemetry      | Attributes:
+opentelemetry      |      -> node_id: Str()
+opentelemetry      |      -> zone: Str()
+opentelemetry      |      -> guid:x-request-id: Str(f52ef03a-3c46-948e-af85-647ac996d40b)
+opentelemetry      |      -> http.url: Str(http://localhost:10000/service/1)
+opentelemetry      |      -> http.method: Str(GET)
+opentelemetry      |      -> downstream_cluster: Str(-)
+opentelemetry      |      -> user_agent: Str(curl/8.5.0)
+opentelemetry      |      -> http.protocol: Str(HTTP/1.1)
+opentelemetry      |      -> peer.address: Str(172.18.0.7)
+opentelemetry      |      -> request_size: Str(0)
+opentelemetry      |      -> response_size: Str(63)
+opentelemetry      |      -> component: Str(proxy)
+opentelemetry      |      -> upstream_cluster: Str(service_cluster1)
+opentelemetry      |      -> upstream_cluster.name: Str(service_cluster1)
+opentelemetry      |      -> http.status_code: Str(200)
+opentelemetry      |      -> response_flags: Str(-)
+opentelemetry      |    {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
+opentelemetry      | 2026-01-16T03:33:05.277Z   info    Traces  {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces", "resource spans": 1, "spans": 1}
+opentelemetry      | 2026-01-16T03:33:05.277Z   info    ResourceSpans #0
+opentelemetry      | Resource SchemaURL: 
+opentelemetry      | Resource attributes:
+opentelemetry      |      -> service.name: Str(front-envoy)
+opentelemetry      |      -> telemetry.sdk.name: Str(envoy)
+opentelemetry      |      -> telemetry.sdk.version: Str(6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL)
+opentelemetry      |      -> telemetry.sdk.language: Str(cpp)
+opentelemetry      | ScopeSpans #0
+opentelemetry      | ScopeSpans SchemaURL: 
+opentelemetry      | InstrumentationScope envoy 6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL
+opentelemetry      | Span #0
+opentelemetry      |     Trace ID       : ede71c1843b61970213aafc38ad85041
+opentelemetry      |     Parent ID      : 
+opentelemetry      |     ID             : 5bff19d77410cca4
+opentelemetry      |     Name           : routeToEnvoy1
+opentelemetry      |     Kind           : Client
+opentelemetry      |     Start time     : 2026-01-16 03:33:03.532392 +0000 UTC
+opentelemetry      |     End time       : 2026-01-16 03:33:03.540149 +0000 UTC
+opentelemetry      |     Status code    : Unset
+opentelemetry      |     Status message : 
+opentelemetry      | Attributes:
+opentelemetry      |      -> node_id: Str()
+opentelemetry      |      -> zone: Str()
+opentelemetry      |      -> guid:x-request-id: Str(f52ef03a-3c46-948e-af85-647ac996d40b)
+opentelemetry      |      -> http.url: Str(http://localhost:10000/service/1)
+opentelemetry      |      -> http.method: Str(GET)
+opentelemetry      |      -> downstream_cluster: Str(-)
+opentelemetry      |      -> user_agent: Str(curl/8.5.0)
+opentelemetry      |      -> http.protocol: Str(HTTP/1.1)
+opentelemetry      |      -> peer.address: Str(172.18.0.1)
+opentelemetry      |      -> request_size: Str(0)
+opentelemetry      |      -> response_size: Str(63)
+opentelemetry      |      -> component: Str(proxy)
+opentelemetry      |      -> upstream_cluster: Str(envoy_cluster1)
+opentelemetry      |      -> upstream_cluster.name: Str(envoy_cluster1)
+opentelemetry      |      -> http.status_code: Str(200)
+opentelemetry      |      -> response_flags: Str(-)
+opentelemetry      |    {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
+opentelemetry      | 2026-01-16T03:33:19.519Z   info    Traces  {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces", "resource spans": 1, "spans": 1}
+opentelemetry      | 2026-01-16T03:33:19.519Z   info    ResourceSpans #0
+opentelemetry      | Resource SchemaURL: 
+opentelemetry      | Resource attributes:
+opentelemetry      |      -> telemetry.sdk.language: Str(cpp)
+opentelemetry      |      -> telemetry.sdk.version: Str(6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL)
+opentelemetry      |      -> service.name: Str(envoy-2)
+opentelemetry      |      -> telemetry.sdk.name: Str(envoy)
+opentelemetry      | ScopeSpans #0
+opentelemetry      | ScopeSpans SchemaURL: 
+opentelemetry      | InstrumentationScope envoy 6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL
+opentelemetry      | Span #0
+opentelemetry      |     Trace ID       : 7d3c9bb3e80c1cb5a33949bccaed8abd
+opentelemetry      |     Parent ID      : b65e35eb96f7c86c
+opentelemetry      |     ID             : a78efca71f23a0b4
+opentelemetry      |     Name           : routeToEnvoy2
+opentelemetry      |     Kind           : Server
+opentelemetry      |     Start time     : 2026-01-16 03:33:16.21917 +0000 UTC
+opentelemetry      |     End time       : 2026-01-16 03:33:16.221186 +0000 UTC
+opentelemetry      |     Status code    : Unset
+opentelemetry      |     Status message : 
+opentelemetry      | Attributes:
+opentelemetry      |      -> node_id: Str()
+opentelemetry      |      -> zone: Str()
+opentelemetry      |      -> guid:x-request-id: Str(de144976-fc71-9db9-840a-ce3353aedd30)
+opentelemetry      |      -> http.url: Str(http://localhost:10000/service/2)
+opentelemetry      |      -> http.method: Str(GET)
+opentelemetry      |      -> downstream_cluster: Str(-)
+opentelemetry      |      -> user_agent: Str(curl/8.5.0)
+opentelemetry      |      -> http.protocol: Str(HTTP/1.1)
+opentelemetry      |      -> peer.address: Str(172.18.0.6)
+opentelemetry      |      -> request_size: Str(0)
+opentelemetry      |      -> response_size: Str(63)
+opentelemetry      |      -> component: Str(proxy)
+opentelemetry      |      -> upstream_cluster: Str(service_cluster2)
+opentelemetry      |      -> upstream_cluster.name: Str(service_cluster2)
+opentelemetry      |      -> http.status_code: Str(200)
+opentelemetry      |      -> response_flags: Str(-)
+opentelemetry      |    {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
+opentelemetry      | 2026-01-16T03:33:20.121Z   info    Traces  {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces", "resource spans": 1, "spans": 1}
+opentelemetry      | 2026-01-16T03:33:20.121Z   info    ResourceSpans #0
+opentelemetry      | Resource SchemaURL: 
+opentelemetry      | Resource attributes:
+opentelemetry      |      -> telemetry.sdk.version: Str(6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL)
+opentelemetry      |      -> telemetry.sdk.language: Str(cpp)
+opentelemetry      |      -> service.name: Str(envoy-1)
+opentelemetry      |      -> telemetry.sdk.name: Str(envoy)
+opentelemetry      | ScopeSpans #0
+opentelemetry      | ScopeSpans SchemaURL: 
+opentelemetry      | InstrumentationScope envoy 6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL
+opentelemetry      | Span #0
+opentelemetry      |     Trace ID       : 7d3c9bb3e80c1cb5a33949bccaed8abd
+opentelemetry      |     Parent ID      : 5fee3a19558c858e
+opentelemetry      |     ID             : b65e35eb96f7c86c
+opentelemetry      |     Name           : routeToEnvoy2
+opentelemetry      |     Kind           : Client
+opentelemetry      |     Start time     : 2026-01-16 03:33:16.218075 +0000 UTC
+opentelemetry      |     End time       : 2026-01-16 03:33:16.221711 +0000 UTC
+opentelemetry      |     Status code    : Unset
+opentelemetry      |     Status message : 
+opentelemetry      | Attributes:
+opentelemetry      |      -> node_id: Str()
+opentelemetry      |      -> zone: Str()
+opentelemetry      |      -> guid:x-request-id: Str(de144976-fc71-9db9-840a-ce3353aedd30)
+opentelemetry      |      -> http.url: Str(http://localhost:10000/service/2)
+opentelemetry      |      -> http.method: Str(GET)
+opentelemetry      |      -> downstream_cluster: Str(-)
+opentelemetry      |      -> user_agent: Str(curl/8.5.0)
+opentelemetry      |      -> http.protocol: Str(HTTP/1.1)
+opentelemetry      |      -> peer.address: Str(172.18.0.7)
+opentelemetry      |      -> request_size: Str(0)
+opentelemetry      |      -> response_size: Str(63)
+opentelemetry      |      -> component: Str(proxy)
+opentelemetry      |      -> upstream_cluster: Str(envoy_cluster2)
+opentelemetry      |      -> upstream_cluster.name: Str(envoy_cluster2)
+opentelemetry      |      -> http.status_code: Str(200)
+opentelemetry      |      -> response_flags: Str(-)
+opentelemetry      |    {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
+opentelemetry      | 2026-01-16T03:33:20.322Z   info    Traces  {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces", "resource spans": 1, "spans": 1}
+opentelemetry      | 2026-01-16T03:33:20.322Z   info    ResourceSpans #0
+opentelemetry      | Resource SchemaURL: 
+opentelemetry      | Resource attributes:
+opentelemetry      |      -> service.name: Str(front-envoy)
+opentelemetry      |      -> telemetry.sdk.name: Str(envoy)
+opentelemetry      |      -> telemetry.sdk.version: Str(6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL)
+opentelemetry      |      -> telemetry.sdk.language: Str(cpp)
+opentelemetry      | ScopeSpans #0
+opentelemetry      | ScopeSpans SchemaURL: 
+opentelemetry      | InstrumentationScope envoy 6c261a8848fc4ca3c3906c848db99dd3e3dbc33f/1.38.0-dev/Clean/RELEASE/BoringSSL
+opentelemetry      | Span #0
+opentelemetry      |     Trace ID       : 7d3c9bb3e80c1cb5a33949bccaed8abd
+opentelemetry      |     Parent ID      : 
+opentelemetry      |     ID             : 5fee3a19558c858e
+opentelemetry      |     Name           : routeToEnvoy2ViaEnvoy1
+opentelemetry      |     Kind           : Client
+opentelemetry      |     Start time     : 2026-01-16 03:33:16.216931 +0000 UTC
+opentelemetry      |     End time       : 2026-01-16 03:33:16.222405 +0000 UTC
+opentelemetry      |     Status code    : Unset
+opentelemetry      |     Status message : 
+opentelemetry      | Attributes:
+opentelemetry      |      -> node_id: Str()
+opentelemetry      |      -> zone: Str()
+opentelemetry      |      -> guid:x-request-id: Str(de144976-fc71-9db9-840a-ce3353aedd30)
+opentelemetry      |      -> http.url: Str(http://localhost:10000/service/2)
+opentelemetry      |      -> http.method: Str(GET)
+opentelemetry      |      -> downstream_cluster: Str(-)
+opentelemetry      |      -> user_agent: Str(curl/8.5.0)
+opentelemetry      |      -> http.protocol: Str(HTTP/1.1)
+opentelemetry      |      -> peer.address: Str(172.18.0.1)
+opentelemetry      |      -> request_size: Str(0)
+opentelemetry      |      -> response_size: Str(63)
+opentelemetry      |      -> component: Str(proxy)
+opentelemetry      |      -> upstream_cluster: Str(envoy_cluster2)
+opentelemetry      |      -> upstream_cluster.name: Str(envoy_cluster2)
+opentelemetry      |      -> http.status_code: Str(200)
+opentelemetry      |      -> response_flags: Str(-)
+opentelemetry      |    {"resource": {"service.instance.id": "84b50271-54f2-4e96-bdad-5b428b01cc95", "service.name": "otelcol-contrib", "service.version": "0.139.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
