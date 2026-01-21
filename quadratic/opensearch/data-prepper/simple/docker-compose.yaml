@@ -1,0 +1,11 @@
+services:
+  data-prepper:
+    image: opensearchproject/data-prepper:latest
+    container_name: data-prepper
+    volumes:
+      - ./pipelines.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml 
+      - ./data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
+      - ./keystore.p12:/usr/share/data-prepper/keystore.p12
+      - ./data-prepper.jks:/usr/share/data-prepper/data-prepper.jks
+    ports:
+      - "4900:4900"

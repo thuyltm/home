@@ -1,0 +1,10 @@
+simple-sample-pipeline:
+  workers: 2
+  delay: "5000"
+  source:
+    random:
+  processor:
+    - string_converter:
+        upper_case: true
+  sink:
+    - stdout:
