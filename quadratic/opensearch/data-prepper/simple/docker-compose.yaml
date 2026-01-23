@@ -7,5 +7,7 @@ services:
       - ./data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
       - ./keystore.p12:/usr/share/data-prepper/keystore.p12
       - ./data-prepper.jks:/usr/share/data-prepper/data-prepper.jks
+      - ./data-prepper.pem:/usr/share/data-prepper/data-prepper.pem
+      - ./data-prepper-key.pem:/usr/share/data-prepper/data-prepper-key.pem
     ports:
       - "4900:4900"

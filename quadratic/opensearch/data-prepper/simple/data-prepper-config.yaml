@@ -1,0 +1,5 @@
+ssl: true
+keyStoreFilePath: "/usr/share/data-prepper/data-prepper.jks"
+keyStorePassword: "123456"
+privateKeyPassword: "123456"
+serverPort: 4900

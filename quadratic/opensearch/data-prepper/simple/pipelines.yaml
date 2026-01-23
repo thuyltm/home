@@ -2,7 +2,22 @@ simple-sample-pipeline:
   workers: 2
   delay: "5000"
   source:
-    random:
+    #random:
+    otlp:
+      # Port to listen on for OTLP data (gRPC and HTTP are supported by this unified source)
+      port: 21890
+      # Optional: Enable gRPC health checks
+      health_check_service: true
+      # Optional: Enable gRPC reflection service for easier client configuration (e.g., Postman)
+      proto_reflection_service: true
+      # Optional: Configure TLS/SSL settings if needed
+      ssl: true
+      ssl_certificate_file: "/usr/share/data-prepper/data-prepper.pem" #public key
+      ssl_key_file: "/usr/share/data-prepper/data-prepper-key.pem" # private key
+  buffer:
+    bounded_blocking:
+      buffer_size: 1024
+      batch_size: 128
   processor:
     - string_converter:
         upper_case: true
