@@ -1,0 +1,57 @@
+{
+
+    "took":3,
+    "timed_out":false,
+    "_shards":{
+        "total":1,
+        "successful":1,
+        "skipped":0,
+        "failed":0
+    },
+    "hits":{
+        "total":{
+            "value":1,
+            "relation":"eq"
+        },
+        "max_score":1.0,
+        "hits":[
+            {
+                "_index":"otel-v1-apm-span-000001",
+                "_id":"d76df8e7aefcf7469b71d79fd76df8e7aefcf7469b71d79f/7de79d7da71e71a7de6de79f",
+                "_score":1.0,
+                "_source":{
+                    "traceId":"d76df8e7aefcf7469b71d79fd76df8e7aefcf7469b71d79f",
+                    "droppedLinksCount":0,
+                    "kind":"SPAN_KIND_UNSPECIFIED",
+                    "droppedEventsCount":0,
+                    "traceGroupFields":{
+                        "endTime":"2025-02-19T21:20:00Z",
+                        "durationInNanos":1000000000,
+                        "statusCode":0
+                    },
+                    "traceGroup":"PUT /invoice/42",
+                    "serviceName":"billing",
+                    "parentSpanId":"",
+                    "spanId":"7de79d7da71e71a7de6de79f",
+                    "traceState":"",
+                    "name":"PUT /invoice/42",
+                    "startTime":"2025-02-19T21:19:59Z",
+                    "links":[
+                    ],
+                    "endTime":"2025-02-19T21:20:00Z",
+                    "droppedAttributesCount":0,
+                    "durationInNanos":1000000000,
+                    "events":[
+                    ],
+                    "instrumentationScope.name":"manual-https",
+                    "span.attributes.retry@count":1,
+                    "resource.attributes.service@version":"2.1.0",
+                    "span.attributes.region":"eu-west-1",
+                    "resource.attributes.service@name":"billing",
+                    "status.code":0
+                }
+            }
+        ]
+    }
+
+}

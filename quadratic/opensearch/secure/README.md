@@ -1,24 +1,3 @@
-curl -X PUT -H "Content-Type: application/json" -d '{ "name": "John Doe", "gpa": 3.89, "grad_year": 2022}' \
-https://localhost:9200/students/_doc/1 -ku admin:Skype@123
-
-
-curl -XGET "https://localhost:9200/students/_mapping" -ku admin:Skype@123
-
-
-curl -XGET "https://localhost:9200/students/_search" -ku admin:Skype@123 -H 'Content-Type: application/json' -d'
-{
-  "query": {
-    "match_all": {}
-  }
-}
-'
-
-curl -X GET "https://localhost:9200/students/_search?pretty" -H 'Content-Type: application/json' -d'
-{
-  "query": {
-    "match_all": {}
-  }
-}'
 1. OpenSearch includes demo certificates for quick setup and testing, located in the <OPENSEARCH_HOME>/config/ directory. These certificates are not secure for production environments and must be replaced with your own
 ```sh
 % docker exec -it opensearch-node1 sh
@@ -38,4 +17,8 @@ opensearch-node1       | io.netty.handler.ssl.NotSslRecordException: not an SSL/
 # OR
 % docker cp ddc287f8c1df:/usr/share/opensearch/config/root-ca.pem ~/Documents/Learn/home/quadratic/opensearch/sercure
 % curl --cacert root-ca.pem -XGET https://localhost:9200/_cat/indices -ku admin:Skype@123
+# if use
+% curl --cacert root-ca.pem -XGET https://opensearch:9200/_cat/indices -ku admin:Skype@123
+# will throws "Host name 'opensearch' does not match the certificate subject provided by the peer (CN=node-0.example.com, OU=node, O=node, L=test, C=de)", with the result that you should set hostname alias 'node-0.example.com' for container name 'opensearch'
 ```
+

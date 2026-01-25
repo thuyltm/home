@@ -1,0 +1,7 @@
+# Disable TLS on the Data Prepper REST API (local only)
+ssl: false
+serverPort: 4900
+
+peer_forwarder:
+  ssl: false
+  discovery_mode: local_node
