@@ -1,3 +1,15 @@
+##################################################################################
+##
+## Python Dependencies
+## https://github.com/bazel-contrib/rules_python/releases
+##
+##################################################################################
+
+######################################################################################
+##
+## Golang Dependencies
+##
+######################################################################################
 bazel_dep(name = "rules_go", version = "0.56.1")
 bazel_dep(name = "gazelle", version = "0.45.0")
 bazel_dep(name = "platforms", version = "1.0.0")
@@ -7,13 +19,7 @@ bazel_dep(name = "rules_pkg", version = "1.0.1")
 bazel_dep(name = "aspect_bazel_lib", version = "2.10.0")
 
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
-go_sdk.download(
-    name = "go_sdk",
-    version = "1.23.1",
-)
-use_repo(go_sdk, "go_sdk")
-
-register_toolchains("@go_sdk//:all")
+go_sdk.from_file(go_mod = "//:go.mod")
 
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 oci.pull(
@@ -21,7 +27,7 @@ oci.pull(
     digest = "sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f",
     image = "golang",
     platforms = ["linux/amd64"],
-    tag = "1.23-alpine",
+    tag = "1.25-alpine",
 )
 oci.pull(
     name = "distroless_base",
@@ -70,6 +76,7 @@ use_repo(
     "com_github_go_gl_mathgl",
     "com_github_go_gst_go_glib",
     "com_github_go_gst_go_gst",
+    "com_github_go_logr_stdr",
     "com_github_go_redis_redis_v8",
     "com_github_go_sql_driver_mysql",
     "com_github_google_uuid",
@@ -84,6 +91,8 @@ use_repo(
     "com_github_minio_minio_go_v7",
     "com_github_pion_interceptor",
     "com_github_pion_webrtc_v4",
+    "com_github_prometheus_client_golang",
+    "com_github_quic_go_quic_go",
     "com_github_stretchr_testify",
     "com_github_testcontainers_testcontainers_go",
     "com_github_testcontainers_testcontainers_go_modules_cockroachdb",
@@ -92,6 +101,24 @@ use_repo(
     "io_gocv_x_gocv",
     "io_gorm_driver_sqlite",
     "io_gorm_gorm",
+    "io_opencensus_go",
+    "io_opentelemetry_go_contrib_bridges_otelslog",
+    "io_opentelemetry_go_contrib_instrumentation_net_http_otelhttp",
+    "io_opentelemetry_go_otel",
+    "io_opentelemetry_go_otel_bridge_opencensus",
+    "io_opentelemetry_go_otel_exporters_otlp_otlplog_otlploggrpc",
+    "io_opentelemetry_go_otel_exporters_otlp_otlpmetric_otlpmetricgrpc",
+    "io_opentelemetry_go_otel_exporters_otlp_otlptrace",
+    "io_opentelemetry_go_otel_exporters_otlp_otlptrace_otlptracegrpc",
+    "io_opentelemetry_go_otel_exporters_prometheus",
+    "io_opentelemetry_go_otel_exporters_zipkin",
+    "io_opentelemetry_go_otel_log",
+    "io_opentelemetry_go_otel_metric",
+    "io_opentelemetry_go_otel_sdk",
+    "io_opentelemetry_go_otel_sdk_log",
+    "io_opentelemetry_go_otel_sdk_metric",
+    "io_opentelemetry_go_otel_trace",
+    "org_golang_google_grpc",
     "org_uber_go_fx",
     "org_uber_go_zap",
 )

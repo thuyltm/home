@@ -18,6 +18,7 @@ require (
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/pion/interceptor v0.1.40
 	github.com/prometheus/client_golang v1.23.2
+	github.com/quic-go/quic-go v0.54.0
 	github.com/stretchr/testify v1.11.1
 	go.opentelemetry.io/contrib/bridges/otelslog v0.14.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.64.0
@@ -77,7 +78,6 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
-	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/gorilla/context v1.1.2 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
@@ -95,7 +95,6 @@ require (
 	github.com/magiconair/properties v1.8.10 // indirect
 	github.com/mattn/go-pointer v0.0.1 // indirect
 	github.com/mattn/go-sqlite3 v1.14.22 // indirect
-	github.com/minaevmike/go-grpc-cli v0.0.0-20170716195518-4e54ece5f10f // indirect
 	github.com/minio/crc64nvme v1.1.0 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
@@ -136,7 +135,6 @@ require (
 	github.com/prometheus/otlptranslator v1.0.0 // indirect
 	github.com/prometheus/procfs v0.19.2 // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
-	github.com/quic-go/quic-go v0.54.0 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/shirou/gopsutil/v4 v4.25.5 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
@@ -195,7 +193,7 @@ require (
 	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc v1.39.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.39.0
 	go.opentelemetry.io/otel/exporters/zipkin v1.39.0
-	go.opentelemetry.io/otel/log v0.15.0 // indirect
+	go.opentelemetry.io/otel/log v0.15.0
 	golang.org/x/crypto v0.44.0 // indirect
 	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/sys v0.39.0 // indirect
