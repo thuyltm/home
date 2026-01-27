@@ -1,9 +1,39 @@
 ##################################################################################
 ##
+## Shell
+##
+##################################################################################
+bazel_dep(name = "rules_shell", version = "0.6.1")
+
+
+
+
+
+##################################################################################
+##
 ## Python Dependencies
 ## https://github.com/bazel-contrib/rules_python/releases
 ##
 ##################################################################################
+bazel_dep(name = "rules_python", version = "1.8.2")
+bazel_dep(name = "aspect_rules_py", version = "1.8.4")
+bazel_dep(name = "bazel_lib", version = "3.1.1")
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(
+    python_version = "3.13",
+)
+
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+pip.parse(
+    hub_name = "pip",
+    python_version = "3.13",
+    requirements_lock = "//:requirements_lock.txt",
+)
+
+use_repo(pip, "pip")
+
+
 
 ######################################################################################
 ##
@@ -47,6 +77,14 @@ oci.pull(
     ],
     tag = "3.18",
 )
+
+oci.pull(
+    name="my_fastapi_container_base",
+    digest="sha256:fecc54cdbca5a27eafd56abdd3518415e08239fb49dd0dfedc01ab6484079bed",
+    image="docker.io/thuyltm2201/my_fastapi_container_base:latest",
+    tag="latest",
+)
+
 use_repo(
     oci,
     "alpine",
@@ -56,6 +94,7 @@ use_repo(
     "distroless_base_linux_arm64",
     "golang",
     "golang_linux_amd64",
+    "my_fastapi_container_base",
 )
 
 go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
