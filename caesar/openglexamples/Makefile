@@ -1,5 +1,5 @@
-CXXFLAGS=-g -Wall `pkg-config --cflags glu glut gl`
-LDFLAGS=`pkg-config --libs glu glut gl`
+CXXFLAGS=-g -Wall `pkg-config --cflags glu glut gl` #provides options for the compiler (pre-processor and compile phases)
+LDFLAGS=`pkg-config --libs glu glut gl` #provides options for the linker (linking phase)
 SOURCES=$(wildcard *.c *cpp)
 OBJECTS=$(SOURCES:.c= $(basename $$SOURCES))
 .PHONY: all clean
