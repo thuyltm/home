@@ -1,3 +1,64 @@
+bazel_dep(name = "gazelle", version = "0.45.0")
+bazel_dep(name = "platforms", version = "1.0.0")
+bazel_dep(name = "rules_docker_compose_test", version = "1.2.0")
+bazel_dep(name = "rules_oci", version = "2.2.0")
+bazel_dep(name = "rules_pkg", version = "1.0.1")
+bazel_dep(name = "aspect_bazel_lib", version = "2.10.0")
+
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+
+##################################################################################
+##
+## NodeJS
+##
+##################################################################################
+
+
+
+##################################################################################
+##
+## Rust
+##
+##################################################################################
+
+
+##################################################################################
+##
+## Scala
+##
+##################################################################################
+
+
+##################################################################################
+##
+## Java
+##
+##################################################################################
+bazel_dep(name = "rules_java", version = "9.3.0")
+bazel_dep(name = "rules_jvm_external", version = "6.9")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+
+maven.install(
+    artifacts = [
+        "junit:junit:4.12",
+        "com.google.guava:guava:28.0-jre",
+    ],
+    fetch_sources = True,
+    repositories = [
+        "http://uk.maven.org/maven2",
+        "https://jcenter.bintray.com/",
+    ],
+)
+
+use_repo(maven, "maven")
+
+oci.pull(
+    name = "distroless_java",
+    digest = "sha256:97891db4665b347af579b94f324f94f984a1e2e6d009b0015a1d2d214a0389d3",
+    image = "gcr.io/distroless/java17",
+)
+use_repo(oci, "distroless_java")
 ##################################################################################
 ##
 ## C++
@@ -45,17 +106,12 @@ use_repo(pip, "pip")
 ##
 ######################################################################################
 bazel_dep(name = "rules_go", version = "0.56.1")
-bazel_dep(name = "gazelle", version = "0.45.0")
-bazel_dep(name = "platforms", version = "1.0.0")
-bazel_dep(name = "rules_docker_compose_test", version = "1.2.0")
-bazel_dep(name = "rules_oci", version = "2.2.0")
-bazel_dep(name = "rules_pkg", version = "1.0.1")
-bazel_dep(name = "aspect_bazel_lib", version = "2.10.0")
+
 
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 go_sdk.from_file(go_mod = "//:go.mod")
 
-oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+
 oci.pull(
     name = "golang",
     digest = "sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f",
