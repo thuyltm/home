@@ -9,3 +9,7 @@ magnet/video/
 magnet/go4vl/webcam/facefinder.model
 caesar/images/
 build/
+.bazelbsp
+.bsp
+.idea
+.metals
