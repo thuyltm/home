@@ -1,0 +1,2 @@
+resolvers in ThisBuild += "akka-secure-mvn" at "https://repo.akka.io/psStdrDNPsCl_nzQYRt0UkkEYgWnKI_KgqJkCDN0pC8kh99d/secure"
+resolvers in ThisBuild += Resolver.url("akka-secure-ivy", url("https://repo.akka.io/psStdrDNPsCl_nzQYRt0UkkEYgWnKI_KgqJkCDN0pC8kh99d/secure"))(Resolver.ivyStylePatterns)
