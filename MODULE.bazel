@@ -3,7 +3,7 @@ bazel_dep(name = "platforms", version = "1.0.0")
 bazel_dep(name = "rules_docker_compose_test", version = "1.2.0")
 bazel_dep(name = "rules_oci", version = "2.2.0")
 bazel_dep(name = "rules_pkg", version = "1.0.1")
-bazel_dep(name = "aspect_bazel_lib", version = "2.10.0")
+bazel_dep(name = "aspect_bazel_lib", version = "2.19.3")
 
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 
@@ -12,8 +12,6 @@ oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 ## NodeJS
 ##
 ##################################################################################
-
-
 
 ##################################################################################
 ##
@@ -31,17 +29,36 @@ use_repo(rust, "rust_toolchains")
 
 register_toolchains("@rust_toolchains//:all")
 
-
 crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
-
-crate.spec(package = "actix-files", version = "0.6.9")
-crate.spec(package = "actix-web", version = "4.12.1")
-crate.spec(package = "actix-ws", version = "0.3.1")
-crate.spec(package = "env_logger", version = "0.11.8")
-crate.spec(package = "futures-util", version = "0.3.31")
-crate.spec(package = "log", version = "0.4.29")
-crate.spec(package = "tokio", features = ["full"], version = "1.49.0")
-
+crate.spec(
+    package = "actix-files",
+    version = "0.6.9",
+)
+crate.spec(
+    package = "actix-web",
+    version = "4.12.1",
+)
+crate.spec(
+    package = "actix-ws",
+    version = "0.3.1",
+)
+crate.spec(
+    package = "env_logger",
+    version = "0.11.8",
+)
+crate.spec(
+    package = "futures-util",
+    version = "0.3.31",
+)
+crate.spec(
+    package = "log",
+    version = "0.4.29",
+)
+crate.spec(
+    features = ["full"],
+    package = "tokio",
+    version = "1.49.0",
+)
 crate.from_specs()
 use_repo(crate, "crates")
 
@@ -51,7 +68,6 @@ use_repo(crate, "crates")
 ##
 ##################################################################################
 
-
 ##################################################################################
 ##
 ## Java
@@ -59,21 +75,31 @@ use_repo(crate, "crates")
 ##################################################################################
 bazel_dep(name = "rules_java", version = "9.3.0")
 bazel_dep(name = "rules_jvm_external", version = "6.9")
+bazel_dep(name = "contrib_rules_jvm", version = "0.32.0")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
-
 maven.install(
     artifacts = [
         "junit:junit:4.12",
-        "com.google.guava:guava:28.0-jre",
+        "com.google.guava:guava:32.0.1-jre",
+        "io.vertx:vertx-core:5.0.7",
+        "io.vertx:vertx-launcher-application:5.0.7",
+        "io.vertx:vertx-junit5:5.0.7",
+        "io.vertx:vertx-web-client:5.0.7",
+        "org.junit.jupiter:junit-jupiter-api:6.1.0-M1",
+        "org.junit.jupiter:junit-jupiter-engine:6.1.0-M1",
+        "org.junit.platform:junit-platform-launcher:6.1.0-M1",
+        "org.junit.platform:junit-platform-reporting:6.1.0-M1",
+        "org.junit.platform:junit-platform-console:6.1.0-M1",
     ],
     fetch_sources = True,
+    lock_file = "//:maven_install.json",  # <--- Lock file definition
     repositories = [
         "http://uk.maven.org/maven2",
         "https://jcenter.bintray.com/",
+        "https://mvnrepository.com/artifact/",
     ],
 )
-
 use_repo(maven, "maven")
 
 oci.pull(
@@ -82,6 +108,7 @@ oci.pull(
     image = "gcr.io/distroless/java17",
 )
 use_repo(oci, "distroless_java")
+
 ##################################################################################
 ##
 ## C++
@@ -118,10 +145,7 @@ pip.parse(
     python_version = "3.13",
     requirements_lock = "//:requirements_lock.txt",
 )
-
 use_repo(pip, "pip")
-
-
 
 ######################################################################################
 ##
@@ -130,10 +154,8 @@ use_repo(pip, "pip")
 ######################################################################################
 bazel_dep(name = "rules_go", version = "0.56.1")
 
-
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 go_sdk.from_file(go_mod = "//:go.mod")
-
 
 oci.pull(
     name = "golang",
@@ -160,14 +182,12 @@ oci.pull(
     ],
     tag = "3.18",
 )
-
 oci.pull(
-    name="my_fastapi_container_base",
-    digest="sha256:fecc54cdbca5a27eafd56abdd3518415e08239fb49dd0dfedc01ab6484079bed",
-    image="docker.io/thuyltm2201/my_fastapi_container_base:latest",
-    tag="latest",
+    name = "my_fastapi_container_base",
+    digest = "sha256:fecc54cdbca5a27eafd56abdd3518415e08239fb49dd0dfedc01ab6484079bed",
+    image = "docker.io/thuyltm2201/my_fastapi_container_base:latest",
+    tag = "latest",
 )
-
 use_repo(
     oci,
     "alpine",

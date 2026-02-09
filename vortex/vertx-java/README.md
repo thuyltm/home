@@ -1,0 +1,1 @@
+bazel test //vortex/vertx-java:sampleVerticleTests --nocache_test_results --test_output=all
