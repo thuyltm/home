@@ -1,0 +1,6 @@
+Apache Hadoop YARN (Yet Another Resource Negotiator) is a core component of Apache Hadoop 2.0+ that acts as a distributed operating system for big data applications. It separates resource management from data processing, allowing multiple **data engines --such as MapReduce, Spark, and Storm --** to run concurrently on the same cluster while managing CPU and memory usage
+![Yarn Architecture](https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/yarn_architecture.gif)
+
+The **ResourceManager/Schedule** is responsible for allocating resouces to the various running applications in the system. The Scheduler is pure scheduler in the sense that it performs no monitorung or tracking of status for the application. Also it offer no guarantees about restarting failed tasks either due to application failure or hardware failures.
+
+The **NodeManager** is the per-machine framework agent who is responsible for container, monitorung their resource usage (cpu, memory, disk, network) and reporting the same to the ResourceManager/Scheduler

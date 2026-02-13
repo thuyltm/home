@@ -91,6 +91,9 @@ maven.install(
         "org.junit.platform:junit-platform-launcher:6.1.0-M1",
         "org.junit.platform:junit-platform-reporting:6.1.0-M1",
         "org.junit.platform:junit-platform-console:6.1.0-M1",
+        "org.apache.hadoop:hadoop-common:3.4.2",
+        "org.apache.hadoop:hadoop-mapreduce-client-core:3.4.2",
+        "org.apache.hadoop:hadoop-hdfs-client:3.4.2"
     ],
     fetch_sources = True,
     lock_file = "//:maven_install.json",  # <--- Lock file definition
