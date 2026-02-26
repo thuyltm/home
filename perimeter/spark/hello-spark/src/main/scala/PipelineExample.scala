@@ -36,6 +36,7 @@ object PipelineExample {
     //We can also save this unfit pipeline to disk
     pipeline.write.overwrite().save("/tmp/unfit-lr-model")
     //And load it back in during production
+    //The code fails if the directory /tmp/spark-logistic-regrssion-model has not been created yet
     val sameModel = PipelineModel.load("/tmp/spark-logistic-regression-model")
     //Prepare test documents, which are unlabeled (id, text) tuples
     val test = spark.createDataFrame(Seq(

@@ -1,0 +1,47 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: my-scala-hello-spark
+  namespace: default
+spec:
+  type: Scala
+  mode: cluster
+  image: docker.io/thuyltm2201/hello-spark:latest
+  imagePullPolicy: IfNotPresent
+  mainClass: EstimatorTransformerParamExample
+  mainApplicationFile: local:///opt/spark/jars/hello-spark-assembly-1.0.jar
+  arguments:
+  - "5000"
+  sparkVersion: 4.1.1
+  driver:
+    labels:
+      version: 4.0.0
+    cores: 1
+    memory: 512m
+    serviceAccount: spark-operator-spark
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+      runAsGroup: 185
+      runAsUser: 185
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+      seccompProfile:
+        type: RuntimeDefault
+  executor:
+    labels:
+      version: 4.0.0
+    instances: 1
+    cores: 1
+    memory: 512m
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+      runAsGroup: 185
+      runAsUser: 185
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+      seccompProfile:
+        type: RuntimeDefault

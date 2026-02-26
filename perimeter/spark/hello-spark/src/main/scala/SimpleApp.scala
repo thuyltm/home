@@ -15,6 +15,7 @@ object SimpleApp {
     df.show()
     //Count the number of line containing `a` and the number containing `b` in the Spark README
     //val logFile = getClass.getResourceAsStream("/README.md")
+    //this code raise an exception when the file is missing
     val filePath = "src/main/resources/README.md"
     val logData = spark.read.textFile(filePath).cache()
     val numAs = logData.filter(line=>line.contains("a")).count()
