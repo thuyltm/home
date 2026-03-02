@@ -1,11 +1,13 @@
 ```sh
 # Starts a master instance on the machine the script is executed on.
-% sbin/start-master.sh
+# By default, Spark might only bind to localhost. 
+# To accept connections from anywhere, set the SPARK_MASTER_HOST environment variable to 0.0.0.0 when starting the master. 
+% SPARK_MASTER_HOST=0.0.0.0 $SPARK_HOME/sbin/start-master.sh
 # INFO Master: Starting Spark master at spark://thuy-Vivobook-Go-E1504FA-E1504FA:7077
-# INFO MasterWebUI: Bound MasterWebUI to 0.0.0.0, and started at http://172.18.0.1:8080
-% ./sbin/start-worker.sh spark://thuy-Vivobook-Go-E1504FA-E1504FA:7077
+# INFO MasterWebUI: Bound MasterWebUI to 0.0.0.0, and started at http://localhost:8080
+% $SPARK_HOME/sbin/start-worker.sh spark://thuy-Vivobook-Go-E1504FA-E1504FA:7077
 # To run an interactive Spark sell against the cluster
-% ./bin/spark-shell --master spark://thuy-Vivobook-Go-E1504FA-E1504FA:7077
+% $SPARK_HOME/bin/spark-shell --master spark://thuy-Vivobook-Go-E1504FA-E1504FA:7077
 % curl -XPOST http://thuy-Vivobook-Go-E1504FA-E1504FA:6066/v1/submissions/create \
 --header "Content-Type:application/json;charset=UTF-8" \
 --data '{
