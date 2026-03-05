@@ -1,0 +1,59 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: otel
+spec:
+  telemetry:
+    accessLog:
+      settings:
+        - format:
+            type: Text
+            text: |
+              [%START_TIME%] "%REQ(:METHOD)% %REQ(X-ENVOY-ORIGINAL-PATH?:PATH)% %PROTOCOL%" %RESPONSE_CODE% %RESPONSE_FLAGS% %BYTES_RECEIVED% %BYTES_SENT% %DURATION% "%REQ(X-FORWARDED-FOR)%" "%REQ(USER-AGENT)%" "%REQ(X-REQUEST-ID)%" "%REQ(:AUTHORITY)%" "%UPSTREAM_HOST%"
+          sinks:
+            - type: OpenTelemetry
+              openTelemetry:
+                host: otel-collector.monitoring.svc.cluster.local
+                port: 4317
+    tracing:
+      # sample 100% of requests
+      samplingRate: 100
+      provider:
+        backendRefs:
+        - name: otel-collector
+          namespace: monitoring
+          port: 4317
+        type: OpenTelemetry
+      customTags:
+        # This is an example of using a literal as a tag value
+        provider:
+          type: Literal
+          literal:
+            value: "otel"
+        "k8s.pod.name":
+          type: Environment
+          environment:
+            name: ENVOY_POD_NAME
+            defaultValue: "-"
+        "k8s.namespace.name":
+          type: Environment
+          environment:
+            name: ENVOY_POD_NAMESPACE
+            defaultValue: "default"        
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: otel-sink
+spec:
+  logging:
+    level:
+      default: info
+  telemetry:
+    metrics:
+      sinks:
+        - type: OpenTelemetry
+          openTelemetry:
+            host: otel-collector.monitoring.svc.cluster.local
+            port: 4317

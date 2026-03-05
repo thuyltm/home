@@ -4,19 +4,22 @@ load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 
-
 py_library(
     name = "my_lib",
     srcs = ["my_lib.py"],
     deps = [
-        "@pip//numpy",      # Dependency on numpy
-        "@pip//requests",    # Dependency on requests
+        "@pip//numpy",  # Dependency on numpy
+        "@pip//requests",  # Dependency on requests
     ],
 )
 
 py_binary(
     name = "main",
-    srcs = ["main.py", "my_lib.py", "__init__.py"],
+    srcs = [
+        "__init__.py",
+        "main.py",
+        "my_lib.py",
+    ],
     deps = [
         "//elliptic/locust:my_lib",
         "@pip//requests",
@@ -25,7 +28,10 @@ py_binary(
 
 py_library(
     name = "server",
-    srcs = ["server.py", "__init__.py"],
+    srcs = [
+        "__init__.py",
+        "server.py",
+    ],
     deps = [
         "@pip//fastapi",
         "@pip//uvicorn",
@@ -35,20 +41,23 @@ py_library(
 sh_binary(
     name = "run_server",
     srcs = ["run_server.sh"],
-    data = ["server.py", "__init__.py"], # Declare runtime dependencies
+    data = [
+        "__init__.py",
+        "server.py",
+    ],  # Declare runtime dependencies
 )
 
 pkg_tar(
     name = "app_layer",
     srcs = ["run_server.sh"],
-    mode = "0755"
+    mode = "0755",
 )
 
 oci_image(
     name = "image",
     # This is defined by an oci.pull() call in /MODULE.bazel
     base = "@my_fastapi_container_base",
-    cmd = ["/home/phase1/fastapi/run_server.sh"], # absolute path to the script in the container
+    cmd = ["/home/phase1/fastapi/run_server.sh"],  # absolute path to the script in the container
     tars = [":app_layer"],
 )
 

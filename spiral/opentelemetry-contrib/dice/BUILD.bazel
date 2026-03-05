@@ -1,0 +1,37 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "dice_lib",
+    srcs = [
+        "main.go",
+        "otel.go",
+        "rolldice.go",
+    ],
+    importpath = "home/spiral/opentelemetry-contrib/dice",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@io_opentelemetry_go_contrib_bridges_otelslog//:otelslog",
+        "@io_opentelemetry_go_contrib_instrumentation_net_http_otelhttp//:otelhttp",
+        "@io_opentelemetry_go_otel//:otel",
+        "@io_opentelemetry_go_otel//attribute",
+        "@io_opentelemetry_go_otel//propagation",
+        "@io_opentelemetry_go_otel//semconv/v1.20.0:v1_20_0",
+        "@io_opentelemetry_go_otel_exporters_otlp_otlplog_otlploggrpc//:otlploggrpc",
+        "@io_opentelemetry_go_otel_exporters_otlp_otlpmetric_otlpmetricgrpc//:otlpmetricgrpc",
+        "@io_opentelemetry_go_otel_exporters_otlp_otlptrace_otlptracegrpc//:otlptracegrpc",
+        "@io_opentelemetry_go_otel_log//global",
+        "@io_opentelemetry_go_otel_metric//:metric",
+        "@io_opentelemetry_go_otel_sdk//resource",
+        "@io_opentelemetry_go_otel_sdk//trace",
+        "@io_opentelemetry_go_otel_sdk_log//:log",
+        "@io_opentelemetry_go_otel_sdk_metric//:metric",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+    ],
+)
+
+go_binary(
+    name = "dice",
+    embed = [":dice_lib"],
+    visibility = ["//visibility:public"],
+)

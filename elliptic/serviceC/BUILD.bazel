@@ -1,0 +1,15 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "serviceC_lib",
+    srcs = ["main.go"],
+    importpath = "home/elliptic/serviceC",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_quic_go_quic_go//http3"],
+)
+
+go_binary(
+    name = "serviceC",
+    embed = [":serviceC_lib"],
+    visibility = ["//visibility:public"],
+)

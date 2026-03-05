@@ -196,6 +196,7 @@ require (
 	github.com/AlexEidt/Vidio v1.5.1
 	github.com/AlexEidt/aio v1.4.3
 	github.com/apache/beam/sdks/v2 v2.71.0
+	github.com/boltdb/bolt v1.3.1
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cockroachdb/cockroach-go/v2 v2.4.1
 	github.com/esimov/pigo v1.4.6

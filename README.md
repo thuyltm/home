@@ -8,6 +8,7 @@ it is recommended to manage Go dependencies via go.mod. The go_deps extension pa
 
 ```sh 
 bazel run //:gazelle 
+bazel run //:gazelle -- pacman/decentralizestorage
 ```
 
 An initial go.mod file can be created via
@@ -21,6 +22,7 @@ A dependency can be added via
 ```sh
 bazel run @rules_go//go get github.com/labstack/echo/v4
 ```
+Add this library to the block __use_repo__ in MODULE.bazel if it is not automatically included
 
 please add these lines into MODULE.bazel [GUILINE](https://stackoverflow.com/questions/78983979/bzlmod-golang-missing-package-and-incorrect-function) in order for gazzelie automatically adds dependencies using in the BUILD file
 ```sh

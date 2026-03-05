@@ -1,0 +1,1 @@
+Envoy Gateway can export metrics to an OpenTelemetry sink

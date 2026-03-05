@@ -1,9 +1,9 @@
-package(default_visibility = ["//visibility:public"])
-
+load("@aspect_bazel_lib//lib:tar.bzl", "tar")
 load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
 load("@rules_java//java:defs.bzl", "java_binary", "java_library", "java_test")
-load("@aspect_bazel_lib//lib:tar.bzl", "tar")
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
+
+package(default_visibility = ["//visibility:public"])
 
 java_library(
     name = "java-maven-lib",

@@ -266,4 +266,5 @@ use_repo(
     "org_golang_google_grpc",
     "org_uber_go_fx",
     "org_uber_go_zap",
+    "com_github_boltdb_bolt"
 )

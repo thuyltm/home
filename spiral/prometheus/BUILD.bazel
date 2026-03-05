@@ -1,0 +1,21 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "prometheus_lib",
+    srcs = ["main.go"],
+    importpath = "home/spiral/prometheus",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_prometheus_client_golang//prometheus/promhttp",
+        "@io_opentelemetry_go_otel//attribute",
+        "@io_opentelemetry_go_otel_exporters_prometheus//:prometheus",
+        "@io_opentelemetry_go_otel_metric//:metric",
+        "@io_opentelemetry_go_otel_sdk_metric//:metric",
+    ],
+)
+
+go_binary(
+    name = "prometheus",
+    embed = [":prometheus_lib"],
+    visibility = ["//visibility:public"],
+)

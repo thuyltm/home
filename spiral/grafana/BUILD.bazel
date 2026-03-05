@@ -1,0 +1,19 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "grafana_lib",
+    srcs = ["main.go"],
+    importpath = "home/spiral/grafana",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_gin_gonic_gin//:gin",
+        "@com_github_prometheus_client_golang//prometheus",
+        "@com_github_prometheus_client_golang//prometheus/promhttp",
+    ],
+)
+
+go_binary(
+    name = "grafana",
+    embed = [":grafana_lib"],
+    visibility = ["//visibility:public"],
+)

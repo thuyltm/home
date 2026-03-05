@@ -1,0 +1,22 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "zipkin_lib",
+    srcs = ["main.go"],
+    importpath = "home/spiral/opentelemetry-contrib/zipkin",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@io_opentelemetry_go_otel//:otel",
+        "@io_opentelemetry_go_otel//semconv/v1.20.0:v1_20_0",
+        "@io_opentelemetry_go_otel_exporters_zipkin//:zipkin",
+        "@io_opentelemetry_go_otel_sdk//resource",
+        "@io_opentelemetry_go_otel_sdk//trace",
+        "@io_opentelemetry_go_otel_trace//:trace",
+    ],
+)
+
+go_binary(
+    name = "zipkin",
+    embed = [":zipkin_lib"],
+    visibility = ["//visibility:public"],
+)

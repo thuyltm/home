@@ -12,7 +12,6 @@ java_binary(
     ],
 )
 
-
 java_binary(
     name = "WordCount2",
     srcs = ["WordCount2.java"],

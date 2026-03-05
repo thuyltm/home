@@ -1,20 +1,21 @@
-package(default_visibility = ["//visibility:public"])
-
 load("@crates//:defs.bzl", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl", "rust_binary")
 
+package(default_visibility = ["//visibility:public"])
+
 filegroup(
     name = "static_data_files",
-    srcs = glob(["**/*"]), # Includes all files and subdirectories
+    srcs = glob(["**/*"]),  # Includes all files and subdirectories
 )
 
 rust_binary(
     name = "bin",
-    crate_root = "src/main.rs",
     srcs = glob([
         "src/*.rs",
     ]),
+    crate_root = "src/main.rs",
     data = [":static_data_files"],
+    visibility = ["//visibility:public"],
     deps = [
         # External crates
         "@crates//:actix-files",
@@ -25,5 +26,4 @@ rust_binary(
         "@crates//:log",
         "@crates//:tokio",
     ],
-    visibility = ["//visibility:public"],
 )
