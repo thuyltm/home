@@ -38,3 +38,23 @@ Hashcash can be split into the following steps:
 
 The number of times that the sender needs to try to get a valid hash value is modeled by geometric distribution. Hence the sender will on average have to try $2^{20}$ values to find a valid header
 
+### Block data in this demo Blockchain
+```golang
+// We need the data to hash
+// This data is straightforward: we just merge block fields with the target and nonce. 
+// Nonce here is the counter from the Hashcash
+func (pow *ProofOfWork) prepareData(nonce int) []byte {
+	data := bytes.Join(
+		[][]byte{
+			pow.block.PrevBlockHash,
+			pow.block.Data,
+			IntToHex(pow.block.Timestamp),
+			IntToHex(int64(targetBits)),
+			IntToHex(int64(nonce)),
+		},
+		[]byte{},
+	)
+	return data
+}
+```
+

@@ -6,3 +6,15 @@ One important thing about BoltDB is that there are no data types: keys and value
 Bitcoin Core uses two "buckets" to store data:
 1. blocks stores metadata describing all the blocks in a chain
 2. chainstate stores the state of a chain
+
+#### Persistence
+1. Open a DB file
+2. Check if there's a blockchain stored in it
+3. If there's a blockchain:
+    3.1. Set the tip to the last block hash stored in the DB
+4. If there's no existing blockchain:
+    4.1. Create the genesis block
+    4.2 Store in the DB
+    4.3 Save the genesis block's hash as the last block hash
+    4.4 Set the top to the genesis block hash
+5. Create a new Blockchain instance with the tip specific to its case

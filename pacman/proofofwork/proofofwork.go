@@ -39,8 +39,8 @@ func NewProofOfWork(b *Block) *ProofOfWork {
 }
 
 // We need the data to hash
-// This data is straightforward: we just merge block fields with the target
-// and nonce. nonce here is the counter from the Hashcash
+// This data is straightforward: we just merge block fields with the target and nonce.
+// Nonce here is the counter from the Hashcash
 func (pow *ProofOfWork) prepareData(nonce int) []byte {
 	data := bytes.Join(
 		[][]byte{

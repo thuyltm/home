@@ -45,7 +45,7 @@ func (pow *ProofOfWork) prepareData(nonce int) []byte {
 	data := bytes.Join(
 		[][]byte{
 			pow.block.PrevBlockHash,
-			pow.block.Data,
+			pow.block.HashTransactions(),
 			IntToHex(pow.block.Timestamp),
 			IntToHex(int64(targetBits)),
 			IntToHex(int64(nonce)),
@@ -80,7 +80,7 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 	//nonce is the counter
 	nonce := 0
 
-	fmt.Printf("Mining the block containing \"%s\"\n", pow.block.Data)
+	fmt.Printf("Mining a new block")
 	for nonce < maxNonce {
 		//1. Prepare data
 		//2. Hash it with SHA-256
@@ -90,9 +90,9 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 		hash = sha256.Sum256(data)
 		fmt.Printf("\r%x", hash)
 		hashInt.SetBytes(hash[:])
-		// You can think of a target as the upper boundary of a range: if a number (a hash)
-		// is lower than the boundary, it's valid, and vice versa
+
 		if hashInt.Cmp(pow.target) == -1 {
+			fmt.Printf("\n\r%d attempts pave the way to success\n", nonce)
 			break
 		} else {
 			nonce++

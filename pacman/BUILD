@@ -9,7 +9,7 @@ go_library(
 )
 
 go_binary(
-    name = "blockchain",
+    name = "main",
     embed = [":blockchain_lib"],
     visibility = ["//visibility:public"],
 )

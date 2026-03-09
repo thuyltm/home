@@ -5,4 +5,4 @@ __They way hashes are calculates is very important feature of blockchain__, and 
 
 __Blocks are stored in the insertion order and that each block is linked to the previous one.__ This structure allows to quickly get the latest block in a chain
 
-The actual blockchain is much more complex. Adding new blocks requires some work: one has to perform the machanism called Proof-of-Work before getting a permission to add block. Also, blockchain is distributed database that has no single decision maker. Thus, a new block must be confirmed and approved by other paricipants of the network (this mechanism is called consensus). ANd there's no transactions in our blockchain yet
+The actual blockchain is much more complex. Adding new blocks requires some work: one has to __perform the machanism called Proof-of-Work before getting a permission to add block__. Also, blockchain is __distributed database that has no single decision maker__. Thus, a new block must be confirmed and __approved by other paricipants of the network (this mechanism is called consensus)__. ANd there's no transactions in our blockchain yet

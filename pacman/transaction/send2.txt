@@ -1,0 +1,76 @@
+bazel run //pacman/transaction:main -- send -from Ivan -to Pedro -amount 2
+INFO: Analyzed target //pacman/transaction:main (0 packages loaded, 0 targets configured).
+INFO: Found 1 target...
+Target //pacman/transaction:main up-to-date:
+  bazel-bin/pacman/transaction/main_/main
+INFO: Elapsed time: 0.347s, Critical Path: 0.01s
+INFO: 1 process: 1 internal.
+INFO: Build completed successfully, 1 total action
+INFO: Running command line: bazel-bin/pacman/transaction/main_/main send -from Ivan -to Pedro -amount 2
+00000069bb54cb3814fe09a3d6d3690e14fafdfb6b0c76cd0f5b266d5d7c6ab4
+13304501 attempts pave the way to success
+
+
+Success!
+(base) thuy@thuy-Vivobook-Go-E1504FA-E1504FA:~/Documents/Learn/home(/git/main$) bazel run //pacman/transaction:main -- printchain
+INFO: Analyzed target //pacman/transaction:main (0 packages loaded, 0 targets configured).
+INFO: Found 1 target...
+Target //pacman/transaction:main up-to-date:
+  bazel-bin/pacman/transaction/main_/main
+INFO: Elapsed time: 0.297s, Critical Path: 0.01s
+INFO: 1 process: 1 internal.
+INFO: Build completed successfully, 1 total action
+INFO: Running command line: bazel-bin/pacman/transaction/main_/main printchain
+===========================================
+Block 1
+Prev. hash: 00000057c3dd671a13daa46092645110acc464026b89a3d54bc53b944b2a56b8
+Hash: 00000069bb54cb3814fe09a3d6d3690e14fafdfb6b0c76cd0f5b266d5d7c6ab4
+PoW: true
+TransactionId: 007daef3925d251d860662e75a79de2c87dcf9cadd1bf56d389b1ab8e9d129e4
+==========Vin Result======================
+VinId 0: b21c38b94a145f56ac2353ed134ed8903b9b3881711b4e55831b59205ba30d01
+Vout index: 0
+ScriptSig: Ivan
+===========================================
+==========Vout Result======================
+Value 0: 2
+ScriptPubKey: Pedro
+Value 1: 4
+ScriptPubKey: Ivan
+===========================================
+
+
+===========================================
+Block 2
+Prev. hash: 0000005d6c2d9e3d53eb8f21217c20a9ed9e3a0fe30eed7675d330d5270337e2
+Hash: 00000057c3dd671a13daa46092645110acc464026b89a3d54bc53b944b2a56b8
+PoW: true
+TransactionId: b21c38b94a145f56ac2353ed134ed8903b9b3881711b4e55831b59205ba30d01
+==========Vin Result======================
+VinId 0: 25363d7bbb69dc1bd23ad34dcb6ebb9025bf3d58246fca068b3b045c963c70de
+Vout index: 0
+ScriptSig: Thuy
+===========================================
+==========Vout Result======================
+Value 0: 6
+ScriptPubKey: Ivan
+Value 1: 4
+ScriptPubKey: Thuy
+===========================================
+
+
+===========================================
+Block 3
+Prev. hash: 
+Hash: 0000005d6c2d9e3d53eb8f21217c20a9ed9e3a0fe30eed7675d330d5270337e2
+PoW: true
+TransactionId: 25363d7bbb69dc1bd23ad34dcb6ebb9025bf3d58246fca068b3b045c963c70de
+==========Vin Result======================
+VinId 0: 
+Vout index: -1
+ScriptSig: The Times 03/Jan/2009 Chancellor on brink of second bailout for banks
+===========================================
+==========Vout Result======================
+Value 0: 10
+ScriptPubKey: Thuy
+===========================================
