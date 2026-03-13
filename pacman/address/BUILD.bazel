@@ -1,0 +1,38 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "address_lib",
+    srcs = [
+        "base58.go",
+        "block.go",
+        "blockchain.go",
+        "blockchain_iterator.go",
+        "cli.go",
+        "cli_createblockchain.go",
+        "cli_createwallet.go",
+        "cli_getbalance.go",
+        "cli_listaddress.go",
+        "cli_printchain.go",
+        "cli_send.go",
+        "main.go",
+        "proofofwork.go",
+        "transaction.go",
+        "transaction_input.go",
+        "transaction_output.go",
+        "wallet.go",
+        "wallets.go",
+    ],
+    data = ["wallet.dat"],
+    importpath = "home/pacman/address",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_boltdb_bolt//:bolt",
+        "@org_golang_x_crypto//ripemd160",
+    ],
+)
+
+go_binary(
+    name = "main",
+    embed = [":address_lib"],
+    visibility = ["//visibility:public"],
+)

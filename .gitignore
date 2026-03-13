@@ -3,7 +3,7 @@ bazel-out/
 bazel-testlogs/
 bazel-*
 TODO.md
-.vscode/
+.vscode/settings.json
 magnet/images/
 magnet/video/
 magnet/go4vl/webcam/facefinder.model
