@@ -1,0 +1,17 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "alvtree_lib",
+    srcs = [
+        "node.go",
+        "tree.go",
+    ],
+    importpath = "home/phoenix/alvtree",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "test",
+    srcs = ["alvtree_test.go"],
+    embed = [":alvtree_lib"],
+)

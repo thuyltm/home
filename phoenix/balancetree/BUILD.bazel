@@ -1,0 +1,18 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "balancetree_lib",
+    srcs = [
+        "main.go",
+        "node.go",
+        "tree.go",
+    ],
+    importpath = "home/phoenix/balancetree",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "main",
+    embed = [":balancetree_lib"],
+    visibility = ["//visibility:public"],
+)
