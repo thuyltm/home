@@ -1,0 +1,23 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "cli",
+    srcs = [
+        "cli.go",
+        "cli_createblockchain.go",
+        "cli_createwallet.go",
+        "cli_getbalance.go",
+        "cli_listaddress.go",
+        "cli_print.go",
+        "cli_reindexutxo.go",
+        "cli_send.go",
+    ],
+    importpath = "home/pacman/cli",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pacman/cipher",
+        "//pacman/wallet",
+        "@com_github_boltdb_bolt//:bolt",
+        "//pacman/cache"
+    ],
+)

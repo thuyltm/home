@@ -1,15 +1,18 @@
-load("@rules_go//go:def.bzl", "go_binary", "go_library")
+load("@rules_go//go:def.bzl", "go_library", "go_binary")
+
+package(default_visibility = ["//visibility:public"])
 
 go_library(
     name = "blockchain_lib",
-    srcs = ["main.go"],
-    importpath = "home/pacman",
-    visibility = ["//visibility:private"],
-    deps = ["//pacman/prototype:block_lib"],
+    srcs = [
+        "main.go"
+    ],
+    deps = [
+        "//pacman/cli"
+    ],
 )
 
 go_binary(
     name = "main",
     embed = [":blockchain_lib"],
-    visibility = ["//visibility:public"],
 )

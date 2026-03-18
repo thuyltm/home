@@ -3,7 +3,6 @@ load("@rules_go//go:def.bzl", "go_binary", "go_library")
 go_library(
     name = "serialize_lib",
     srcs = [
-        "base58.go",
         "main.go",
         "wallet.go",
         "wallets.go",
@@ -11,7 +10,10 @@ go_library(
     data = ["wallet.dat"],
     importpath = "home/pacman/serialize",
     visibility = ["//visibility:private"],
-    deps = ["@org_golang_x_crypto//ripemd160"],
+    deps = [
+        "@org_golang_x_crypto//ripemd160",
+        "//pacman/cipher:cipher"
+    ],
 )
 
 go_binary(

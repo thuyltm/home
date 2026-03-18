@@ -3,7 +3,7 @@ There are no user accounts, your personal data is not required and not stored an
 
 __When you use a Bitcoin client to genrate a new address, a pair of keys is generated for you__. Public keys are not sensitive and can be disclosed to anyone. No one but the owner should have access to private keys because private key servve as the identifier of the owner. The one who controls the private key controls all the coins sent to this key in Bitcoin. 
 
-### Digitatl Signatures
+### Digital Signatures
 There's a concept of digital signature algorithms that guarantee:
 1. data wasn't modified while being transferred from a sender to a recipient
 2. the sender cannot deny sending the data
@@ -29,6 +29,12 @@ Since hasing is one way, which cannot be reversed, it's not possible to extract 
 
 ### Wallet
 A wallet manages the private key needed to sign transaction and public key derived from it
+
+### Transaction Output
+Persist the coin balance for each address. These are also known as the current UTXO set (Unspent Transaction Output) associated with each address
+
+### Transaction Input
+The outcome of a peer-to-peer transfer between wallets
 
 
 

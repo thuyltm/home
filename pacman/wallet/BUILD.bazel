@@ -1,0 +1,22 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "wallet",
+    srcs = [
+        "wallet.go",
+        "wallets.go",
+    ],
+    importpath = "home/pacman/wallet",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_x_crypto//ripemd160",
+        "//pacman/cipher:cipher"
+    ],
+)
+
+go_test(
+    name = "wallet_test",
+    srcs = ["base58_test.go"],
+    embed = [":wallet_lib"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

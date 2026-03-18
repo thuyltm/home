@@ -1,7 +1,7 @@
 load("@rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
-    name = "address_lib",
+    name = "cryptographic_lib",
     srcs = [
         "base58.go",
         "block.go",
@@ -22,8 +22,7 @@ go_library(
         "wallet.go",
         "wallets.go",
     ],
-    data = ["wallet.dat"],
-    importpath = "home/pacman/address",
+    importpath = "home/pacman/cryptographic",
     visibility = ["//visibility:private"],
     deps = [
         "@com_github_boltdb_bolt//:bolt",
@@ -33,6 +32,6 @@ go_library(
 
 go_binary(
     name = "main",
-    embed = [":address_lib"],
+    embed = [":cryptographic_lib"],
     visibility = ["//visibility:public"],
 )

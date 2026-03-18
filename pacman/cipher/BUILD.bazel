@@ -1,0 +1,20 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "cipher",
+    srcs = [
+        "base58.go",
+        "hash.go",
+        "sign.go"
+    ],
+    importpath = "home/pacman/cipher",
+    visibility = ["//visibility:public"],
+    deps = ["@org_golang_x_crypto//ripemd160"]
+)
+
+go_test(
+    name = "cipher_test",
+    srcs = ["base58_test.go"],
+    embed = [":cipher"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

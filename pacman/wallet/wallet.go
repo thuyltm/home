@@ -1,4 +1,4 @@
-package main
+package wallet
 
 import (
 	"bytes"
@@ -12,13 +12,11 @@ import (
 	cipher "home/pacman/cipher"
 	"log"
 	"os"
-
-	"golang.org/x/crypto/ripemd160"
 )
 
 const version = byte(0x00)
-const addressChecksumLen = 4
 const walletFile = "wallet.dat"
+const addressChecksumLen = 4
 
 type Wallet struct {
 	PrivateKey ecdsa.PrivateKey
@@ -37,24 +35,22 @@ func NewWallet() *Wallet {
 }
 
 func (w Wallet) GetAddress() []byte {
-	pubKeyHash := HashPubKey(w.PublicKey)
+	pubKeyHash := cipher.HashPubKey(w.PublicKey)
 	versionedPayload := append([]byte{version}, pubKeyHash...)
 	checksum := checksum(versionedPayload)
 	fullPayload := append(versionedPayload, checksum...)
-	address := cipher.Base58Encode(fullPayload)
+	address := cipher.Base58Encode(fullPayload) //conver byte array into a human readable string
 	return address
 }
 
-func HashPubKey(pubKey []byte) []byte {
-	publicSHA256 := sha256.Sum256(pubKey)
-	RIPEMD160Hasher := ripemd160.New()
-	_, err := RIPEMD160Hasher.Write(publicSHA256[:])
-	if err != nil {
-		log.Panic(err)
-	}
-	publicRIPEMD160 := RIPEMD160Hasher.Sum(nil)
+func ValidateAddress(address string) bool {
+	pubKeyHash := cipher.Base58Decode([]byte(address))
+	actualChecksum := pubKeyHash[len(pubKeyHash)-addressChecksumLen:]
+	version := pubKeyHash[0]
+	pubKeyHash = pubKeyHash[1 : len(pubKeyHash)-addressChecksumLen]
+	targetChecksum := checksum(append([]byte{version}, pubKeyHash...))
 
-	return publicRIPEMD160
+	return bytes.Equal(actualChecksum, targetChecksum)
 }
 
 func checksum(payload []byte) []byte {
@@ -64,7 +60,7 @@ func checksum(payload []byte) []byte {
 }
 
 func newKeyPair() (ecdsa.PrivateKey, []byte) {
-	curve := elliptic.P256()
+	curve := elliptic.P256() //generate a private key using Elliptic Curve Cryptography
 	private, err := ecdsa.GenerateKey(curve, rand.Reader)
 	if err != nil {
 		log.Panic(err)

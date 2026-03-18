@@ -1,4 +1,4 @@
-load("@rules_go//go:def.bzl", "go_library")
+load("@rules_go//go:def.bzl", "go_library", "go_binary")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -7,6 +7,13 @@ go_library(
     srcs = [
         "block.go",
         "blockchain.go",
+        "main.go"
     ],
     importpath = "home/pacman/prototype",
 )
+
+go_binary(
+    name = "main",
+    embed = [":block_lib"],
+)
+

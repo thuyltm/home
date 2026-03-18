@@ -1,0 +1,15 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "merkletree",
+    srcs = ["merkle_tree.go"],
+    importpath = "home/pacman/merkletree",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "merkletree_test",
+    srcs = ["merkle_tree_test.go"],
+    embed = [":merkletree_lib"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

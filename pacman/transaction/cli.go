@@ -83,7 +83,7 @@ func (cli *CLI) printChain() {
 	}
 }
 
-// We want to send some coins to someone lese
+// We want to send some coins to someone else
 // 1. Create a new transaction
 // 2. Put it in a block, and mine the block
 func (cli *CLI) send(from, to string, amount int) {

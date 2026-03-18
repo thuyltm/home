@@ -3,7 +3,7 @@ load("@rules_go//go:def.bzl", "go_binary", "go_library")
 package(default_visibility = ["//visibility:public"])
 
 go_library(
-    name = "decentralizestorage_lib",
+    name = "database_lib",
     srcs = [
         "block.go",
         "blockchain.go",
@@ -17,5 +17,5 @@ go_library(
 
 go_binary(
     name = "main",
-    embed = [":decentralizestorage_lib"],
+    embed = [":database_lib"],
 )

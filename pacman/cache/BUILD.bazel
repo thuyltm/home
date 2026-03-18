@@ -1,0 +1,23 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cache",
+    srcs = [
+        "block.go",
+        "blockchain.go",
+        "blockchain_iterator.go",
+        "proofofwork.go",
+        "transaction.go",
+        "transaction_input.go",
+        "transaction_output.go",
+        "utxo_set.go",
+    ],
+    importpath = "home/pacman/cache",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pacman/cipher",
+        "//pacman/merkletree:merkletree",
+        "//pacman/wallet:wallet",
+        "@com_github_boltdb_bolt//:bolt",
+    ],
+)
