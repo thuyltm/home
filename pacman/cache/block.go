@@ -30,7 +30,7 @@ func NewBlock(transactions []*Transaction, prevBlockHash []byte, height int) *Bl
 }
 
 func NewGenesisBlock(coinbase *Transaction) *Block {
-	return NewBlock([]*Transaction{coinbase}, []byte{}, 0)
+	return NewBlock([]*Transaction{coinbase}, []byte{}, 1)
 }
 
 // a hash of the transactions in the block

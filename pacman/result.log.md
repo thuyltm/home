@@ -34,7 +34,7 @@
 #    Value:  10
 #    PubKeyHash: e94adcd79cd8eb63c12bed3c1a48fe482fa284ec
 % bazel run //pacman:main -- printUTXO
-# Key: bd5a56f22749d4d61ee66d737d99ba4e2fc9d88bf205cff81234d717f921873e
+# Key: bd5a56f22749d4d61ee66d737d99ba4e2fc9d88bf205cff81234d717f921873e ---- TRANSACTION ID
 # Value: 
 #==================
 #Out 0
