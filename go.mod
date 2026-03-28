@@ -15,7 +15,7 @@ require (
 	github.com/gorilla/sessions v1.1.1
 	github.com/gorilla/websocket v1.5.3
 	github.com/jackc/pgx/v5 v5.7.2
-	github.com/labstack/echo/v4 v4.13.4
+	github.com/labstack/echo/v4 v4.15.1
 	github.com/pion/interceptor v0.1.40
 	github.com/prometheus/client_golang v1.23.2
 	github.com/quic-go/quic-go v0.54.0

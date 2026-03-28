@@ -1,0 +1,16 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "simplecgo_lib",
+    srcs = ["main.go"],
+    cgo = True,
+    clinkopts = ["-luuid"],
+    importpath = "home/phase1/simplecgo",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "simplecgo",
+    embed = [":simplecgo_lib"],
+    visibility = ["//visibility:public"],
+)
