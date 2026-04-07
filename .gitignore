@@ -14,3 +14,4 @@ build/
 .idea
 .metals
 .ijwb
+node_modules/
