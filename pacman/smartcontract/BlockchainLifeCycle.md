@@ -1,0 +1,7 @@
+https://www.dappuniversity.com/articles/code-your-own-cryptocurrency-on-ethereum
+
+Usually, before the mainnet of a blockchain project is launched, the team will set up an Initial Coin Offering (ICO), an Initial Exchange Offering (IEO), or any other means that can help the project raise funds and grow their community. Typically, the collected funcs are then used to develop the prototypes of the blockchain network, which is thentested during the testnet phase. After performing bug fixes and depending on the performance of the testnet, the team will then launch the mainnet version of the blockchain, which is (ideally) fully deployed and fuctional
+
+Many blockchain startups decided to perform ICO crowdfunding events. To do so, the majority of them chose to issue their own ERC-20 token on the Ethereum network. These tokens were then distributed to investor's wallets, according to their contribution during the ICO phase.
+
+After the ICO crowdfunding is complete and the blockchain is fully deployed, the team may release their mainnet, which will have their own native coin (on a proprietary blockchain) rather than the previously issued ERC-20 token. At this point, a process known as mainnet swap takes place, where the ERC-20 tilens are swapped for the coins of the new blockchain. After the mainnet swap is completed, remaining tokens are usally destroyed so that only the new coins can be used
