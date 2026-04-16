@@ -5,8 +5,16 @@ https://v2.hardhat.org/tutorial/testing-contracts
 ### What is hardhat?
 Hardhat is a flexible and extensible development environment for Ethereum software. It enable you to **write, test, debug and deploy your smart contracts** with ease
 
+Hardhat comes built-in with Hardhat Network, a local Ethereum network designed for development. It allows you to deploy your contracts, run your tests and debug your code, all within the confines of your local machine. It's the default network that Hardhat connects to, so you don't need to set up anything for it work. Just run your tests.
+```sh
+npx hardhat test test/Token.ts
+```
+
 ### What is hardhat-view plugin?
 The hardhat-view plugin integrates **Viem, a lightweight, type-safe TypeScript library**, into the Hardhat development environment. It provides efficient, low-level tools to interact with Ethereum-compatible blockchains, serving for **testing, deploying, and managing smart contracts**.
+
+### What is Hardhat Ignition?
+Deployments are defined through Ignition Modules. These modules are abstractions to describe a deployment
 
 ### What is Sepolia? What is Alchemy?
 To test a decentralized application before deploying it to the Ethereum mainnet, web3 developers will deploy their smart contracts on a public testnet. **Sepolia is a Proof-of-Stake testnet used to validate** the functionality of their dapps before migrating them to Ethereum's layer one blockchain.
@@ -16,6 +24,10 @@ To test a decentralized application before deploying it to the Ethereum mainnet,
 [Link My Alchemy project dashboard](https://dashboard.alchemy.com/apps/tkkca2hqcheip744/setup)
 
 Endpoint URL: https://eth-sepolia.g.alchemy.com/v2/nf7ccD252FXE8pH42znQE
+
+[Link My Infura project dashboard](https://developer.metamask.io/key/active-endpoints)
+Endpoint URL: https://sepolia.infura.io/v3/55f29f249dc1464298d87c9a16475c5a
+
 
 Alchemy is **an RPC node provider that connects your wallet (like MetaMask) to the blockchain**. To get the private key for a Sepolia dapp, you must export it from the wallet used to interact with the dapp
 

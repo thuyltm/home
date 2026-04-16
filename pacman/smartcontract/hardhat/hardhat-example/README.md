@@ -21,6 +21,7 @@ To run all the tests in the project, execute the following command:
 
 ```shell
 npx hardhat test
+npx hardhat test test/Token.js
 ```
 
 You can also selectively run the Solidity or `node:test` tests:
@@ -61,7 +62,7 @@ Verify the contract address deployed on the Sepolia Testnet using hardhat-verify
 ```sh
 npx hardhat verify --network sepolia 0x3926371d5800b5B7e4bf3e604BDb2b38160d8347 --force
 #=== Etherscan ===
-#[hardhat-keystore] Enter the password: ***********
+#[hardhat-keystore] Enter the password: Hardhat@123
 
 #The contract at 0x3926371d5800b5B7e4bf3e604BDb2b38160d8347 has already been verified on Etherscan.
 
