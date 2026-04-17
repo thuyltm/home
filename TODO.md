@@ -19,3 +19,7 @@ https://huyenchip.com/mlops/
 https://github.com/gunnarmorling/awesome-opensource-data-engineering
 https://www.kaggle.com/discussions/getting-started/361111
 https://www.kdnuggets.com/7-projects-master-data-engineering
+
+### LMM Tutorial
+https://course.fast.ai/
+https://huggingface.co/learn/llm-course/en/chapter1/1
