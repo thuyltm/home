@@ -32,3 +32,13 @@ A Merkle Tree is a hierarchical data strucure to efficiently verify large sets o
 - Chain: these blocks are chronologically linked together, forming a chain
 - Consensus: Before a new block is added, a consensus mechanism (e.g. Proof of Work or Proof of Stake) must be executed.
 - Secure: Cryptographic techniques make it highly resistant to hacking and fraud
+
+## pacman/smartContract
+Implementing a dApp smart contract involves
+- writing contract logic: Solidity programming language
+- set up the development workspace to compile, test, deploy smartcontract to a blockchain: Truffle, Hardhat frameworks
+- Blockchain Node Provider: Alchemy/Infura are RPC providers offering infrastructure to connect to networks like Ethereum
+- a public Ethereum testnet blockchain network: Sepolia
+- create a React app and use ethers.js to enable communication between frontend and the contract
+- Wallet: MetaMask
+- Block Exploerers: Sepolia Etherscan (https://sepolia.etherscan.io/) monitors transaction searching, contract verification, block data visualization
