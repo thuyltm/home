@@ -11,6 +11,9 @@ https://www.kdnuggets.com/10-github-repositories-to-master-backend-development
 ### DevOps Tools
 https://github.com/techiescamp/devops-tools
 
+### DataScience Sandbox
+https://hds-sandbox.github.io/
+
 ### Machine Learning Tutorial
 https://huyenchip.com/ml-interviews-book/contents/4.3.1-courses.html
 https://huyenchip.com/mlops/
