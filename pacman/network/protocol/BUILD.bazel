@@ -1,0 +1,25 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "protocol",
+    srcs = [
+        "command.go",
+        "message.go",
+        "message_version.go",
+        "netaddr.go",
+        "protocol.go",
+    ],
+    importpath = "home/pacman/network/protocol",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_sirupsen_logrus//:logrus"],
+)
+
+go_test(
+    name = "protocol_test",
+    srcs = [
+        "command_test.go",
+        "message_test.go",
+    ],
+    embed = [":protocol"],
+    deps = ["@com_github_jeiwan_tinybit//protocol:go_default_library"],
+)

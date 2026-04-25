@@ -1,0 +1,22 @@
+load("@rules_go//go:def.bzl", "go_library", "go_binary")
+
+go_library(
+    name = "cmd_lib",
+    srcs = [
+        "main.go", 
+        "tinybit.go"
+    ],
+    importpath = "home/pacman/network/cmd",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_spf13_cobra//:cobra",
+        "//pacman/network/protocol"
+    ],
+)
+
+go_binary(
+    name = "cmd",
+    embed = [":cmd_lib"],
+    visibility = ["//visibility:public"],
+)

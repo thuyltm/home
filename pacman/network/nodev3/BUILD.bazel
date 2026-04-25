@@ -1,0 +1,30 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "nodev3",
+    srcs = [
+        "cmd_inv.go",
+        "cmd_ping.go",
+        "cmd_pong.go",
+        "cmd_tx.go",
+        "cmd_verack.go",
+        "cmd_version.go",
+        "node.go",
+        "peer.go",
+        "url.go",
+    ],
+    importpath = "home/pacman/network/nodev3",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pacman/network/binary",
+        "//pacman/network/protocolv3",
+        "@com_github_sirupsen_logrus//:logrus",
+    ],
+)
+
+go_test(
+    name = "nodev3_test",
+    srcs = ["url_test.go"],
+    embed = [":nodev3"],
+    deps = ["//pacman/network/protocolv2"],
+)

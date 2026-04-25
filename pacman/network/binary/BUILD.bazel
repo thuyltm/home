@@ -1,0 +1,20 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "binary",
+    srcs = [
+        "marshaler.go",
+        "unmarshaler.go",
+    ],
+    importpath = "home/pacman/network/binary",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "binary_test",
+    srcs = [
+        "marshaler_test.go",
+        "unmarshaler_test.go",
+    ],
+    embed = [":binary"],
+)
