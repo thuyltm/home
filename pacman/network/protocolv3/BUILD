@@ -5,6 +5,7 @@ go_library(
     srcs = [
         "cmd.go",
         "msg.go",
+        "msg_block.go",
         "msg_getdata.go",
         "msg_inv.go",
         "msg_pingpong.go",
@@ -13,6 +14,7 @@ go_library(
         "msg_version.go",
         "netaddr.go",
         "protocol.go",
+        "varint.go",
     ],
     importpath = "home/pacman/network/protocolv3",
     visibility = ["//visibility:public"],
@@ -26,9 +28,11 @@ go_test(
     name = "protocolv3_test",
     srcs = [
         "cmd_test.go",
+        "msg_block_test.go",
         "msg_test.go",
         "msg_tx_test.go",
         "msg_verack_test.go",
+        "varint_test.go",
     ],
     embed = [":protocolv3"],
     deps = [

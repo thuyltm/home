@@ -1,0 +1,2 @@
+If you encounter the error "Error creating a default config file: open /home/thuy/.btcd/btcd.conf: no such file or directory
+Post "https://localhost:8334": dial tcp 127.0.0.1:8334: connect: connection refused", it is likely the command was initiated from a incorrect directory where the folder datadir=./btcd/data is missing

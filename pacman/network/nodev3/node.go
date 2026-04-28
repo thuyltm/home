@@ -18,7 +18,9 @@ type Node struct {
 	Peers        map[string]*Peer
 	PingCh       chan peerPing
 	PongCh       chan uint64
+	DisconCh     chan string
 	UserAgent    string
+	mempool      *Mempool
 }
 
 func New(network, userAgent string) (*Node, error) {
@@ -31,9 +33,19 @@ func New(network, userAgent string) (*Node, error) {
 		NetworkMagic: networkMagic,
 		Peers:        make(map[string]*Peer),
 		PingCh:       make(chan peerPing),
+		DisconCh:     make(chan string),
 		PongCh:       make(chan uint64),
 		UserAgent:    userAgent,
+		mempool:      NewMempool(),
 	}, nil
+}
+
+func (n Node) Mempool() map[string]*MsgTx {
+	m := make(map[string]*MsgTx)
+	for k, v := range n.mempool.txs {
+		m[string(k)] = v
+	}
+	return m
 }
 
 func (no Node) Run(nodeAddr string) error {
@@ -64,6 +76,7 @@ func (no Node) Run(nodeAddr string) error {
 		return err
 	}
 	go no.monitorPeers()
+	go no.mempool.Run()
 	tmp := make([]byte, MsgHeaderLength)
 Loop:
 	for {
@@ -115,6 +128,11 @@ Loop:
 				logrus.Errorf("failed to handle 'tx': %+v", err)
 				continue
 			}
+		case "block":
+			if err := no.handleBlock(&msgHeader, conn); err != nil {
+				logrus.Errorf("failed to handle 'block': %+v", err)
+				continue
+			}
 		}
 	}
 	return nil
@@ -133,4 +151,5 @@ func (no Node) disconnectPeer(peerID string) {
 	}
 
 	peer.Connection.Close()
+	delete(no.Peers, peerID)
 }

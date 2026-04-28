@@ -2,10 +2,15 @@ package protocolv3
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"errors"
 	"fmt"
 	"home/pacman/network/binary"
 	"io"
+	"sort"
 )
+
+var errInvalidTransaction = errors.New("invalid transaction")
 
 type MsgTx struct {
 	Version    int32
@@ -16,6 +21,91 @@ type MsgTx struct {
 	TxOut      []TxOutput
 	TxWitness  TxWitnessData
 	LockTime   uint32
+}
+
+func (tx MsgTx) Hash() ([]byte, error) {
+	serialized, err := tx.MarshalBinary()
+	if err != nil {
+		return nil, fmt.Errorf("tx.MarshalBinary: %+v", err)
+	}
+	hash := sha256.Sum256(serialized)
+	hash = sha256.Sum256(hash[:])
+	txid := hash[:]
+	sort.SliceStable(txid, func(i, j int) bool {
+		return true
+	})
+	return txid, nil
+}
+
+func (tx MsgTx) MarshalBinary() ([]byte, error) {
+	buf := bytes.NewBuffer([]byte{})
+	b, err := binary.Marshal(tx.Version)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := buf.Write(b); err != nil {
+		return nil, err
+	}
+	if tx.Flag == uint16(1) {
+		b, err := binary.Marshal(tx.Flag)
+		if err != nil {
+			return nil, err
+		}
+		if _, err := buf.Write(b); err != nil {
+			return nil, err
+		}
+	}
+	b, err = binary.Marshal(tx.TxInCount)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := buf.Write(b); err != nil {
+		return nil, err
+	}
+	for _, txin := range tx.TxIn {
+		b, err = binary.Marshal(txin)
+		if err != nil {
+			return nil, err
+		}
+		if _, err := buf.Write(b); err != nil {
+			return nil, err
+		}
+	}
+	b, err = binary.Marshal(tx.TxOutCount)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := buf.Write(b); err != nil {
+		return nil, err
+	}
+	for _, txout := range tx.TxOut {
+		b, err = binary.Marshal(txout)
+		if err != nil {
+			return nil, err
+		}
+		if _, err := buf.Write(b); err != nil {
+			return nil, err
+		}
+	}
+	if tx.Flag == uint16(1) {
+		b, err = binary.Marshal(tx.TxWitness)
+		if err != nil {
+			return nil, err
+		}
+		if _, err := buf.Write(b); err != nil {
+			return nil, err
+		}
+	}
+
+	b, err = binary.Marshal(tx.LockTime)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := buf.Write(b); err != nil {
+		return nil, err
+	}
+
+	return buf.Bytes(), nil
 }
 
 func (tx *MsgTx) UnmarshalBinary(r io.Reader) error {
@@ -72,6 +162,16 @@ func (tx *MsgTx) UnmarshalBinary(r io.Reader) error {
 	return nil
 }
 
+func (tx MsgTx) Verify() error {
+	if len(tx.TxIn) == 0 || tx.TxInCount == 0 {
+		return errInvalidTransaction
+	}
+	if len(tx.TxOut) == 0 || tx.TxOutCount == 0 {
+		return errInvalidTransaction
+	}
+	return nil
+}
+
 type TxInput struct {
 	PreviousOutput  OutPoint
 	ScriptLength    uint8
@@ -100,20 +200,69 @@ type OutPoint struct {
 	Index uint32
 }
 
+func (txw TxWitnessData) MarshalBinary() ([]byte, error) {
+	var buf = bytes.NewBuffer([]byte{})
+	b, err := binary.Marshal(txw.Count)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := buf.Write(b); err != nil {
+		return nil, err
+	}
+	for _, w := range txw.Witness {
+		b, err := binary.Marshal(w)
+		if err != nil {
+			return nil, err
+		}
+		if _, err := buf.Write(b); err != nil {
+			return nil, err
+		}
+	}
+	return buf.Bytes(), nil
+}
+
 func (txw *TxWitnessData) UnmarshalBinary(r io.Reader) error {
 	d := binary.NewDecoder(r)
+
 	if err := d.Decode(&txw.Count); err != nil {
 		return err
 	}
+
 	txw.Witness = nil
+
 	for i := uint8(0); i < txw.Count; i++ {
 		var w TxWitness
+
 		if err := d.Decode(&w); err != nil {
 			return err
 		}
+
 		txw.Witness = append(txw.Witness, w)
 	}
+
 	return nil
+}
+
+func (txw *TxWitness) MarshalBinary() ([]byte, error) {
+	var buf = bytes.NewBuffer([]byte{})
+
+	b, err := binary.Marshal(txw.Length)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := buf.Write(b); err != nil {
+		return nil, err
+	}
+
+	b, err = binary.Marshal(txw.Data)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := buf.Write(b); err != nil {
+		return nil, err
+	}
+
+	return buf.Bytes(), nil
 }
 
 func (txw *TxWitness) UnmarshalBinary(r io.Reader) error {
