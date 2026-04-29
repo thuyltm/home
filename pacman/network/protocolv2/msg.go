@@ -66,7 +66,7 @@ func NewMessage(cmd, network string, payload interface{}) (*Message, error) {
 }
 
 func (mh MessageHeader) CommandString() string {
-	return strings.Trim(string(mh.Command[:]), string(0))
+	return strings.Trim(string(mh.Command[:]), string(rune(0)))
 }
 
 func (mh MessageHeader) Validate() error {

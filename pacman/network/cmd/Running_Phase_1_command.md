@@ -11,11 +11,11 @@ We received two messages from the btcd node
 
 The Btcd console log is at this time
 ```sh
-# 2026-04-22 10:43:45.663 [DBG] PEER: Received version (agent /Satoshi:5.64/tinybit:0.0.1/, pver 70015, block -1) from 127.0.0.1:59442 (inbound)
-# 2026-4-22 10:43:45.663 [DBG] PEER: Negotiated protocol version 70015 for peer 127.0.0.1:59442 (inbound)
-# 2026-04-22 10:43:45.663 [DBG] CHAN: Added time sample of 0s (total: 1)
-# 2026-04-22 10:43:45.663 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.25.0/, pver 70016, block 0) to 127.0.0.1:59442 (inbound)
-# 2026-04-22 10:43:45.663 [DBG] PEER: Sending verack to 127.0.0.1:59442 (inbound)
-# 2026-04-22 10:44:15.671 [DBG] PEER: Cannot start peer 127.0.0.1:59442 (inbound): protocol negotiation timeout
+# PEER: Received version (agent /Satoshi:5.64/tinybit:0.0.1/, pver 70015, block -1) from 127.0.0.1:59442 (inbound)
+# PEER: Negotiated protocol version 70015 for peer 127.0.0.1:59442 (inbound)
+# [DBG] CHAN: Added time sample of 0s (total: 1)
+# [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.25.0/, pver 70016, block 0) to 127.0.0.1:59442 (inbound)
+# [DBG] PEER: Sending verack to 127.0.0.1:59442 (inbound)
+# [DBG] PEER: Cannot start peer 127.0.0.1:59442 (inbound): protocol negotiation timeout
 ```
 The btcd node correctly decoded our message and replied to it. Version and verack messages as a part of version handshake procedure
