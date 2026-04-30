@@ -1,0 +1,46 @@
+=============== Apr 22, 2026 (+07) ===============
+10:43:07.551820 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+10:43:07.556233 db@open opening
+10:43:07.557249 version@stat F·[] S·0B[] Sc·[]
+10:43:07.558561 db@janitor F·2 G·0
+10:43:07.558617 db@open done T·2.347211ms
+12:26:48.438924 memdb@flush N·3 S·93B
+12:26:48.442391 memdb@flush created L0@3 N·3 S·260B "\x00\x00\x00..loc,v1":"bid..bid,v3"
+12:26:48.442449 version@stat F·[1] S·260B[260B] Sc·[0.25]
+12:26:48.443293 memdb@flush committed F·1 T·4.268222ms
+12:26:48.443403 journal@remove removed @1
+12:26:48.444625 transaction@flush created L0@4 N·24 S·1KiB "\x00\x00\x00..ate,v4":"bid..bid,v27"
+12:26:48.444654 version@stat F·[2] S·1KiB[1KiB] Sc·[0.50]
+12:26:48.446318 transaction@flush created L0@5 N·2 S·364B "\x00\x00\x00..fee,v28":"\x00\x00\x00..loc,v29"
+12:26:48.446337 version@stat F·[3] S·1KiB[1KiB] Sc·[0.75]
+12:26:48.448904 transaction@flush created L0@6 N·2 S·266B "\x00\x00\x00..loc,v30":"\x00\x00\x00..ncy,v31"
+12:26:48.448942 version@stat F·[4] S·2KiB[2KiB] Sc·[1.00]
+12:26:48.449740 db@close closing
+12:26:48.449820 table@compaction L0·4 -> L1·0 S·2KiB Q·31
+12:26:48.449841 table@build exiting
+12:26:48.449934 db@close done T·192.697µs
+=============== Apr 23, 2026 (+07) ===============
+11:08:11.736041 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:08:11.737339 version@stat F·[4] S·2KiB[2KiB] Sc·[1.00]
+11:08:11.737390 db@open opening
+11:08:11.737480 journal@recovery F·1
+11:08:11.737995 journal@recovery recovering @2
+11:08:11.739813 version@stat F·[4] S·2KiB[2KiB] Sc·[1.00]
+11:08:11.744659 db@janitor F·6 G·0
+11:08:11.744707 db@open done T·7.29909ms
+11:08:11.744851 table@compaction L0·4 -> L1·0 S·2KiB Q·31
+11:08:11.749526 table@build created L1@9 N·26 S·1KiB "\x00\x00\x00..ate,v4":"bid..bid,v27"
+11:08:11.749964 version@stat F·[0 1] S·1KiB[0B 1KiB] Sc·[0.00 0.00]
+11:08:11.750789 table@compaction committed F-3 S-700B Ke·0 D·5 T·5.898839ms
+11:08:11.751105 table@remove removed @6
+11:08:11.751245 table@remove removed @5
+11:08:11.751334 table@remove removed @4
+11:08:11.751405 table@remove removed @3
+11:24:31.212593 transaction@flush created L0@10 N·2 S·225B "\x00\x00\x00..fee,d33":"\x00\x00\x00..loc,v32"
+11:24:31.212689 version@stat F·[1 1] S·1KiB[225B 1KiB] Sc·[0.25 0.00]
+11:24:31.215168 transaction@flush created L0@11 N·2 S·364B "\x00\x00\x00..fee,v34":"\x00\x00\x00..loc,v35"
+11:24:31.215246 version@stat F·[2 1] S·2KiB[589B 1KiB] Sc·[0.50 0.00]
+11:24:31.218434 transaction@flush created L0@12 N·2 S·266B "\x00\x00\x00..loc,v36":"\x00\x00\x00..ncy,v37"
+11:24:31.218493 version@stat F·[3 1] S·2KiB[855B 1KiB] Sc·[0.75 0.00]
+11:24:31.219303 db@close closing
+11:24:31.219398 db@close done T·92.119µs

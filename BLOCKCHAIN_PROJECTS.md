@@ -42,3 +42,6 @@ Implementing a dApp smart contract involves
 - create a React app and use ethers.js to enable communication between frontend and the contract
 - Wallet: MetaMask
 - Block Exploerers: Sepolia Etherscan (https://sepolia.etherscan.io/) monitors transaction searching, contract verification, block data visualization
+
+## pacman/network
+We deploy a miniature blockchain network integrated with a Btcd and a Btcd Wallet. Netxt, we establish a Tinybit node to simulate how to synchronize transactions or blocks to a existing blockchain network. This means that when a new transaction is pending in mempool or mined in btcd node, this information will be propagated to all connected peers

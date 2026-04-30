@@ -1,5 +1,4 @@
-https://github.com/LearnWeb3DAO/ICO
-https://www.dappuniversity.com/articles/code-your-own-cryptocurrency-on-ethereum
+https://github.com/jellydn/dapp-token-ico
 
 Simple breakdown of popular token sale models: ICO, IEO, IDO and STO
 1. ICO (Initial Coin Offering)
