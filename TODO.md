@@ -22,6 +22,8 @@ https://huyenchip.com/mlops/
 https://github.com/gunnarmorling/awesome-opensource-data-engineering
 https://www.kaggle.com/discussions/getting-started/361111
 https://www.kdnuggets.com/7-projects-master-data-engineering
+https://github.com/lelouvincx/spotify-data-pipeline-ingestion
+https://github.com/swapniltake1/spotify-data-engineering-project
 
 ### LMM Tutorial
 https://course.fast.ai/
