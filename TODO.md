@@ -16,15 +16,23 @@ https://hds-sandbox.github.io/
 
 ### Machine Learning Tutorial
 https://huyenchip.com/ml-interviews-book/contents/4.3.1-courses.html
+
 https://huyenchip.com/mlops/
 
 ### Data Engineer Tutorial
 https://github.com/gunnarmorling/awesome-opensource-data-engineering
+
 https://www.kaggle.com/discussions/getting-started/361111
+
 https://www.kdnuggets.com/7-projects-master-data-engineering
+
 https://github.com/lelouvincx/spotify-data-pipeline-ingestion
+
 https://github.com/swapniltake1/spotify-data-engineering-project
 
 ### LMM Tutorial
 https://course.fast.ai/
 https://huggingface.co/learn/llm-course/en/chapter1/1
+
+### Vector search
+https://www.kdnuggets.com/how-to-build-vector-search-from-scratch-in-python
