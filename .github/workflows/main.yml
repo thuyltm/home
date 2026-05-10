@@ -3,7 +3,7 @@ name: ci
 permissions:
   contents: read
   packages: write
-  
+
 on:
   push:
     branches:
@@ -34,9 +34,9 @@ jobs:
           target: run-test-stage
           no-cache: true
           push: true
-          tags: docker-gs-ping-test:latest
+          tags: thuyltm2201/docker-gs-ping-test:latest
           load: true  # move the image into the local Docker store.
 
       - name: Run tests container
         run: |
-          docker run -i --rm docker-gs-ping-test:latest go test -v ./bamboo/server/testcases/main_test.go
+          docker run -i --rm thuyltm2201/docker-gs-ping-test:latest go test -v ./bamboo/server/testcases/main_test.go
