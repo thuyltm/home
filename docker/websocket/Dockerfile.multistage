@@ -1,4 +1,4 @@
-FROM golang:1.23-alpine AS websocket-build-stage
+FROM golang:1.25.5-alpine AS websocket-build-stage
 WORKDIR /home
 COPY go.mod go.sum ./
 RUN go mod download
@@ -10,7 +10,7 @@ FROM websocket-build-stage AS run-websocket-test-stage
 RUN go test -v ./caddi/websocket/testcases/complex_websocket_test.go
 
 # Deploy the application binary into a clean image
-FROM golang:1.23-alpine  AS websocket-release-stage
+FROM golang:1.25.5-alpine  AS websocket-release-stage
 WORKDIR /
 COPY --from=websocket-build-stage /home/ ./
 EXPOSE 9090

@@ -1,6 +1,6 @@
 services:
   tests:
-    image: golang:1.23
+    image: golang:1.25.5
     stop_signal: SIGKILL
     stdin_open: true
     tty: true
