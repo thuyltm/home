@@ -33,4 +33,5 @@ jobs:
           tags: docker-gs-ping-test:latest
 
       - name: Run tests container
-        run: docker compose run --rm tests
+        run: |
+          docker run -it --rm docker-gs-ping-test:latest go test -v ./bamboo/server/testcases/main_test.go
