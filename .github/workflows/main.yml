@@ -29,8 +29,9 @@ jobs:
           file: ./docker/server/Dockerfile.multistage
           target: run-test-stage
           no-cache: true
-          push: false
+          push: true
           tags: docker-gs-ping-test:latest
+          load: true  # move the image into the local Docker store.
 
       - name: Run tests container
         run: |
