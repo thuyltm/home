@@ -34,4 +34,4 @@ jobs:
 
       - name: Run tests container
         run: |
-          docker run -it --rm docker-gs-ping-test:latest go test -v ./bamboo/server/testcases/main_test.go
+          docker run -i --rm docker-gs-ping-test:latest go test -v ./bamboo/server/testcases/main_test.go

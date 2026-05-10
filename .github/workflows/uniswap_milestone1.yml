@@ -1,0 +1,38 @@
+name: Unswap Milestone 1
+
+permissions: {}
+
+on:
+  push:
+    paths:
+      - 'pacman/smartcontract/forge/uniswap_milestone1/**' # Only runs when files in this folder change
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ./pacman/smartcontract/forge/uniswap_milestone1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Show Forge version
+        run: forge --version
+
+      - name: Run Forge fmt
+        run: forge fmt --check
+
+      - name: Run Forge build
+        run: forge build --sizes
+
+      - name: Run Forge tests
+        run: forge test -vvv
