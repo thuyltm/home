@@ -26,7 +26,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           context: .
-          file: ./docker/Dockerfile.multistage
+          file: ./docker/server/Dockerfile.multistage
           target: run-test-stage
           no-cache: true
           push: false
