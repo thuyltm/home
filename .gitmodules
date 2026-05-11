@@ -1,0 +1,3 @@
+[submodule "pacman/smartcontract/uniswap/quotecontract/lib/forge-std"]
+	path = pacman/smartcontract/uniswap/quotecontract/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
