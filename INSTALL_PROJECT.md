@@ -127,3 +127,5 @@ sudo apt-get update
 sudo apt-get install pkg-config build-essential
 ```
 13. Install Kubernete
+14. Install PAT (Personal Access Token)
+setup a PAT (Personal Access Token) for GitHub container registry (GHCR) to authenticate Docker operations (login, push and pull) in place of your password

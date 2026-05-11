@@ -6,8 +6,11 @@ permissions:
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'bamboo/server/**' # Triggers when any file in this folder changes
+  pull_request:
+    paths:
+      - 'bamboo/server/**'
 
 jobs:
   build:

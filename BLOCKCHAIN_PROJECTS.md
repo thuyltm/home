@@ -36,12 +36,17 @@ A Merkle Tree is a hierarchical data strucure to efficiently verify large sets o
 ## pacman/smartContract
 Implementing a dApp smart contract involves
 - writing contract logic: Solidity programming language
-- set up the development workspace to compile, test, deploy smartcontract to a blockchain: Truffle, Hardhat frameworks
+- set up the development workspace to compile, test, deploy smartcontract to a blockchain: Truffle, Hardhat, Forge frameworks
 - Blockchain Node Provider: Alchemy/Infura are RPC providers offering infrastructure to connect to networks like Ethereum
-- a public Ethereum testnet blockchain network: Sepolia
-- create a React app and use ethers.js to enable communication between frontend and the contract
+- a public Ethereum testnet blockchain network: Sepolia, personal blockchain testnet Gananche, Harhat
+- create a React app and use ethers.js, web3j to enable communication between frontend and the contract
 - Wallet: MetaMask
 - Block Exploerers: Sepolia Etherscan (https://sepolia.etherscan.io/) monitors transaction searching, contract verification, block data visualization
+**For example**:
+- pacman/smartcontract/harhat
+- pacman/smartcontract/truffle
+- pacman/smartcontract/nft-marketplace
+- pacman/smartcontract/forge/uniswap_milestone1
 
 ## pacman/network
 We deploy a miniature blockchain network integrated with a Btcd and a Btcd Wallet. Netxt, we establish a Tinybit node to simulate how to synchronize transactions or blocks to a existing blockchain network. This means that when a new transaction is pending in mempool or mined in btcd node, this information will be propagated to all connected peers
