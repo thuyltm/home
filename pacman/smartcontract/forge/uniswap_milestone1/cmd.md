@@ -1,6 +1,7 @@
 1. Create a new project
 ```sh
 forge init hello_foundry
+rm -rf .git
 ```
 2. Build contract
 ```sh
@@ -12,6 +13,8 @@ forge test
 ```
 4. Add library
 ```sh
+cd pacman/smartcontract/forge/uniswap_milestone1
+forge install foundry-rs/forge-std
 forge install transmissions11/solmate
 ```
 5. Start a local Ethereum node

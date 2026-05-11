@@ -1,5 +1,7 @@
 #! /bin/bash
 forge init quotecontract
+rm -rf .git
+forge install foundry-rs/forge-std
 forge install transmissions11/solmate
 forge install paulrberg/prb-math
 cd lib/prd-math
