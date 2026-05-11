@@ -25,3 +25,12 @@
 [submodule "pacman/smartcontract/uniswap/erc721/lib/forge-std"]
 	path = pacman/smartcontract/uniswap/erc721/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "pacman/smartcontract/uniswap/flashloans/lib/solmate"]
+	path = pacman/smartcontract/uniswap/flashloans/lib/solmate
+	url = https://github.com/rari-capital/solmate
+[submodule "pacman/smartcontract/uniswap/flashloans/lib/prb-math"]
+	path = pacman/smartcontract/uniswap/flashloans/lib/prb-math
+	url = https://github.com/paulrberg/prb-math
+[submodule "pacman/smartcontract/uniswap/flashloans/lib/abdk-libraries-solidity"]
+	path = pacman/smartcontract/uniswap/flashloans/lib/abdk-libraries-solidity
+	url = https://github.com/abdk-consulting/abdk-libraries-solidity
