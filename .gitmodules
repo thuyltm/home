@@ -34,3 +34,42 @@
 [submodule "pacman/smartcontract/uniswap/flashloans/lib/abdk-libraries-solidity"]
 	path = pacman/smartcontract/uniswap/flashloans/lib/abdk-libraries-solidity
 	url = https://github.com/abdk-consulting/abdk-libraries-solidity
+[submodule "pacman/smartcontract/uniswap/multipoolswaps/lib/solmate"]
+	path = pacman/smartcontract/uniswap/multipoolswaps/lib/solmate
+	url = https://github.com/rari-capital/solmate
+[submodule "pacman/smartcontract/uniswap/multipoolswaps/lib/abdk-libraries-solidity"]
+	path = pacman/smartcontract/uniswap/multipoolswaps/lib/abdk-libraries-solidity
+	url = https://github.com/abdk-consulting/abdk-libraries-solidity
+[submodule "pacman/smartcontract/uniswap/multipoolswaps/lib/solidity-bytes-utils"]
+	path = pacman/smartcontract/uniswap/multipoolswaps/lib/solidity-bytes-utils
+	url = https://github.com/GNSPS/solidity-bytes-utils
+[submodule "pacman/smartcontract/uniswap/multipoolswaps/lib/prb-math"]
+	path = pacman/smartcontract/uniswap/multipoolswaps/lib/prb-math
+	url = https://github.com/paulrberg/prb-math
+[submodule "pacman/smartcontract/uniswap/priceoracle/lib/solmate"]
+	path = pacman/smartcontract/uniswap/priceoracle/lib/solmate
+	url = https://github.com/rari-capital/solmate
+[submodule "pacman/smartcontract/uniswap/priceoracle/lib/abdk-libraries-solidity"]
+	path = pacman/smartcontract/uniswap/priceoracle/lib/abdk-libraries-solidity
+	url = https://github.com/abdk-consulting/abdk-libraries-solidity
+[submodule "pacman/smartcontract/uniswap/priceoracle/lib/solidity-bytes-utils"]
+	path = pacman/smartcontract/uniswap/priceoracle/lib/solidity-bytes-utils
+	url = https://github.com/GNSPS/solidity-bytes-utils
+[submodule "pacman/smartcontract/uniswap/priceoracle/lib/prb-math"]
+	path = pacman/smartcontract/uniswap/priceoracle/lib/prb-math
+	url = https://github.com/paulrberg/prb-math
+[submodule "pacman/smartcontract/uniswap/erc721/lib/solmate"]
+	path = pacman/smartcontract/uniswap/erc721/lib/solmate
+	url = https://github.com/rari-capital/solmate
+[submodule "pacman/smartcontract/uniswap/erc721/lib/prb-math"]
+	path = pacman/smartcontract/uniswap/erc721/lib/prb-math
+	url = https://github.com/paulrberg/prb-math
+[submodule "pacman/smartcontract/uniswap/erc721/lib/abdk-libraries-solidity"]
+	path = pacman/smartcontract/uniswap/erc721/lib/abdk-libraries-solidity
+	url = https://github.com/abdk-consulting/abdk-libraries-solidity
+[submodule "pacman/smartcontract/uniswap/erc721/lib/solidity-bytes-utils"]
+	path = pacman/smartcontract/uniswap/erc721/lib/solidity-bytes-utils
+	url = https://github.com/GNSPS/solidity-bytes-utils
+[submodule "pacman/smartcontract/uniswap/erc721/lib/openzeppelin-contracts"]
+	path = pacman/smartcontract/uniswap/erc721/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
