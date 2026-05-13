@@ -114,7 +114,7 @@ This path will then be added to your PATH environment variable by
 modifying the profile files located at:
 
 /home/thuy/.profile
-  /home/thuy/.bashrc
+/home/thuy/.bashrc
 
 You can uninstall at any time with rustup self uninstall and
 these changes will be reverted.
@@ -127,5 +127,12 @@ sudo apt-get update
 sudo apt-get install pkg-config build-essential
 ```
 13. Install Kubernete
-14. Install PAT (Personal Access Token)
+
+https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+
+14. Install Minikube
+
+https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download
+
+15. Install PAT (Personal Access Token)
 setup a PAT (Personal Access Token) for GitHub container registry (GHCR) to authenticate Docker operations (login, push and pull) in place of your password

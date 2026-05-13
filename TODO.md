@@ -6,7 +6,7 @@
 https://github.com/avhirupc/Information-Security-Algorithms/tree/master
 
 ### Backend Project
-https://www.kdnuggets.com/10-github-repositories-to-master-backend-development
+https://github.com/binhnguyennus/awesome-scalability (Theory)
 
 ### DevOps Tools
 https://github.com/techiescamp/devops-tools
@@ -16,10 +16,12 @@ https://hds-sandbox.github.io/
 
 ### Machine Learning Tutorial
 https://huyenchip.com/ml-interviews-book/contents/4.3.1-courses.html
+https://github.com/josephmisiti/awesome-machine-learning
 
 https://huyenchip.com/mlops/
 
 ### Data Engineer Tutorial
+https://www.kdnuggets.com/10-github-repositories-to-master-data-engineering
 https://github.com/gunnarmorling/awesome-opensource-data-engineering
 
 https://www.kaggle.com/discussions/getting-started/361111
@@ -33,6 +35,8 @@ https://github.com/swapniltake1/spotify-data-engineering-project
 ### LMM Tutorial
 https://course.fast.ai/
 https://huggingface.co/learn/llm-course/en/chapter1/1
+https://mlflow.org/docs/latest/ml/
+https://github.com/tensorchord/Awesome-LLMOps
 
 ### Vector search
 https://www.kdnuggets.com/how-to-build-vector-search-from-scratch-in-python
