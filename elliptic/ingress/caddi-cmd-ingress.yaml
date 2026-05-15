@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: caddi-cmd
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: caddi-cmd.local
+    http:
+      paths:
+      - path: /caddi-cmd
+        pathType: Prefix
+        backend:
+          service:
+            name: cmd
+            port:
+              number: 8080
