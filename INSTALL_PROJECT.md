@@ -135,4 +135,17 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download
 
 15. Install PAT (Personal Access Token)
+
 setup a PAT (Personal Access Token) for GitHub container registry (GHCR) to authenticate Docker operations (login, push and pull) in place of your password
+
+16. Install Helm
+```sh
+tar -zxvf helm-v4.2.0-linux-amd64.tar.gz
+mv linux-amd64/helm /usr/local/bin/helm
+```
+
+17. Install skaffold
+```sh
+curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
+sudo install skaffold /usr/local/bin/
+```

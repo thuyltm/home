@@ -10,9 +10,11 @@ https://github.com/binhnguyennus/awesome-scalability (Theory)
 
 ### DevOps Tools
 https://github.com/techiescamp/devops-tools
+https://kodekloud.com/studio/labs
 
 ### DataScience Sandbox
 https://hds-sandbox.github.io/
+https://github.com/brandonhimpfen/awesome-data-science
 
 ### Machine Learning Tutorial
 https://huyenchip.com/ml-interviews-book/contents/4.3.1-courses.html

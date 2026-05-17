@@ -1,0 +1,36 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: caddi-cmd-gateway
+  annotations:
+    meta.helm.sh/release-name: cmd
+  labels:
+    app.kubernetes.io/managed-by: Helm
+spec:
+  gatewayClassName: istio
+  listeners:
+  - name: http
+    hostname: "caddi.cmd.com"
+    port: 80
+    protocol: HTTP
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: caddi-cmd-route
+  annotations:
+    meta.helm.sh/release-name: cmd
+  labels:
+    app.kubernetes.io/managed-by: Helm
+spec:
+  parentRefs:
+  - name: caddi-cmd-gateway
+  hostnames: ["caddi.cmd.com"]
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /caddi-cmd
+    backendRefs:
+    - name: cmd
+      port: 8080
