@@ -26,3 +26,10 @@ docker compose down --volumes
 # Health Check
 docker inspect --format='{{json .State.Health}}' service2
 ```
+
+```sh
+# ensure container-to-container communication
+docker run --network zerocode-instrumentation_zerocode-instrumentation_default busybox ping -c 1 flasktest
+docker run --network zerocode-instrumentation_zerocode-instrumentation_default curlimages/curl curl http://flask-test:5000/rolldice
+docker network inspect zerocode-instrumentation_zerocode-instrumentation_default
+```

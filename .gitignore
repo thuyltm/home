@@ -14,3 +14,4 @@ build/
 .metals
 .ijwb
 node_modules/
+__pycache__

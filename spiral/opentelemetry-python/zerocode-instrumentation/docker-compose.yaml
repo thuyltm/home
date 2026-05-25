@@ -1,0 +1,31 @@
+networks:
+  zerocode-instrumentation_default:
+    driver: bridge
+    external: true
+    name: zerocode-instrumentation_default
+services:
+  collector:
+    image: otel/opentelemetry-collector:latest
+    container_name: collector
+    networks: 
+      - zerocode-instrumentation_default
+    command: ["--config=/conf/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/conf/otel-collector-config.yaml
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+  
+  flask-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flask-test
+    networks: 
+      - zerocode-instrumentation_default
+    ports:
+      - "5000:5000"
+    depends_on:
+      collector:
+        condition: service_started
+  
