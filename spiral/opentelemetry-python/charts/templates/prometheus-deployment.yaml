@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    meta.helm.sh/release-name: flask-test
+  labels:
+    app.kubernetes.io/managed-by: Helm 
+  name: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: prometheus
+      app.kubernetes.io/name: prometheus
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: prometheus
+        app.kubernetes.io/instance: prometheus
+        app.kubernetes.io/managed-by: Helm
+    spec:
+      containers:
+        - args:
+            - --web.console.templates=/etc/prometheus/consoles
+            - --web.console.libraries=/etc/prometheus/console_libraries
+            - --storage.tsdb.retention.time=1h
+            - --config.file=/etc/prometheus/prometheus-config.yaml
+            - --storage.tsdb.path=/prometheus
+            - --web.enable-lifecycle
+            - --web.route-prefix=/
+            - --enable-feature=exemplar-storage
+            - --enable-feature=otlp-write-receiver
+          image: quay.io/prometheus/prometheus:v2.52.0
+          name: prometheus
+          ports:
+            - containerPort: 9090
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/prometheus/prometheus-config.yaml
+              # `name` here must match the name
+              # from the volumes section of this pod
+              name: prometheus-configmap-volume
+              subPath: prometheus-config.yaml
+      volumes:
+        - configMap:
+            items:
+              - key: prometheus-config.yaml
+                path: prometheus-config.yaml
+            # `name` here must match the name 
+            # specified in the ConfigMap's YAML 
+            name: prometheus-configmap         
+          name: prometheus-configmap-volume

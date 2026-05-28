@@ -1,0 +1,38 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: flask-test-gateway
+  namespace: default
+  annotations:
+    meta.helm.sh/release-name: flask-test
+  labels:
+    app.kubernetes.io/managed-by: Helm
+spec:
+  gatewayClassName: istio
+  listeners:
+  - name: http
+    hostname: "spiral.flask.com"
+    port: 5000
+    protocol: HTTP
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: flask-test-route
+  namespace: default
+  annotations:
+    meta.helm.sh/release-name: flask-test
+  labels:
+    app.kubernetes.io/managed-by: Helm
+spec:
+  parentRefs:
+  - name: flask-test-gateway
+  hostnames: ["spiral.flask.com"]
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /flask-test
+    backendRefs:
+    - name: flask-test
+      port: 5000

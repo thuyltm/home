@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    meta.helm.sh/release-name: cmd
+    meta.helm.sh/release-namespace: default
+  labels:
+    app.kubernetes.io/instance: cmd
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: cmd
+    app.kubernetes.io/version: 1.16.0
+    helm.sh/chart: cmd-0.1.0
+  name: cmd
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: cmd
+      app.kubernetes.io/name: cmd
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: cmd
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: cmd
+        app.kubernetes.io/version: 1.16.0
+        helm.sh/chart: cmd-0.1.0
+    spec:
+      containers:
+      - image: thuyltm2201/caddi_cmd:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /caddi-cmd/healthz
+            port: http
+            scheme: HTTP
+        name: cmd
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /caddi-cmd/healthz
+            port: http
+            scheme: HTTP
+        resources: {}
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: docker-secret
+      restartPolicy: Always
+      securityContext: {}
+      serviceAccount: cmd
+      serviceAccountName: cmd

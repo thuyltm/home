@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: flask-test
+  labels:
+    app.kubernetes.io/managed-by: Helm 
+  name: otelcol
+spec:
+  ports:
+    - name: "4317"
+      port: 4317
+      targetPort: 4317
+    - name: "4318"
+      port: 4318
+      targetPort: 4318
+  selector:
+    app.kubernetes.io/instance: otelcol
+    app.kubernetes.io/name: otelcol
+  type: ClusterIP

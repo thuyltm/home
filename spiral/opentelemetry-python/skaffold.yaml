@@ -1,0 +1,23 @@
+apiVersion: skaffold/v4beta14
+kind: Config
+metadata:
+  name: flask-test
+#build:
+#  tagPolicy:
+#    sha256: {}
+#  artifacts:
+#    - image: thuyltm2201/flask-test
+#      context: .
+#      custom:
+#        buildCommand: ./build_image.sh
+#        dependencies:
+#          paths:
+#            - .
+deploy:
+  helm:
+    releases:
+      - name: flask-test
+        chartPath: ./charts
+        valuesFiles:
+          - ./charts/values.yaml
+        version: 0.1.0

@@ -91,8 +91,12 @@ func main() {
 	sort.Strings(keys)
 	router := mux.NewRouter()
 	var err error
+	router.HandleFunc("/caddi/healthz", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintln(w, "Healthy")
+	})
 
-	router.HandleFunc("/auth/{provider}/callback", func(res http.ResponseWriter, req *http.Request) {
+	router.HandleFunc("/caddi/auth/{provider}/callback", func(res http.ResponseWriter, req *http.Request) {
 		user, err := gothic.CompleteUserAuth(res, req)
 		if err != nil {
 			fmt.Fprintln(res, err)
@@ -100,7 +104,7 @@ func main() {
 		}
 		loadUserInfo(res, req, user)
 	})
-	router.HandleFunc("/auth/{provider}", func(res http.ResponseWriter, req *http.Request) {
+	router.HandleFunc("/caddi/auth/{provider}", func(res http.ResponseWriter, req *http.Request) {
 		//try to get the user without re-authenticating
 		if user, err := gothic.CompleteUserAuth(res, req); err == nil {
 			loadUserInfo(res, req, user)
@@ -108,14 +112,14 @@ func main() {
 			gothic.BeginAuthHandler(res, req)
 		}
 	})
-	router.HandleFunc("/logout/{provider}", func(res http.ResponseWriter, req *http.Request) {
+	router.HandleFunc("/caddi/logout/{provider}", func(res http.ResponseWriter, req *http.Request) {
 		gothic.Logout(res, req)
 		res.Header().Set("Location", "/")
 		res.WriteHeader(http.StatusTemporaryRedirect)
 	})
-	router.Handle("/chat", AuthMiddleware(http.HandlerFunc(loadChatPage)))
+	router.Handle("/caddi/chat", AuthMiddleware(http.HandlerFunc(loadChatPage)))
 	//router.Handle("/chat", http.HandlerFunc(loadChatPage))
-	router.Handle("/ws", http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+	router.Handle("/caddi/ws", http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		cookie, err := req.Cookie(USERID)
 		switch err {
 		case nil:

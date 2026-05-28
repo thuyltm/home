@@ -1,0 +1,125 @@
+services:
+  otelcol:
+    image: otel/opentelemetry-collector-contrib:0.102.1
+    container_name: otelcol
+    networks:
+      - todonet
+    command: ["--config=/etc/otel-collector-config.yml", ""]
+    volumes:
+      - ./collector/otel-collector-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"
+    depends_on:
+      - jaeger
+
+  # Prometheus
+  prometheus:
+    image: quay.io/prometheus/prometheus:v2.52.0
+    container_name: prometheus
+    networks:
+      - todonet
+    command:
+      - --web.console.templates=/etc/prometheus/consoles
+      - --web.console.libraries=/etc/prometheus/console_libraries
+      - --storage.tsdb.retention.time=1h
+      - --config.file=/etc/prometheus/prometheus-config.yaml
+      - --storage.tsdb.path=/prometheus
+      - --web.enable-lifecycle
+      - --web.route-prefix=/
+      - --enable-feature=exemplar-storage
+      - --enable-feature=otlp-write-receiver
+    volumes:
+      - ./prometheus/prometheus-config.yaml:/etc/prometheus/prometheus-config.yaml
+    ports:
+      - "9090:9090"
+  
+  # Opensearch
+  opensearch:
+    image: opensearchproject/opensearch:latest
+    container_name: opensearch
+    networks:
+      - todonet
+    environment:
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=HomeVungTau@123
+      - discovery.type=single-node    
+      - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
+      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
+    ulimits:
+      memlock:
+        soft: -1 # Set memlock to unlimited (no soft or hard limit)
+        hard: -1
+      nofile:
+        soft: 65536 # Maximum number of open files for the opensearch user - set to at least 65536
+        hard: 65536
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s -u admin:HomeVungTau@123 -k http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"\\|\"status\":\"yellow\"'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:latest # Make sure the version of opensearch-dashboards matches the version of opensearch installed on other nodes
+    container_name: opensearch-dashboards
+    networks:
+      - todonet
+    ports:
+      - 5601:5601 # Map host port 5601 to container port 5601
+    environment:
+      - 'OPENSEARCH_HOSTS=["http://opensearch:9200"]' # Define the OpenSearch nodes that OpenSearch Dashboards will query
+      # 2. Disable the security plugin on the dashboards interface
+      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true 
+      - plugins.security.disabled=true 
+    depends_on: [opensearch]
+  
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    networks:
+      - todonet
+    ports:
+      - "9411:9411"
+
+  jaeger:
+    image: jaegertracing/jaeger:latest
+    container_name: jaeger
+    networks:
+      - todonet
+    command:
+      - "--config=/etc/config-opensearch.yml"
+    volumes:
+      - ./jaeger/config-opensearch.yml:/etc/config-opensearch.yml
+    ports:
+      - "16686:16686"
+    environment:
+      - METRICS_STORAGE_TYPE=prometheus
+      - LOG_LEVEL=debug
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+      - SPAN_STORAGE_TYPE=opensearch
+      - ES_USERNAME=admin
+      - ES_PASSWORD=HomeVungTau@123
+      - ES_TLS_SKIP_HOST_VERIFY=true
+      - ES_SERVER_URLS=http://opensearch:9200
+    depends_on:
+      opensearch:
+        condition: service_healthy
+
+  flask-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flask-test
+    networks: 
+      - todonet
+    ports:
+      - "5000:5000"
+    depends_on:
+      otelcol:
+        condition: service_started
+
+networks:
+  todonet:

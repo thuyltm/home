@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    meta.helm.sh/release-name: flask-test
+    meta.helm.sh/release-namespace: default
+  labels:
+    app.kubernetes.io/instance: flask-test
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: flask-test
+    app.kubernetes.io/version: 1.16.0
+    helm.sh/chart: flask-test-0.1.0
+  name: flask-test
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: flask-test
+      app.kubernetes.io/name: flask-test
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: flask-test
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: flask-test
+        app.kubernetes.io/version: 1.16.0
+        helm.sh/chart: flask-test-0.1.0
+    spec:
+      containers:
+      - image: thuyltm2201/flask-test:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /flask-test/health
+            port: http
+            scheme: HTTP
+        name: flask-test
+        ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /flask-test/health
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 60
+          timeoutSeconds: 2
+          failureThreshold: 3
+        resources: {}
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: docker-secret
+      securityContext: {}

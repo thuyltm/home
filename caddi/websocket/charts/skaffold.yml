@@ -1,0 +1,18 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: servicea
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: thuyltm2201/caddi_websocket
+      context: ..
+      ko: {}
+deploy:
+  helm:
+    releases:
+      - name: websocket
+        chartPath: .
+        valuesFiles:
+          - values.yaml

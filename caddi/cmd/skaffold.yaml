@@ -1,0 +1,18 @@
+apiVersion: skaffold/v4beta14
+kind: Config
+metadata:
+  name: cmd
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: thuyltm2201/caddi_cmd
+      ko: {}
+deploy:
+  helm:
+    releases:
+      - name: cmd
+        chartPath: ./charts
+        valuesFiles:
+          - ./charts/values.yaml
+        version: 0.1.0
