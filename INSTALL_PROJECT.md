@@ -156,3 +156,6 @@ curl -L https://github.com/kubernetes/kompose/releases/download/v1.34.0/kompose-
 chmod +x kompose
 sudo mv ./kompose /usr/local/bin/kompose
 ```
+
+19. Generate self-signed certificates
+[Guide](https://docs.opensearch.org/latest/security/configuration/generate-certificates/)
