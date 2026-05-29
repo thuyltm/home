@@ -19,5 +19,6 @@ func main() {
 			"message": "Healthy",
 		})
 	})
-	router.Run() // listens on 0.0.0.0:8080 by default
+	//router.Run() // listens on 0.0.0.0:8080 by default
+	router.RunTLS(":8080", "server.pem", "server-key.pem")
 }

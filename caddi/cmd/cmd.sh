@@ -1,0 +1,1 @@
+curl --cacert server.pem --resolve caddi.cmd.com:8080:127.0.0.1 https://caddi.cmd.com:8080/caddi-cmd/ping
