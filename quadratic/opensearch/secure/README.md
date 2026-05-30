@@ -20,10 +20,14 @@ opensearch-node1       | io.netty.handler.ssl.NotSslRecordException: not an SSL/
 % curl --cacert esnode.pem --resolve "node-0.example.com:9200:127.0.0.1" https://node-0.example.com:9200 -u admin:Skype@123
 # will throws "Host name 'opensearch' does not match the certificate subject provided by the peer (CN=node-0.example.com, OU=node, O=node, L=test, C=de)", with the result that you should set hostname alias 'node-0.example.com' for container name 'opensearch'
 % curl --cacert esnode.pem --resolve "opensearch:9200:127.0.0.1" -XGET https://opensearch:9200/_cat/indices -u admin:Skype@123
+% curl --cacert esnode.pem https://localhost:9200 -u admin:Skype@123
 # use --cert and --key to prove your identity to a server
 % curl --cert kirk.pem --key kirk-key.pem --cacert esnode.pem --resolve "node-0.example.com:9200:127.0.0.1" https://node-0.example.com:9200
 ```
-
+4. Test the connectivity between Opensearch Dashboard and the Opensearch cluster
+```sh
+docker exec -it opensearch-dashboards curl -k https://opensearch-node1:9200 -u kibanaserver:kibanaserver
+```
 
 ### View the content of client certification
 ```sh
@@ -90,3 +94,15 @@ openssl x509 -in root-ca.pem -text -noout
 #    Signature Value:
 ```
 
+
+
+docker run 
+  -p 5601:5601 \
+  -v ./opensearch_dashboards.yml:/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml \
+  -v ./client-cert.pem:/usr/share/opensearch-dashboards/config/client-cert.pem \
+  -v ./client-cert-key.pem:/usr/share/opensearch-dashboards/config/client-cert-key.pem \
+  -v ./root-ca.pem:/usr/share/opensearch-dashboards/config/root-ca.pem \
+  opensearchproject/opensearch-dashboards:latest
+
+
+docker exec -it 7c256084e249 curl -k https://opensearch-node1:9200 -u kibanaserver:kibanaserver
