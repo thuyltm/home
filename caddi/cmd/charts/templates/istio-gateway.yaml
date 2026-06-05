@@ -9,6 +9,15 @@ metadata:
 spec:
   gatewayClassName: istio
   listeners:
+  - name: https
+    hostname: "caddi.cmd.com"
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: caddi-tls-secret
+        namespace: istio-system 
   - name: http
     hostname: "caddi.cmd.com"
     port: 80

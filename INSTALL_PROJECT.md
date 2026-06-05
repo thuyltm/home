@@ -13,6 +13,8 @@ You download Bazelisk binary on our Release page and add it to your Path manuall
 
 https://docs.docker.com/engine/install/ubuntu/
 
+Docker Hub Login Credentials store in a JSON file at ~/.docker/config.json in Linux
+
 4. Install Bazel
 
 https://bazel.build/install/ubuntu
@@ -138,6 +140,8 @@ https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinar
 
 setup a PAT (Personal Access Token) for GitHub container registry (GHCR) to authenticate Docker operations (login, push and pull) in place of your password
 
+Follow the sequences of links Your Avatar/Account Settings/Security/Personal access token/Generate new token
+
 16. Install Helm
 ```sh
 tar -zxvf helm-v4.2.0-linux-amd64.tar.gz
@@ -158,4 +162,12 @@ sudo mv ./kompose /usr/local/bin/kompose
 ```
 
 19. Generate self-signed certificates
+
 [Guide](https://docs.opensearch.org/latest/security/configuration/generate-certificates/)
+
+20. Install Terraform
+```sh
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
+```
