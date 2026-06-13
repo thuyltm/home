@@ -1,42 +1,140 @@
-The console printout these below info when running "terraform apply"
-```sh
-Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
 
-Outputs:
+Terraform will perform the following actions:
 
-container_image = "nginxinc/nginx-unprivileged:1.25-alpine"
-deployment_generation = 1
-deployment_labels = tomap({
-  "app" = "MyExampleApp"
-  "environment" = "dev"
-})
-deployment_name = "terraform-example"
-deployment_replicas = "1"
-kubernetes_connection_info = {
-  "config_context" = "minikube"
-  "config_path" = "~/.kube/config"
-}
-namespace_name = "k8s-ns-by-tf"
-namespace_uid = "a3e3cf76-4ca0-4776-9ac3-3e599c75b29c"
-pod_security_settings = {
-  "read_only_root_filesystem" = true
-  "run_as_non_root" = true
-}
-resource_quota_status = tomap({
-  "limits.cpu" = "50m"
-  "limits.memory" = "10Mi"
-  "pods" = "1"
-  "requests.cpu" = "25m"
-  "requests.memory" = "5Mi"
-})
-service_cluster_ip = "10.96.58.95"
-service_endpoint = "To access the service within the cluster; use: terraform-example-svc.k8s-ns-by-tf.svc.cluster.local"
-service_name = "terraform-example-svc"
-service_ports = tolist([
-  80,
-])
-```
-The later query is
-```sh
-terraform output -raw service_endpoint
-```
+  # kubernetes_deployment.nginx will be created
+  + resource "kubernetes_deployment" "nginx" {
+      + id               = (known after apply)
+      + wait_for_rollout = true
+
+      + metadata {
+          + generation       = (known after apply)
+          **+ name             = "nginx-server"**
+          **+ namespace        = "web-server-namespace"**
+          + resource_version = (known after apply)
+          + uid              = (known after apply)
+        }
+
+      + spec {
+          + min_ready_seconds         = 0
+          + paused                    = false
+          + progress_deadline_seconds = 600
+          + replicas                  = "1"
+          + revision_history_limit    = 10
+
+          + selector {
+              + match_labels = {
+                  **+ "app" = "nginx-web"**
+                }
+            }
+
+          + strategy (known after apply)
+
+          + template {
+              + metadata {
+                  + generation       = (known after apply)
+                  + labels           = {
+                      + "app" = "nginx-web"
+                    }
+                  + name             = (known after apply)
+                  + resource_version = (known after apply)
+                  + uid              = (known after apply)
+                }
+              + spec {
+                  + automount_service_account_token  = true
+                  + dns_policy                       = "ClusterFirst"
+                  + enable_service_links             = true
+                  + host_ipc                         = false
+                  + host_network                     = false
+                  + host_pid                         = false
+                  + hostname                         = (known after apply)
+                  + node_name                        = (known after apply)
+                  + restart_policy                   = "Always"
+                  + scheduler_name                   = (known after apply)
+                  + service_account_name             = (known after apply)
+                  + share_process_namespace          = false
+                  + termination_grace_period_seconds = 30
+
+                  + container {
+                      + image                      = "nginx:latest"
+                      + image_pull_policy          = (known after apply)
+                      + name                       = "nginx-container"
+                      + restart_policy             = (known after apply)
+                      + stdin                      = false
+                      + stdin_once                 = false
+                      + termination_message_path   = "/dev/termination-log"
+                      + termination_message_policy = (known after apply)
+                      + tty                        = false
+
+                      + port {
+                          + container_port = 80
+                          + protocol       = "TCP"
+                        }
+
+                      + resources (known after apply)
+                    }
+
+                  + image_pull_secrets (known after apply)
+
+                  + readiness_gate (known after apply)
+                }
+            }
+        }
+    }
+
+  # kubernetes_namespace.web_server will be created
+  + resource "kubernetes_namespace" "web_server" {
+      + id                               = (known after apply)
+      + wait_for_default_service_account = false
+
+      + metadata {
+          + generation       = (known after apply)
+          + name             = "web-server-namespace"
+          + resource_version = (known after apply)
+          + uid              = (known after apply)
+        }
+    }
+
+  # kubernetes_service.nginx_service will be created
+  + resource "kubernetes_service" "nginx_service" {
+      + id                     = (known after apply)
+      + status                 = (known after apply)
+      + wait_for_load_balancer = true
+
+      + metadata {
+          + generation       = (known after apply)
+          + name             = "nginx-service"
+          + namespace        = "web-server-namespace"
+          + resource_version = (known after apply)
+          + uid              = (known after apply)
+        }
+
+      + spec {
+          + allocate_load_balancer_node_ports = true
+          + cluster_ip                        = (known after apply)
+          + cluster_ips                       = (known after apply)
+          + external_traffic_policy           = (known after apply)
+          + health_check_node_port            = (known after apply)
+          + internal_traffic_policy           = (known after apply)
+          + ip_families                       = (known after apply)
+          + ip_family_policy                  = (known after apply)
+          + publish_not_ready_addresses       = false
+          + selector                          = {
+              + "app" = "nginx-web"
+            }
+          + session_affinity                  = "None"
+          + type                              = "NodePort"
+
+          + port {
+              + node_port   = 30080
+              + port        = 80
+              + protocol    = "TCP"
+              + target_port = "80"
+            }
+
+          + session_affinity_config (known after apply)
+        }
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.

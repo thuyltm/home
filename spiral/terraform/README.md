@@ -24,6 +24,7 @@ terraform plan -out=example.tfplan
 #Crate or Update infrastructe
 terraform apply "example.tfplan"
 terraform destroy
+terraform import kubernetes_secret_v1.caddi_tls_secret caddi/caddi-tls-credential
 ```
 
 
