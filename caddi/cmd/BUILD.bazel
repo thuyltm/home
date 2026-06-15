@@ -3,10 +3,22 @@ load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load", "oci_push")
 load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
 
+filegroup(
+    name = "cert_files",
+    srcs = [        
+        "server-key.pem",
+        "server.pem"
+    ],  # Includes all files and subdirectories
+    visibility = ["//visibility:public"],
+)
+
 go_library(
     name = "cmd_lib",
-    srcs = ["main.go"],
+    srcs = [
+        "main.go",
+    ],    
     importpath = "home/caddi/cmd",
+    data = [":cert_files"],
     visibility = ["//visibility:private"],
     deps = ["@com_github_gin_gonic_gin//:gin"],
 )
@@ -19,13 +31,17 @@ go_binary(
 
 pkg_tar(
     name = "cmd_layer",
-    srcs = [":cmd"],
+    srcs = [
+        ":cmd",
+        ":cert_files"
+    ],
+    package_dir = "/caddi/cmd",
 )
 
 oci_image(
     name = "cmd_image",
     base = "@golang_linux_amd64",
-    entrypoint = ["/cmd"],
+    entrypoint = ["/caddi/cmd/cmd"],
     tars = [":cmd_layer"],
 )
 
@@ -45,14 +61,14 @@ oci_load(
     name = "load",
     # Use the image built for the target platform
     image = ":cmd_amd64_image",
-    repo_tags = ["thuyltm2201/caddi_cmd:latest"],
+    repo_tags = ["thuyltm2201/caddi_cmd:notls_latest"],
 )
 
 oci_push(
     name = "push",
     image = ":cmd_amd64_image",
     remote_tags = [
-        "latest",
+        "notls_latest",
     ],
     repository = "docker.io/thuyltm2201/caddi_cmd",
 )

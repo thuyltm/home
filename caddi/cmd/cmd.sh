@@ -1,1 +1,0 @@
-curl -v -HHost:caddi.cmd.com --resolve "caddi.cmd.com:443:10.96.221.121" --cacert server.pem "https://caddi.cmd.com:443/caddi-cmd/ping"
