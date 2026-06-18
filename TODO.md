@@ -42,3 +42,8 @@ https://github.com/tensorchord/Awesome-LLMOps
 
 ### Vector search
 https://www.kdnuggets.com/how-to-build-vector-search-from-scratch-in-python
+
+### Deep Learning Tutorial
+https://data-flair.training/blogs/deep-learning-project-ideas/
+https://www.kaggle.com/code/kanncaa1/deep-learning-tutorial-for-beginners
+https://www.kaggle.com/code/heeraldedhia/mnist-classifier-first-deep-learning-project
