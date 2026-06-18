@@ -154,18 +154,3 @@ helm install istio-ingress istio/gateway -n istio-ingress --wait --create-namesp
 #NOTES:
 #"istio-ingress" successfully installed!
 ```
-# Perform a gateway call to verify
-[Guide](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/)
-
-Every Gateway is backed by a service of type LoadBalancer. Kubernetes services of type LoadBalancer are supported in most of cloud platform but in some local environment, you need to do the following
-- When working with minikube cluster, running `minikube tunnel` in a different terminal to start an external load balancer
-- For Kind cluster, install Cloud Provider Kind which connects to your KIND cluster and provisions new Load Balancer container for your Services [Guide](https://kind.sigs.k8s.io/docs/user/loadbalancer/)
-Access the caddi-cmd service using curl:
-```sh
- curl -v  -H "Host: caddi.cmd.com" http://10.111.116.203:80/caddi-cmd/ping
-```
-Note that the -H flag set the Host HTTP header to "caddi.cmd.com". This is needed because your ingress Gateway is configured to handle "caddi.cmd.com", you send your request to the ingress IP
-```sh
-export INGRESS_HOST=$(kubectl get gtw caddi-cmd-gateway -o jsonpath='{.status.addresses[0].value}')
-export INGRESS_PORT=$(kubectl get gtw caddi-cmd-gateway -o jsonpath='{.spec.listeners[?(@.name=="http")].port}')
-```

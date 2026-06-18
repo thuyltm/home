@@ -1,0 +1,13 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  meshConfig:
+    defaultProviders:
+      tracing:
+      - "skywalking"
+    enableTracing: true
+    extensionProviders:
+    - name: "skywalking"
+      skywalking:
+        service: skywalking-oap.istio-system.svc.cluster.local
+        port: 11800

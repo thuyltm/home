@@ -1,0 +1,22 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  meshConfig:
+    enableTracing: true
+    extensionProviders:
+    - name: otel
+      opentelemetry:
+        port: 4318
+        service: opentelemetry-collector.istio-system.svc.cluster.local
+        http:
+          path: "/v1/traces"
+          timeout: 5s
+          headers:
+            - name: "custom-header"
+              value: "custom value"
+        resource_detectors:
+          environment: {}
+    defaultProviders:
+      accessLogging:
+      - envoy
+      - otel

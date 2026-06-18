@@ -53,3 +53,12 @@ Traffic Management: Circuit breakers, fault injection, complex routing, rate lim
 - Linkerd prioritizes operational simplicity, ultra-low resource usage, and ready-made ease of use
 
 Traffic Management: Simple retries, timeouts, and traffic shifting
+
+10> Data Plane vs Control Plane
+
+An Istio Service Mesh abstracts network communication between microservices away from your application code into lightweight sidecar proxies (Envoy)
+
+How it works:
+- Data Plane: Consists of Envoy sidecar proxies deployed alongside every microservice. They intercept all incoming and outgoing network traffic
+- Control Plane: The istiod component, which programs and manages these proxies, handling service discovery, certificate management, and configuration routing
+
