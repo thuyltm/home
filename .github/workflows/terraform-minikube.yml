@@ -1,0 +1,48 @@
+name: "Terraform with Minikube CI/CD"
+
+on:
+  push:
+    paths:
+      - 'caddi/cmd/**' # Only runs when files in this folder change
+  pull_request:
+    paths:
+      - 'caddi/cmd/**' 
+
+jobs:
+  terraform-minikube:
+    name: "Minikube & Terraform Run"
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      # Step 2: Spin up a local Minikube instance inside the runner
+      - name: Start Minikube
+        uses: medyagh/setup-minikube@master
+        with:
+          cache: true
+      # Step 3: Verify the cluster is healthy and accessible
+      - name: Verify Minikube Status
+        run: |
+          kubectl cluster-info
+          kubectl get nodes
+      # Step 4: Install and configure the Terraform CLI
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.0"
+      # Step 5: Initialize Terraform configuration
+      - name: Terraform Init
+        run: terraform init
+      # Step 6: Check for formatting and syntax validity
+      - name: Terraform Validate
+        run: terraform validate
+      # Step 7: Generate a deployment plan
+      - name: Terraform Plan
+        run: terraform plan
+      # Step 8: Apply changes automatically 
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve
+					
