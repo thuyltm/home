@@ -1,0 +1,1 @@
+[Guide](https://projectcontour.io/docs/1.33/guides/kind/)

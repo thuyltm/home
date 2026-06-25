@@ -175,3 +175,9 @@ sudo apt update && sudo apt install terraform
 21. Vault Secret Operator
 
 https://developer.hashicorp.com/vault/tutorials/kubernetes-introduction/vault-secrets-operator
+
+22. Install Local Kind Cluster
+```sh
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.32.0/kind-linux-amd64
+```
+
