@@ -47,3 +47,7 @@ https://www.kdnuggets.com/how-to-build-vector-search-from-scratch-in-python
 https://data-flair.training/blogs/deep-learning-project-ideas/
 https://www.kaggle.com/code/kanncaa1/deep-learning-tutorial-for-beginners
 https://www.kaggle.com/code/heeraldedhia/mnist-classifier-first-deep-learning-project
+
+### Agentic AI
+https://docs.langchain.com/oss/python/langchain/rag
+https://www.skills.google/catalog

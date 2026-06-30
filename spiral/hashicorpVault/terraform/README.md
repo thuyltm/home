@@ -1,0 +1,2 @@
+1. Oliver will enable the _userpass_ auth method, create a user _danielle-vault-user_ with a password _pass_, and create and attach a policy _developer-vault-policy_ to the user and grant them create and update permissions on the path _dev-secrets/+/cred_.
+2. Danielle need to login to Vault to create secrets in a secrets path _dev-secrets/+/cred_

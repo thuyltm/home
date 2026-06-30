@@ -1,0 +1,1 @@
+[Guide](https://developer.hashicorp.com/vault/tutorials/secrets-management/openldap)
