@@ -1,3 +1,0 @@
-1> Deployment vs Stateful
-- a deployment is designed for __stateless__ applications where pods are identical and interchangeable. Deployments usually use temporary storage that is wiped if a pod restarts.
-- a statefulset is built for __stateful__ applications (like databases) that require persistent data. StatefulSets natively handle persistent volume claims (PVCs) for each individual pod, ensuring data is never lost.
