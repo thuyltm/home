@@ -1,4 +1,5 @@
 server:
+  extraArgs: "-log-level=debug"
   affinity: ""
   ha:
     enabled: true
@@ -7,6 +8,7 @@ server:
       setNodeId: true
       config: |
         cluster_name = "vault-integrated-storage"
+        log_level = "Debug"
         storage "raft" {
           path = "/vault/data/"
         }

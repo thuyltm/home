@@ -1,0 +1,17 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: simple-vault-client
+build:
+  tagPolicy:
+    sha256: {}
+  local:
+    push: true
+  artifacts:
+    - image: thuyltm2201/simple-vault-client
+      ko: {}
+deploy:
+  kubectl: {}
+manifests:
+  rawYaml:
+    - deployment-01-webapp.yml
