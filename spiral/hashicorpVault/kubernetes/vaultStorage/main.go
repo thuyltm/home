@@ -36,13 +36,12 @@ func main() {
 			fmt.Println("Read JTW:", jwt)
 			authPath := "auth/kubernetes/login"
 			// create the payload for Vault authentication
-			pl := VaultJWTPayload{Role: "webapp", JWT: jwt}
+			pl := VaultJWTPayload{Role: "hashicupsapp", JWT: jwt}
 			jwtPayload, err := json.Marshal(pl)
 			if err != nil {
 				fmt.Println("Error encoding Vault request JSON:", err)
 				return
 			}
-			fmt.Printf("jwtPayload: %s\n", string(jwtPayload))
 			// Send a request to Vault to retrieve a token
 			vaultLoginResponse := &VaultLoginResponse{}
 			err = SendRequest(vaultUrl+"/v1/"+authPath, "", "POST", jwtPayload, vaultLoginResponse)
@@ -50,23 +49,29 @@ func main() {
 				fmt.Println("Error getting response from Vault k8s login:", err)
 				return
 			}
-			fmt.Printf("vaultLoginResponse: %v\n", vaultLoginResponse)
+			fmt.Printf("vaultLoginResponse: %v\n", prettyPrintJSON(vaultLoginResponse))
 			vaultToken = vaultLoginResponse.Auth.ClientToken
 			fmt.Printf("Retrieved token: %v\n", vaultToken)
 		}
-		secretsPath := "secret/data/webapp/config"
+		secretsPath := "secret/data/dev-secrets/config"
 		// Send a request to Vault using the token to retrieve the secret
 		vaultSecretResponse := &VaultSecretResponse{}
 		err := SendRequest(vaultUrl+"/v1/"+secretsPath, vaultToken, "GET", nil, &vaultSecretResponse)
 		if err != nil {
 			fmt.Println("Error getting secret from Vault:", err)
 			return
-		} else {
-			fmt.Println("Successfully retrieved secret from Vault.")
 		}
-		fmt.Printf("Vault Secret Response: %+v\n", vaultSecretResponse)
+		fmt.Printf("Vault Secret Response: %+v\n", prettyPrintJSON(vaultSecretResponse))
 		secretData := vaultSecretResponse.Data.Data
-		fmt.Printf("Secret Data: %v", secretData)
+		fmt.Printf("Secret Data: %v", prettyPrintJSON(secretData))
+		// 1. Set headers first
+		w.Header().Set("Content-Type", "text/json")
+
+		// 2. Set status code second
+		w.WriteHeader(http.StatusOK)
+
+		// 3. Print values last
+		fmt.Fprint(w, prettyPrintJSON(vaultSecretResponse))
 	})
 	log.Println("Listening on port", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
@@ -92,4 +97,13 @@ func SendRequest(url string, token string, requestType string, payload []byte, t
 	}
 	defer res.Body.Close()
 	return json.NewDecoder(res.Body).Decode(target)
+}
+
+func prettyPrintJSON(data any) string {
+	jsonData, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		fmt.Println("Error pretty printing JSON:", err)
+		return ""
+	}
+	return string(jsonData)
 }

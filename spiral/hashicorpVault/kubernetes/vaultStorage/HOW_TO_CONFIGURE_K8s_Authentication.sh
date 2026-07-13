@@ -15,7 +15,7 @@ kubectl exec --stdin=true --tty=true vault-0 -- /bin/sh
 # Success! Enabled kubernetes auth method at: kubernetes/
 # When Vault is running in a Kubernetes cluster, the Kubernetes auth method can be configured to use the service account token of the pod that Vault is running in. 
 / $ cat /var/run/secrets/kubernetes.io/serviceaccount/token | cut -d.  | base64 -d
-
+# https://www.jwt.io/
 / $ vault write auth/kubernetes/config \
     kubernetes_host="https://192.168.49.2:8443"
 # OR Vault is running outside of the Kubernetes cluster
@@ -33,6 +33,7 @@ kubectl exec --stdin=true --tty=true vault-0 -- /bin/sh
      audience="https://kubernetes.default.svc.cluster.local"
 
 / $ vault list auth/kubernetes/role
+/ $ vault read auth/kubernetes/role/hashicupsapp
 
 kubectl exec -it sample-deployment-57c9596999-bjdrw -- /bin/bash
 / $ export K8S_SERVICE_ACCOUNT_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/vault-token)
@@ -78,6 +79,16 @@ kubectl exec -it sample-deployment-57c9596999-bjdrw -- /bin/bash
 #   },
 #   "mount_type":""
 #}
+# enable an instance of the KV secrets engine at the path secret/ with version 2.
+vault secrets enable -path=secret kv-v2
+# create a secret at path secret/data/dev-secrets/config with the key-value pair username=devuser and password=devpass.
+vault kv put secret/dev-secrets/config username=devuser password=devpass
+# verify the deifinition of the secret at the path secret/dev-secrets/config
+vault kv get secret/dev-secrets/config
+# Write out the policy named dev-secrets that enables the read capability for the secrets at path secret/data/dev/*.
+vault policy write dev-secrets - <<EOF
+path "secret/data/dev-secrets/config" {
+  capabilities = ["read"]
+}
+EOF
 
-
-https://www.jwt.io/

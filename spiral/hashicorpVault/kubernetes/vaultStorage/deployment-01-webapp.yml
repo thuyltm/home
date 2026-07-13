@@ -26,3 +26,14 @@ spec:
               value: '/var/run/secrets/kubernetes.io/serviceaccount/token'
             - name: SERVICE_PORT
               value: '8080'
+          volumeMounts:
+          - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+            name: k8s-audience-token
+      volumes:
+      - name: k8s-audience-token
+        projected:
+          sources:
+          - serviceAccountToken:
+              audience: "https://kubernetes.default.svc.cluster.local"
+              expirationSeconds: 3600
+              path: token 
