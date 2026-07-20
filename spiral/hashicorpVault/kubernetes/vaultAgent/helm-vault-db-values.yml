@@ -1,0 +1,19 @@
+server:
+  extraArgs: "-log-level=debug"
+  standalone:
+    enabled: true
+    config: |
+      storage "postgresql" {
+        connection_url = "postgresql://myuser:MyHome123@postgres-service.default.svc.cluster.local:5432/mydb?sslmode=disable"
+      }
+
+      log_level = "Debug"
+
+      listener "tcp" {
+        address = "[::]:8200"
+        cluster_address = "[::]:8201"
+        tls_disable = "true"
+      }
+
+      ui = true
+      disable_mlock = true

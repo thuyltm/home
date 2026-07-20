@@ -1,4 +1,7 @@
-[Guide](https://developer.hashicorp.com/vault/tutorials/kubernetes-introduction)
-[Guide](https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-secrets-engine)
-[Guide](https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar)
-[Kubernetes Vault Guide](https://github.com/hashicorp-education/learn-vault-hello-world)
+[Vault Storage Guide](https://developer.hashicorp.com/vault/tutorials/kubernetes-introduction)
+
+[Vault Agent Guide](https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar)
+
+[Vault TLS](https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-minikube-tls)
+
+![Kubernetes Vault Flow](vaultStorage/applicationInvokeVault.png)

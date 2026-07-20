@@ -1,0 +1,11 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: hashicorpVaultBackendStorage
+manifests:
+  helm:
+    releases:
+      - name: my-vault-storage
+        chartPath: my-vault-storage
+deploy:
+  kubectl: {}

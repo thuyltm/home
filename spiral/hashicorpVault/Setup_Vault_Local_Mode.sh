@@ -33,7 +33,6 @@ Token (will be hidden):
 ```
 vault token lookup -accessor nyBHfiYFMhMranowfQy6dbf5
 vault secrets list
-vault secrets list
 #Path               Type              Accessor                   Description
 #----               ----              --------                   -----------
 #agent-registry/    agent_registry    agent-registry_87b39561    agent registry
