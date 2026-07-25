@@ -114,7 +114,9 @@ vault secrets list
 # Enable an instance of the kv-v2 secrets engine at the path secret
 vault secrets enable -path=secret kv-v2
 # Success! Enabled the kv-v2 secrets engine at: secret/
+################################################
 # create a secret at path secret/webapp/config
+################################################
 vault kv put secret/webapp/config username="static-user" password="static-password"
 # verify the secret at the path secret/webapp/config
 vault kv get secret/webapp/config
@@ -135,3 +137,19 @@ vault kv get secret/webapp/config
 #---         -----
 #password    static-password
 #username    static-user
+#################################################################################
+# enable an instance of the KV secrets engine at the path secret/ with version 2.
+#################################################################################
+vault secrets enable -path=secret kv-v2
+# create a secret at path secret/data/dev-secrets/config with the key-value pair username=devuser and password=devpass.
+vault kv put secret/dev-secrets/config username=devuser password=devpass
+# verify the deifinition of the secret at the path secret/dev-secrets/config
+vault kv get secret/dev-secrets/config
+###################################################################################################################
+# Write out the policy named dev-secrets that enables the read capability for the secrets at path secret/data/dev/*.
+##################################################################################################################
+vault policy write dev-secrets - <<EOF
+path "secret/data/dev-secrets/config" {
+  capabilities = ["read"]
+}
+EOF

@@ -136,11 +136,21 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 
 https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download
 
-15. Install PAT (Personal Access Token)
+15. Create a Personal Access Token (Classic) in your GitHub account
 
 setup a PAT (Personal Access Token) for GitHub container registry (GHCR) to authenticate Docker operations (login, push and pull) in place of your password
 
-Follow the sequences of links Your Avatar/Account Settings/Security/Personal access token/Generate new token
+Personal access tokens (classic) function like ordinary OAuth access token. They can be used instead of a password for Git over HTTPS, or can be used to authenticate to the API over Basic AUthentication
+
+Follow the sequences of steps
+```md
+1. Navigate directly to [your account's GitHub Developer Settings](https://github.com/settings/apps)
+2. In the left sidebar, click Personal access tokens and select Tokens (classic)
+3. Clock the Generate new token dropdown and choose Generate new token (classic)
+4. Check the boxes for the scopes or permissions you want to grant this token (e.g., select repo for basic Git command-line access)
+5. Click Generate
+6. echo $(cat PAT_for_GitHub_Account.md) | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
+```
 
 16. Install Helm
 ```sh
@@ -172,12 +182,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashi
 sudo apt update && sudo apt install terraform
 ```
 
-21. Vault Secret Operator
-
-https://developer.hashicorp.com/vault/tutorials/kubernetes-introduction/vault-secrets-operator
-
-22. Install Local Kind Cluster
+21. Install Local Kind Cluster
 ```sh
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.32.0/kind-linux-amd64
 ```
-

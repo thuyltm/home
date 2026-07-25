@@ -79,16 +79,5 @@ kubectl exec -it sample-deployment-57c9596999-bjdrw -- /bin/bash
 #   },
 #   "mount_type":""
 #}
-# enable an instance of the KV secrets engine at the path secret/ with version 2.
-vault secrets enable -path=secret kv-v2
-# create a secret at path secret/data/dev-secrets/config with the key-value pair username=devuser and password=devpass.
-vault kv put secret/dev-secrets/config username=devuser password=devpass
-# verify the deifinition of the secret at the path secret/dev-secrets/config
-vault kv get secret/dev-secrets/config
-# Write out the policy named dev-secrets that enables the read capability for the secrets at path secret/data/dev/*.
-vault policy write dev-secrets - <<EOF
-path "secret/data/dev-secrets/config" {
-  capabilities = ["read"]
-}
-EOF
+
 
