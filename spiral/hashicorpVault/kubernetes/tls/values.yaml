@@ -1,0 +1,46 @@
+global:
+  enabled: true
+  tlsDisable: false
+injector:
+  enabled: true
+server:
+  extraArgs: "-log-level=debug"
+  extraEnvironmentVars:
+    VAULT_CACERT: /vault/vault-tls/k8s.ca
+    VAULT_TLSCERT: /vault/vault-tls/tls.crt
+    VAULT_TLSKEY: /vault/vault-tls/tls.key
+  volumes:
+    - name: vault-tls
+      secret:
+        defaultMode: 420
+        secretName: vault-tls
+  volumeMounts:
+    - mountPath: /vault/vault-tls
+      name: vault-tls
+      readOnly: true
+  standalone:
+    enabled: false
+  affinity: ""
+  ha:
+    enabled: true
+    replicas: 3
+    raft:
+      enabled: true
+      setNodeId: true
+      config: |
+        cluster_name = "vault-integrated-storage"
+        ui = true
+        listener "tcp" {
+          tls_disable = 0
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+          tls_cert_file = "/vault/vault-tls/tls.crt"
+          tls_key_file = "/vault/vault-tls/tls.key"
+          tls_client_ca_file = "/vault/vault-tls/k8s.ca"
+        }
+        storage "raft" {
+          path = "/vault/data"
+        }
+        disable_mlock = true
+        service_registration "kubernetes" {}
+        log_level = "Debug"

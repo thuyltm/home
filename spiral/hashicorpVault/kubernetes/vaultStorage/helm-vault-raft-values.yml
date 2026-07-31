@@ -1,14 +1,14 @@
 server:
-  extraArgs: "-log-level=debug"
+  extraArgs: "-log-level=trace"
   affinity: ""
   ha:
     enabled: true
     raft:
       enabled: true
+      replicas: 2
       setNodeId: true
       config: |
         cluster_name = "vault-integrated-storage"
-        log_level = "Debug"
         storage "raft" {
           path = "/vault/data/"
         }
@@ -18,3 +18,5 @@ server:
           tls_disable = "true"
         }
         service_registration "kubernetes" {}
+        disable_mlock = true
+        ui = true
