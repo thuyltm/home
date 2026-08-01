@@ -31,9 +31,7 @@ jobs:
   dagster_cloud_default_deploy:
     name: Dagster Serverless Deploy
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: ./perimeter/dagster/dagster-quickstart
+    
     steps:
       - name: Prerun Checks
         id: prerun
@@ -101,15 +99,15 @@ jobs:
         if: steps.prerun.outputs.result == 'pex-deploy' || steps.prerun.outputs.result == 'docker-deploy'
         uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.16
         with:
-          command: "plus deploy build-and-push --agent-type=serverless --python-version ${{ env.PYTHON_VERSION }} --build-strategy=${{ env.ENABLE_FAST_DEPLOYS == 'true' && 'python-executable' || 'docker' }}"
-
+          command: "cd ${{ env.DAGSTER_PROJECT_DIR }} && plus deploy build-and-push --agent-type=serverless --python-version ${{ env.PYTHON_VERSION }} --build-strategy=${{ env.ENABLE_FAST_DEPLOYS == 'true' && 'python-executable' || 'docker' }}"
+        
       # Deploy all code locations in this build session to Dagster Cloud
       - name: Deploy to Dagster Cloud
         id: ci-deploy
         if: steps.prerun.outputs.result != 'skip'
         uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.16
         with:
-          command: "plus deploy finish"
+          command: "cd ${{ env.DAGSTER_PROJECT_DIR }} && plus deploy finish"
 
       # Update a PR comment - this runs always() so the comment is updated on success and failure
       - name: Update PR comment for branch deployments
