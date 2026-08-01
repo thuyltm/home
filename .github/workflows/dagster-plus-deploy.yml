@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-22.04
     defaults:
       run:
-        working-directory: ${{ env.DAGSTER_PROJECT_DIR }}
+        working-directory: ./perimeter/dagster/dagster-quickstart
     steps:
       - name: Prerun Checks
         id: prerun
