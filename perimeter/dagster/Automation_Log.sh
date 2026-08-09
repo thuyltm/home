@@ -1,0 +1,40 @@
+- dagster.daemon.SensorDaemon - INFO - Checking for new runs for sensor: dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Added partition keys to dynamic partitions definition 'dynamic_partition': ['2018-01-24', '2018-01-22', '2018-01-23']
+- dagster.daemon.SensorDaemon - INFO - Creating new run for dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Launching run for dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Completed launch of run 8004858c-2a8b-48a6-9817-d26eaee29398 for dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Creating new run for dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Launching run for dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Completed launch of run 901346de-1fe4-470e-aa6d-669b53f41bcd for dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Creating new run for dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Launching run for dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Completed launch of run 25942103-cda3-457d-a352-0b3a3b4f97eb for dynamic_sensor
+- dagster.daemon.QueuedRunCoordinatorDaemon - INFO - Priority sorting and checking tag concurrency limits for queued runs.
+- dagster - DEBUG - import_dynamic_partition_job - RUN_START - Started execution of run for "import_dynamic_partition_job".
+- dagster - DEBUG - import_dynamic_partition_job - ENGINE_EVENT - Executing steps using multiprocess executor: parent process (pid: 114746)
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - STEP_WORKER_STARTING - Launching subprocess for "import_dynamic_partition_file".
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - STEP_WORKER_STARTED - Executing step "import_dynamic_partition_file" in subprocess.
+- dagster - DEBUG - import_dynamic_partition_job - RUN_START - Started execution of run for "import_dynamic_partition_job".
+- dagster - DEBUG - import_dynamic_partition_job - ENGINE_EVENT - Executing steps using multiprocess executor: parent process (pid: 114820)
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - STEP_WORKER_STARTING - Launching subprocess for "import_dynamic_partition_file".
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - RESOURCE_INIT_STARTED - Starting initialization of resources [io_manager].
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - RESOURCE_INIT_SUCCESS - Finished initialization of resources [io_manager].
+- dagster - DEBUG - import_dynamic_partition_job - LOGS_CAPTURED - Capturing logs for process (pid: 114821).
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - STEP_START - Started execution of step "import_dynamic_partition_file".
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - STEP_OUTPUT - Yielded output "result" of type "String". (Type check passed).
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - Writing file at: /home/thuy/Documents/Learn/home/perimeter/dagster/dagster-etl/.tmp_dagster_home_f6og4kr9/storage/import_dynamic_partition_file/2018-01-24 using PickledObjectFilesystemIOManager...
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - ASSET_MATERIALIZATION - Materialized value import_dynamic_partition_file.
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+- dagster - DEBUG - import_dynamic_partition_job - import_dynamic_partition_file - STEP_SUCCESS - Finished execution of step "import_dynamic_partition_file" in 71ms.
+- dagster - DEBUG - import_dynamic_partition_job - - duckdb_dynamic_partition_table - STEP_WORKER_STARTING - Launching subprocess for "duckdb_dynamic_partition_table".
+- dagster.daemon.QueuedRunCoordinatorDaemon - INFO - Launched 3 runs.
+- dagster.daemon.SensorDaemon - INFO - Checking for new runs for sensor: dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Sensor dynamic_sensor skipped: Sensor function returned an empty result
+- dagster.daemon.SensorDaemon - INFO - Checking for new runs for sensor: dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Skipping addition of partition keys for dynamic partitions definition 'dynamic_partition' that already exist: ['2018-01-24', '2018-01-22', '2018-01-23']
+- dagster.daemon.SensorDaemon - INFO - Skipping 3 runs for sensor dynamic_sensor already completed with run keys: ["2018-01-24.csv", "2018-01-22.csv", "2018-01-23.csv"]
+- dagster.daemon.SensorDaemon - INFO - Checking for new runs for sensor: dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Sensor dynamic_sensor skipped: Sensor function returned an empty result
+- dagster.daemon.SensorDaemon - INFO - Checking for new runs for sensor: dynamic_sensor
+- dagster.daemon.SensorDaemon - INFO - Skipping addition of partition keys for dynamic partitions definition 'dynamic_partition' that already exist: ['2018-01-24', '2018-01-22', '2018-01-23']
+- dagster.daemon.SensorDaemon - INFO - Skipping 3 runs for sensor dynamic_sensor already completed with run keys: ["2018-01-24.csv", "2018-01-22.csv", "2018-01-23.csv"]

@@ -1,12 +1,10 @@
 [project]
-name = "dagster_quickstart"
+name = "dagster_etl"
 requires-python = ">=3.10,<3.15"
 version = "0.1.0"
 dependencies = [
     "dagster==1.13.16",
-    "dagster-cloud>=1.13.16",
     "dagster-duckdb>=0.29.16",
-    "pandas>=2.3.3",
 ]
 
 [dependency-groups]
@@ -26,9 +24,9 @@ force-include = { "pyproject.toml" = "pyproject.toml" }
 directory_type = "project"
 
 [tool.dg.project]
-root_module = "dagster_quickstart"
+root_module = "dagster_etl"
 registry_modules = [
-    "dagster_quickstart.components.*",
+    "dagster_etl.components.*",
 ]
 
 
