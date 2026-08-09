@@ -1,9 +1,8 @@
 name: Dagster Cloud Serverless Deployment
 on:
   push:
-    branches:
-      - "main"
-      - "master"
+    paths:
+      - 'perimeter/dagster/dagster-quickstart/**' # Triggers when any file in this folder changes
   pull_request:
     types: [opened, synchronize, reopened, closed]
 
