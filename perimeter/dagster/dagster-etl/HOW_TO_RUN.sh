@@ -26,3 +26,7 @@ ops:
 # check
 duckdb src/dagster_etl/data/staging/data.duckdb
 D Select * From raw_data;
+##################################################
+# Install dagster-aws or dagster-gcp
+# pip install dagster-aws
+pip install dagster-gcp

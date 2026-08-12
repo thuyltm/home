@@ -200,3 +200,26 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubc
 sudo apt update
 sudo apt install gh -y
 ```
+
+23. Install Google Cloud cli
+
+[Guide](https://docs.cloud.google.com/sdk/docs/install-sdk)
+```sh
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+tar -xf google-cloud-cli-linux-x86_64.tar.gz
+./google-cloud-sdk/install.sh
+gcloud init
+gcloud auth 
+gcloud config list
+#For example, to view the help for gcloud compute instances create:
+gcloud help compute instances create
+```
+Create a Service Account
+```md
+1. Go to the Google Cloud Console Service Account page
+2. Select your Google Cloud Project
+3. Click Create Service Account at the top of the screen
+4. Assign Roles: Select the specific roles your code needs (e.g., Storage Object Viewer, BigQuery Admin)
+5. Generate Key
+6. Nagivate to the Keys tab, click Add Key
+```
