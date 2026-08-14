@@ -1,0 +1,26 @@
+name: Get OIDC Subject
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read 
+
+jobs:
+  print-subject:
+    runs-on: ubuntu-latest
+     # Add this block
+    permissions:
+      id-token: write   # Required for requesting the JWT
+      contents: read     # Required for actions/checkout
+    steps:
+      - name: Fetch and Encode JWT
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const jwt = await core.getIDToken();
+            const spacedJwt = jwt.split('').join(' ');
+            console.log("Spaced JWT:");
+            console.log(spacedJwt); // PRINT
+            const noSpace = spacedJwt.replace(/\s/g, ""); 
+            console.log(noSpace); // PRINT WITH MASK (USELESS INFO)

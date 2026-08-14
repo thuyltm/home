@@ -1,0 +1,28 @@
+name: Workload-identity-federation-with-deployment-pipeline
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    # Allow the job to fetch a GitHub ID token
+    permissions:
+      id-token: write
+      contents: read
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v3'
+        with:
+          create_credentials_file: true
+          project_id: 'articulate-run-306102' 
+          workload_identity_provider: 'projects/206108938560/locations/global/workloadIdentityPools/my-workload-pool-github/providers/github-provider'
+      
+      - name: Upload File to GCS
+        uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: '.github/workflows/test.txt'
+          destination: 'workload-identity-federate'

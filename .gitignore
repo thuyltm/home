@@ -19,3 +19,4 @@ __pycache__
 .terraform.lock.hcl
 terraform.tfstate
 .tmp_dagster*/
+articulate-run-306102-910c63dbe0d6.json
