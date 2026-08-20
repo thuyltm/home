@@ -1,6 +1,7 @@
 https://docs.dagster.io/
 [Guide](https://courses.dagster.io/courses/take/dagster-etl/multimedia/65303173-about-this-course)
 [Github](https://github.com/dagster-io/project-dagster-university/tree/main/dagster_university)
+[Deploy](https://docs.dagster.io/deployment/oss/deployment-options/gcp)
 
 Dagster's programming model is built around Assets, which are organized with __Definitions__
 - __Definitions__ act as containers for all Dagster entities in your project

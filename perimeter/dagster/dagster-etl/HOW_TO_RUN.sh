@@ -28,5 +28,23 @@ duckdb src/dagster_etl/data/staging/data.duckdb
 D Select * From raw_data;
 ##################################################
 # Install dagster-aws or dagster-gcp
+##################################################
 # pip install dagster-aws
 pip install dagster-gcp
+############################################################
+# Confirm the assets and resources are configured correctly
+############################################################
+dg check defs
+############################################################
+# Start the Dagster webserver
+############################################################
+dg dev
+############################################################
+# Prepare dataset, table
+############################################################
+bq mk --location=US --dataset articulate-run-306102:iris
+bq mk --table articulate-run-306102:iris.iris_data
+bq mk --table articulate-run-306102:iris.iris_setosa
+
+# Use this link https://console.cloud.google.com/iam-admin/iam?project=articulate-run-306102 
+# to assign the required Bigquery role (bigquery.jobUser and bigquery.dataEditor) for account thuy-le-thi-minh@articulate-run-306102.iam.gserviceaccount.com
