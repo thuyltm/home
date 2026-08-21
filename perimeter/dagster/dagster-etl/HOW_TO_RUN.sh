@@ -48,3 +48,28 @@ bq mk --table articulate-run-306102:iris.iris_setosa
 
 # Use this link https://console.cloud.google.com/iam-admin/iam?project=articulate-run-306102 
 # to assign the required Bigquery role (bigquery.jobUser and bigquery.dataEditor) for account thuy-le-thi-minh@articulate-run-306102.iam.gserviceaccount.com
+############################################################
+# View content of database Duckdb
+############################################################
+duckdb data.duckdb
+D SHOW TABLES;
+D SELECT * FROM raw_asteroid_data;
+############################################################
+# Integrate dlt with dagster
+############################################################
+uv add dagster dagster-dlt dlt
+python dlt_quickstart.py
+duckdb data.duckdb
+D DESCRIBE;
+D SELECT schema_name, database_name, internal 
+  FROM duckdb_schemas();
+D SELECT table_name
+  FROM information_schema.tables
+  WHERE table_schema = 'mydata';
+D DESCRIBE mydata.load_dict;
+D SELECT * FROM mydata.load_dict;
+D SELECT * FROM nasa_neo.fetch_neo_data;
+#######################################################################
+# Incorporate dlt with dagster
+# Sling is a lightweight and hight performance ETL data movement tool
+#######################################################################
