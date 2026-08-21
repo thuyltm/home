@@ -51,3 +51,6 @@ https://www.kaggle.com/code/heeraldedhia/mnist-classifier-first-deep-learning-pr
 ### Agentic AI
 https://docs.langchain.com/oss/python/langchain/rag
 https://www.skills.google/catalog
+
+### Data Collection
+https://api.nasa.gov/ (Demo Key: KzY7FJKve4kv3v5h6MaFfjsychngZJCZfU1AN7Br)
