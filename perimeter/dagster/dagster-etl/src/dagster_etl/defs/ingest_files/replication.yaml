@@ -1,0 +1,15 @@
+source: MY_POSTGRES
+target: MY_DUCKDB
+
+defaults:
+  mode: full-refresh
+  object: "{stream_schema}_{stream_table}"
+
+streams:
+  test_schema.attendee:
+  test_schema.curriculum:
+  test_schema.enroll:
+    mode: incremental
+    primary_key: enroll_id
+    update_key: enroll_date
+

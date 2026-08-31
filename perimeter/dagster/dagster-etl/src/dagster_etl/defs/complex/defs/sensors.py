@@ -3,8 +3,8 @@ import os
 from pathlib import Path
 
 import dagster as dg
-import dagster_etl.defs.complexpartition.defs.jobs as jobs
-from dagster_etl.defs.complexpartition.defs.assets import dynamic_partitions_def
+import dagster_etl.defs.complex.defs.jobs as jobs
+from dagster_etl.defs.complex.defs.assets import dynamic_partitions_def
 
 @dg.sensor(target=jobs.import_dynamic_partition_job)
 def dynamic_sensor(context: dg.SensorEvaluationContext) -> dg.SensorResult:

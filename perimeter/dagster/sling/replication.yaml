@@ -1,0 +1,10 @@
+source: "postgresql://test_user:test_pass@localhost:5432/test_db?sslmode=disable"
+target: "duckdb:///home/thuy/Documents/Learn/home/perimeter/dagster/sling/my_duckdb.db" 
+
+defaults:
+  mode: full-refresh # Options: full-refresh, increment, or snapshot
+  # Dynamically names tables in DuckDB using the source schema and table nam
+  object: '{stream_schema}.{stream_table}' # target table of file name
+
+streams:
+  test_schema.*: # the source table

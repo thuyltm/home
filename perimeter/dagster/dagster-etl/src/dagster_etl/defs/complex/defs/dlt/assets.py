@@ -37,8 +37,9 @@ def simple_source():
 def dlt_simple_assets(context: dg.AssetExecutionContext, dlt: DagsterDltResource):
     yield from dlt.run(context=context, dlt_source=simple_source())
 
-#####################################################################################
-# A Dagster asset implements dlt pipeline that import CSV data into a duckdb database
+######################################################################################
+# CustomerDagsterDltTranslator converts CSV dagster asset into a dtl resource, which
+# dlt pipeline then imports into a Duckdb database
 ######################################################################################
 class FilePath(dg.Config):
     path: str
@@ -53,6 +54,8 @@ def import_file_dlt(config: FilePath) -> str:
 @dlt.source
 def csv_source(file_path: str = None):
     def load_csv():
+        # pandas deduce column types from the data
+        # which helps dlt the typed value it needs to write the correct schema to DucDB
         df = pd.read_csv(file_path)
         yield df.to_dict(orient="records")
     return load_csv
@@ -61,6 +64,7 @@ class CustomDagsterDltTranslator(DagsterDltTranslator):
     def get_asset_spec(self, data: DltResourceTranslatorData) -> dg.AssetSpec:
         default_spec = super().get_asset_spec(data)
         return default_spec.replace_attributes(
+            # Map a Dagster asset to dlt source
             deps=[dg.AssetKey("import_file_dlt")],
         )
 
@@ -80,7 +84,7 @@ def dlt_csv_assets(
     yield from dlt.run(context, dlt_source=csv_source(import_file_dlt))
 
 ##################################################################################
-# Set up a Nasa API data loading pipeline using dlt as Daggest asset
+# Expose a dlt resource as a Dagster asset
 ##################################################################################
 class NasaDate(dg.Config):
     date: str

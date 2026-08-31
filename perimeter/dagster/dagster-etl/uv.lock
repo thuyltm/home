@@ -511,6 +511,7 @@ dependencies = [
     { name = "dagster" },
     { name = "dagster-dlt" },
     { name = "dagster-duckdb" },
+    { name = "dagster-sling" },
     { name = "dbt" },
     { name = "dlt" },
 ]
@@ -526,6 +527,7 @@ requires-dist = [
     { name = "dagster", specifier = "==1.13.16" },
     { name = "dagster-dlt", specifier = ">=0.29.16" },
     { name = "dagster-duckdb", specifier = ">=0.29.16" },
+    { name = "dagster-sling", specifier = ">=0.29.16" },
     { name = "dbt", specifier = ">=2.0.0rc212" },
     { name = "dlt", specifier = ">=1.30.0" },
 ]
@@ -590,6 +592,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/9d/7a/3e9bc46fe56c38ad63418f657b5379afcdb5dce52e8ddfc26d1c820b049c/dagster_shared-1.13.16.tar.gz", hash = "sha256:4008e1d8cabfa44aef8ea2574f8c959d7122c2618202ebd7afda7b63404f039c", size = 123705, upload-time = "2026-07-30T16:54:03.008Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/84/29/1e99bdfcf8487a06fde36ed001c56954615d645b2026a039410b5b7084a5/dagster_shared-1.13.16-py3-none-any.whl", hash = "sha256:a2eecccfdcd8907dcd5c2e07b6925ee916b98e373338db29b3fb55ad841c0659", size = 95988, upload-time = "2026-07-30T16:54:02.01Z" },
+]
+
+[[package]]
+name = "dagster-sling"
+version = "0.29.16"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "dagster" },
+    { name = "sling" },
+    { name = "sling-mac-arm64", marker = "platform_machine == 'arm64' and sys_platform == 'darwin'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/75/bd/be2a2cc7a35274b25ca6a0ab5b2da13d9f3ca38288ce1672559f770612e0/dagster_sling-0.29.16.tar.gz", hash = "sha256:1ecdd0c8aecc874a9e8e8fc939f5beb32ff181d3a859f079811a25131dbff951", size = 233084, upload-time = "2026-07-30T16:57:58.33Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/78/fb/0482535528ca73b97213471151db828149ab87bb25246825ce8c84611a9c/dagster_sling-0.29.16-py3-none-any.whl", hash = "sha256:ec2e0dfacb120e7d85ab3dec2854655f818c0f0e1268de914ec5d499a77af15c", size = 25387, upload-time = "2026-07-30T16:57:57.256Z" },
 ]
 
 [[package]]
@@ -2458,6 +2474,24 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81", size = 34031, upload-time = "2024-12-04T17:35:28.174Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050, upload-time = "2024-12-04T17:35:26.475Z" },
+]
+
+[[package]]
+name = "sling"
+version = "1.5.26"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/22/58/433d88e845ecf64b9a108e72e983886c607ad64cdb8ad4ce4475330abe94/sling-1.5.26.tar.gz", hash = "sha256:ac8c9aa0f89447f896f0c55067578bd0af4db820282b0f8e14d78f515fcb3eeb", size = 79154, upload-time = "2026-08-17T10:33:19.105Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ed/29/5ad1efee2d2478a4a338d9ac6600b3dee4799453c6b21851536027f32f21/sling-1.5.26-py3-none-any.whl", hash = "sha256:85f92d7faff2e9ce97ec8905f242cf18ae0425ed47fde0ffc16acde60cd242e2", size = 39697, upload-time = "2026-08-17T10:33:17.779Z" },
+]
+
+[[package]]
+name = "sling-mac-arm64"
+version = "1.4.10.post2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c5/48/153f94bbb1fd6eb5812fbc2269ef89d93fdea15802b626e88c20b2f1edc4/sling_mac_arm64-1.4.10.post2.tar.gz", hash = "sha256:52cbfa689b621fff1a7d1c9a8b8ab0c6b89c5a5bd86921a725496160d38849a8", size = 92866186, upload-time = "2025-06-19T21:45:04.595Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0a/1f/12ac71c65e45a34181cf5916a43b37dcac8712d9105971e4c04bdf74999c/sling_mac_arm64-1.4.10.post2-py3-none-any.whl", hash = "sha256:d66b2d2119a01c8d38c25725c04044ee477762c6993dc13debcbd605c0429891", size = 93154303, upload-time = "2025-06-19T21:44:59.917Z" },
 ]
 
 [[package]]

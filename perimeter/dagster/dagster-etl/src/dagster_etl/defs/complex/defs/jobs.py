@@ -1,6 +1,6 @@
 import dagster as dg
 
-import dagster_etl.defs.complexpartition.defs.assets as assets
+import dagster_etl.defs.complex.defs.assets as assets
 
 import_partition_job = dg.define_asset_job(
     name="import_partition_job",

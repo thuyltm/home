@@ -3,7 +3,7 @@ import datetime
 from pathlib import Path
 import dagster as dg
 from dagster_duckdb import DuckDBResource
-from dagster_etl.defs.complexpartition.defs.nasa.resources import NASAResource
+from dagster_etl.defs.complex.defs.nasa.resources import NASAResource
 from pydantic import field_validator
 
 class NasaDate(dg.Config):

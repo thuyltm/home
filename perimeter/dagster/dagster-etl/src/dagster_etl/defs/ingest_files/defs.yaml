@@ -1,0 +1,19 @@
+type: dagster_sling.SlingReplicationCollectionComponent
+
+attributes:
+  connections:
+    MY_POSTGRES:
+      type: postgres
+      host: localhost
+      port: 5432
+      database: test_db
+      user: test_user
+      password: test_pass
+    MY_DUCKDB:
+      type: duckdb 
+      instance: /home/thuy/Documents/Learn/home/perimeter/dagster/dagster-etl/src/dagster_etl/data/staging/migration.db
+  replications:
+    - path: replication.yaml
+      translation:
+        group_name: sling_data
+        description: "Loads data from Sling replication {{ stream_definition.name }}"

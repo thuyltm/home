@@ -73,3 +73,5 @@ D SELECT * FROM nasa_neo.fetch_neo_data;
 # Incorporate dlt with dagster
 # Sling is a lightweight and hight performance ETL data movement tool
 #######################################################################
+uv add dagster-sling
+docker compose -f docker/db/postgres/docker-compose.yml up

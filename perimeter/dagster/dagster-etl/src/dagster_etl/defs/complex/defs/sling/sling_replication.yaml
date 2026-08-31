@@ -1,0 +1,14 @@
+source: MY_POSTGRES
+target: MY_DUCKDB
+
+defaults:
+  mode: full-refresh # the entire table is copied over every time
+  object: "{stream_schema}_{stream_table}"
+
+streams:
+  test_schema.customers:
+  test_schema.products:
+  test_schema.orders:
+    mode: incremental #  copy only new or updated data from a primary database
+    primary_key: order_id
+    update_key: order_date # using the order_date column to track changes
