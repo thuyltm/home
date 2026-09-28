@@ -1,0 +1,23 @@
+[project]
+name = "quickstart"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { email = "thuyltm2201@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "dbt-core>=1.12.5",
+    "dbt-duckdb>=1.11.0",
+    "dbt-teradata>=1.11.0",
+    "google-cloud-bigquery>=3.45.2",
+    "pandas>=3.0.6",
+]
+
+[project.scripts]
+quickstart = "quickstart:main"
+
+[build-system]
+requires = ["uv_build>=0.12.0,<0.13.0"]
+build-backend = "uv_build"

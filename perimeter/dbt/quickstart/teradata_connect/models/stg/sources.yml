@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    description: This is a replica of the Postgres database used by the app
+    schema: jaffle_shop
+    tables:
+      - name: raw_customers
+        description: One record per customer
+      - name: raw_orders
+        description: One record per order.

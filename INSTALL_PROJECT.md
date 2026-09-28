@@ -214,9 +214,9 @@ gcloud config list
 #For example, to view the help for gcloud compute instances create:
 gcloud help compute instances create
 ```
-Create a Service Account
+Create a Service Account (default thuy-le-thi-minh@articulate-run-306102.iam.gserviceaccount.com)
 ```md
-1. Go to the Google Cloud Console Service Account page
+1. Go to the [Google Cloud Console Service Account page](https://console.cloud.google.com/iam-admin/serviceaccounts?project=articulate-run-306102)
 2. Select your Google Cloud Project
 3. Click Create Service Account at the top of the screen
 4. Assign Roles: Select the specific roles your code needs (e.g., Storage Object Viewer, BigQuery Admin)
