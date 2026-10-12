@@ -18,3 +18,16 @@ Flow these steps in sequence to achieve success
     2.3. Or **Select Preferences: Open User Setting (JSON)** to edit the raw **settings.json** file and add more the line **"python.languageServer=Pylance"**
 3. Verify: Open any .py file, Pylance will activate immediately to start analyzing your code
 
+### To configure and optimize Python code suggestions
+Open your workspace _settings.json_ file (Ctrl+, then click the "Open Setting (JSON)" icon in the top right) and append these configurations:
+```json
+    // Controls the strictness of type completions ('off', 'basic', or 'strict')
+    "python.analysis.typeCheckingMode": "basic",
+    // General Editor Configurations
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": "off"
+    },
+    "editor.suggestOnTriggerCharacters": true
+```
