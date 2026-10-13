@@ -1,0 +1,18 @@
+zone,destination_borough,trips
+LaGuardia Airport,Brooklyn,10848
+Newark Airport,,9
+JFK Airport,EWR,143
+LaGuardia Airport,Staten Island,43
+JFK Airport,Brooklyn,28369
+LaGuardia Airport,Bronx,1531
+JFK Airport,Staten Island,286
+Newark Airport,EWR,467
+LaGuardia Airport,,1375
+LaGuardia Airport,EWR,47
+JFK Airport,Manhattan,68139
+Newark Airport,Manhattan,10
+JFK Airport,Queens,46118
+LaGuardia Airport,Manhattan,60208
+LaGuardia Airport,Queens,11216
+JFK Airport,Bronx,3047
+JFK Airport,,7630

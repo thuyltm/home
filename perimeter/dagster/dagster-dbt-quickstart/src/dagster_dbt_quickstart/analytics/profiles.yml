@@ -1,0 +1,6 @@
+dagster_dbt_university:
+  target: dev 
+  outputs:
+    dev:
+      type: duckdb
+      path: '/home/thuy/Documents/Learn/home/perimeter/dagster/dagster-dbt-quickstart/data/staging/data.duckdb'

@@ -1,0 +1,1 @@
+A __dbt_resource_props__ is a dictionary in the __Dagster-dbt__ integration that represents a single dbt resource (such as a model, seed, snapshot, or source) extracted from a dbt project's __manifest.json__ file
