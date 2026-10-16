@@ -80,6 +80,7 @@ jobs:
         run: |
           cd perimeter/dagster/dagster-dbt-quickstart/src/dagster_dbt_quickstart/analytics
           uv run dbt deps
+          uv run dbt parse
           uv run dbt compile
           uv run dbt parse
         shell: bash
