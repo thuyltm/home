@@ -59,12 +59,6 @@ jobs:
         if: steps.prerun.outputs.result != 'skip'
         run: ${{ steps.setup-python-version.outputs.python-path }} -m pip install uv
         shell: bash
-      
-      # 3. Install dbt and your specific database adapter (e.g., snowflake, postgres, bigquery)
-      - name: Install dbt
-        run: |
-          pip install --upgrade pip
-          pip install dbt-core dbt-snowflake # Replace dbt-snowflake with your adapter
 
       # Sync all projects (workspace or single project)
       - name: Sync project dependencies
@@ -77,6 +71,7 @@ jobs:
         shell: bash
       
       - name: Prepare dbt projects
+        working-directory: ${{ env.DAGSTER_PROJECT_DIR }}
         run: |
           cd perimeter/dagster/dagster-dbt-quickstart/src/dagster_dbt_quickstart/analytics
           uv run dbt deps
