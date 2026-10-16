@@ -24,3 +24,6 @@ with
     )
 select *
 from daily_summary
+{% if is_incremental() %}
+    where date_of_business between '{{ var('min_date') }}' and '{{ var('max_date') }}'
+{% endif %}
