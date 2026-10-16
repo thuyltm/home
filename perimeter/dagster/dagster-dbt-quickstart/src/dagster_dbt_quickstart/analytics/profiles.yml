@@ -3,4 +3,4 @@ dagster_dbt_university:
   outputs:
     dev:
       type: duckdb
-      path: '/home/thuy/Documents/Learn/home/perimeter/dagster/dagster-dbt-quickstart/data/staging/data.duckdb'
+      path: '/home/runner/work/home/home/perimeter/dagster/dagster-dbt-quickstart/data/staging/data.duckdb'

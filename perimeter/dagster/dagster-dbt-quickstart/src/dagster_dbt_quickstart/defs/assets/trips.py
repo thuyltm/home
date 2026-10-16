@@ -10,7 +10,7 @@ from . import constants
     kinds={"python"},
 )
 def taxi_zones_file() -> dg.MaterializeResult:
-    file_to_read = "/home/thuy/Documents/Learn/home/perimeter/dagster/dagster-dbt-quickstart/data/source/taxi_zones.csv"
+    file_to_read = "data/source/taxi_zones.csv"
     # 1. Open the source file in read mode ('r')
     with open(file_to_read, 'rb') as source:
         # source.read() outputs a 'str' containing the file's content
@@ -49,7 +49,7 @@ def taxi_zones(context: dg.AssetExecutionContext, database: DuckDBResource):
     kinds={"duckdb"},
 )
 def taxi_trips_file(context: dg.AssetExecutionContext) -> dg.MaterializeResult:
-    file_to_read = "/home/thuy/Documents/Learn/home/perimeter/dagster/dagster-dbt-quickstart/data/source/taxi_trips.parquet"
+    file_to_read = "data/source/taxi_trips.parquet"
 
     # 1. Open the source file in read mode ('r')
     with open(file_to_read, 'rb') as source:

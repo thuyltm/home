@@ -1,10 +1,10 @@
-from pathlib import Path
+import dagster as dg
 
 from dagster_dbt import DbtProject
 
 dbt_project = DbtProject(
-    project_dir="/home/thuy/Documents/Learn/home/perimeter/dagster/dagster-dbt-quickstart/src/dagster_dbt_quickstart/analytics",
-    profiles_dir="/home/thuy/Documents/Learn/home/perimeter/dagster/dagster-dbt-quickstart/src/dagster_dbt_quickstart/analytics",
+    project_dir=dg.EnvVar("DBT_PROJECT"),
+    profiles_dir=dg.EnvVar("DBT_PROJECT"),
     profile="dagster_dbt_university",   # Must match the top-level key in profiles.yml
     target="dev", 
 )

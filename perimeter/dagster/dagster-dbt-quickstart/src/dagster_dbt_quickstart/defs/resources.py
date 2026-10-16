@@ -5,11 +5,11 @@ from dagster_dbt_quickstart.defs.assets.dbt import dbt_analytics
 
 
 database_resource = DuckDBResource(
-    database="/home/thuy/Documents/Learn/home/perimeter/dagster/dagster-dbt-quickstart/data/staging/data.duckdb"
+    database=dg.EnvVar("DUCKDB_DATABASE")
 )
 
 dbt_resource = DbtCliResource(
-    project_dir="/home/thuy/Documents/Learn/home/perimeter/dagster/dagster-dbt-quickstart/src/dagster_dbt_quickstart/analytics",
+    project_dir=dg.EnvVar("DBT_PROJECT"),
 )
 
 @dg.definitions
