@@ -12,6 +12,7 @@ dependencies = [
     "geopandas>=1.1.4",
     "matplotlib>=3.10.9",
     "pyarrow>=25.0.1",
+    "dbt-core>=1.12.5",
 ]
 
 [dependency-groups]
