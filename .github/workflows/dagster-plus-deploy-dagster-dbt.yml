@@ -59,6 +59,13 @@ jobs:
         if: steps.prerun.outputs.result != 'skip'
         run: ${{ steps.setup-python-version.outputs.python-path }} -m pip install uv
         shell: bash
+      
+      - name: Prepare dbt projects
+        run: |
+          cd src/dagster_dbt_quickstart/analytics
+          dbt deps
+          dbt compile
+          dbt parse
 
       # Sync all projects (workspace or single project)
       - name: Sync project dependencies
@@ -77,13 +84,6 @@ jobs:
         with:
           command: "plus deploy refresh-defs-state --target-path=${{ env.DAGSTER_PROJECT_DIR }}"
       
-      - name: Prepare dbt projects
-        run: |
-          cd src/dagster_dbt_quickstart/analytics
-          dbt deps
-          dbt compile
-          dbt parse
-
       # If using fast build, install setuptools for PEX builds
       - name: Install setuptools
         if: steps.prerun.outputs.result == 'pex-deploy'
