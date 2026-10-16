@@ -76,7 +76,7 @@ jobs:
           cd src/dagster_dbt_quickstart/analytics
           uv run dbt deps
           uv run dbt parse
-          uv run dbt compile --profiles-dir ${{ env.DAGSTER_PROJECT_DIR }}/src/dagster_dbt_quickstart/analytics
+          uv run dbt compile --profiles-dir src/dagster_dbt_quickstart/analytics
           uv run dbt parse
         shell: bash
 
