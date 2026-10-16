@@ -1,6 +1,10 @@
-name: Dagster Cloud Serverless Deployment
+name: Dagster Cloud Serverless Deployment Quickstart
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - 'perimeter/dagster/dagster-quickstart/**' # Triggers when any file in this folder changes
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
 
 concurrency:
   # Cancel in-progress deploys to same branch
@@ -8,13 +12,13 @@ concurrency:
   cancel-in-progress: true
 env:
   # The organization name in Dagster Cloud
-  DAGSTER_CLOUD_ORGANIZATION: "dagster-dbt-home"
+  DAGSTER_CLOUD_ORGANIZATION: "vungtaucity"
   # The Dagster Cloud URL
-  DAGSTER_CLOUD_URL: "https://dagster.cloud/dagster-dbt-home"
+  DAGSTER_CLOUD_URL: "https://dagster.cloud/vungtaucity"
   # The API token from https://dagster.cloud/ should be stored in Secrets
   DAGSTER_CLOUD_API_TOKEN: ${{ secrets.DAGSTER_CLOUD_API_TOKEN }}
   # Path to the root folder containing the dagster project
-  DAGSTER_PROJECT_DIR: "perimeter/dagster/dagster-dbt-quickstart"
+  DAGSTER_PROJECT_DIR: "perimeter/dagster/dagster-quickstart"
   # Enable PEX-based fast deploys (set to "false" to use Docker builds instead)
   ENABLE_FAST_DEPLOYS: "true"
   # Python version used to deploy the project
@@ -26,11 +30,11 @@ jobs:
   dagster_cloud_default_deploy:
     name: Dagster Serverless Deploy
     runs-on: ubuntu-22.04
-
+    
     steps:
       - name: Prerun Checks
         id: prerun
-        uses: dagster-io/dagster-cloud-action/actions/utils/prerun@v1.13.24
+        uses: dagster-io/dagster-cloud-action/actions/utils/prerun@v1.13.16
 
       - name: Checkout
         uses: actions/checkout@v6
@@ -40,7 +44,7 @@ jobs:
       # Detect if this is branch deployment and initialize the build session
       - name: Initialize build session
         id: ci-init
-        uses: dagster-io/dagster-cloud-action/actions/utils/dg-deploy-init@v1.13.24
+        uses: dagster-io/dagster-cloud-action/actions/utils/dg-deploy-init@v1.13.16
         with:
           project_dir: ${{ env.DAGSTER_PROJECT_DIR }}
           # A full deployment name. If this run is for a pull request, this value will be used as
@@ -73,16 +77,9 @@ jobs:
       # Refresh state for any StateBackedComponents in the project
       - name: Refresh defs state
         if: steps.prerun.outputs.result != 'skip'
-        uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.24
+        uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.16
         with:
           command: "plus deploy refresh-defs-state --target-path=${{ env.DAGSTER_PROJECT_DIR }}"
-      
-      - name: Prepare dbt projects
-        run: |
-          cd src/dagster_dbt_quickstart/analytics
-          dbt deps
-          dbt compile
-          dbt parse
 
       # If using fast build, install setuptools for PEX builds
       - name: Install setuptools
@@ -99,23 +96,23 @@ jobs:
       - name: Build and push
         id: build-and-push
         if: steps.prerun.outputs.result == 'pex-deploy' || steps.prerun.outputs.result == 'docker-deploy'
-        uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.24
+        uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.16
         with:
-          command: "plus deploy build-and-push --agent-type=serverless --python-version ${{ env.PYTHON_VERSION }} --build-strategy=${{ env.ENABLE_FAST_DEPLOYS == 'true' && 'python-executable' || 'docker' }}"
-
+          command: "plus deploy build-and-push --target-path=${{ env.DAGSTER_PROJECT_DIR }} --agent-type=serverless --python-version ${{ env.PYTHON_VERSION }} --build-strategy=${{ env.ENABLE_FAST_DEPLOYS == 'true' && 'python-executable'|| 'docker' }}"
+        
       # Deploy all code locations in this build session to Dagster Cloud
       - name: Deploy to Dagster Cloud
         id: ci-deploy
         if: steps.prerun.outputs.result != 'skip'
-        uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.24
+        uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.16
         with:
-          command: "plus deploy finish"
+          command: "plus deploy finish --target-path=${{ env.DAGSTER_PROJECT_DIR }} "
 
       # Update a PR comment - this runs always() so the comment is updated on success and failure
       - name: Update PR comment for branch deployments
         id: ci-notify
         if: steps.prerun.outputs.result != 'skip'
-        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v1.13.24
+        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v1.13.16
         with:
           command: "ci notify --project-dir=${{ env.DAGSTER_PROJECT_DIR }}"
 
@@ -123,6 +120,6 @@ jobs:
       - name: Generate a summary
         id: ci-summary
         if: steps.prerun.outputs.result != 'skip'
-        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v1.13.24
+        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v1.13.16
         with:
           command: "ci status --output-format=markdown >> $GITHUB_STEP_SUMMARY"
