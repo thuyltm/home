@@ -73,10 +73,10 @@ jobs:
       - name: Prepare dbt projects
         working-directory: ${{ env.DAGSTER_PROJECT_DIR }}
         run: |
-          cd perimeter/dagster/dagster-dbt-quickstart/src/dagster_dbt_quickstart/analytics
+          cd src/dagster_dbt_quickstart/analytics
           uv run dbt deps
           uv run dbt parse
-          uv run dbt compile --profiles-dir perimeter/dagster/dagster-dbt-quickstart/src/dagster_dbt_quickstart/analytics
+          uv run dbt compile --profiles-dir ${{ env.DAGSTER_PROJECT_DIR }}/src/dagster_dbt_quickstart/analytics
           uv run dbt parse
         shell: bash
 
