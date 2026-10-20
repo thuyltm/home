@@ -1,0 +1,78 @@
+name: DBT CI Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dbt-run:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/perimeter/dbt/dbt-ci
+
+    env:
+      # Tell dbt where to find the profiles.yml file in the repo
+      DBT_PROFILES_DIR: ${{ github.workspace }}/perimeter/dbt/dbt-ci
+      # Explicit file target location for the DuckDB instance
+      DUCKDB_PATH: ${{ github.workspace }}/perimeter/dbt/dbt-ci/data.duckdb
+
+    steps:
+      # 1. Check out repository files
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Install uv and cache the uv cache directory automatically
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          # Automatically caches the content-addressable uv store between runs
+          enable-cache: true
+          # Optional: Pin a specific version of uv
+          version: "latest"
+
+      # 3. Setup Python using the target version defined in your project (.python-version or pyproject.toml)
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install Dependencies
+        run: uv sync
+
+      # 4. Optional: Install dbt packages if your project uses packages.yml
+      - name: Install dbt Packages
+        run: uv run dbt deps
+
+      # 5. Validate the dbt setup and connections
+      - name: Compile dbt project
+        run: uv run dbt compile --profiles-dir .
+
+      # 6. Build and test models (dbt build handles seeding, running, and testing in order)
+      - name: Execute dbt Build
+        run: uv run dbt build 
+
+      # 7. Check if the file exists and save the result to outputs
+      - name: Check file existence
+        id: check_file
+        run: |
+          if [ -f "data.duckdb" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+      # 8. Use the output conditionally in a later step
+      - name: Only run if file exists
+        if: steps.check_file.outputs.exists == 'true'
+        run: echo "The generated file was found!"
+      
+      - name: Install DuckDB CLI
+        run: |
+          curl -sL https://install.duckdb.org | sh
+          echo "$HOME/.duckdb/cli/latest" >> $GITHUB_PATH
+
+      - name: Verify DuckDB CLI version
+        run: duckdb --version
+
+      - name: Check DuckDB with CLI
+        run: |
+          duckdb data.duckdb "SHOW TABLES;"
+          duckdb data.duckdb "SELECT count(*) FROM fct_customers;"
+

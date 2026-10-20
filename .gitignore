@@ -25,3 +25,6 @@ package-lock.yml
 package-lock.concurrent-update-lock
 dbt_packages/
 data.duckdb
+target
+logs
+uv.lock
