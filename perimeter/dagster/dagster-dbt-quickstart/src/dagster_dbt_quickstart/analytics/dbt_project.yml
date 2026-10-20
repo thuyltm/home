@@ -12,6 +12,10 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
+vars:
+  min_date: '2026-01-01'
+  max_date: '2026-01-01'
+
 models:
   analytics:
     +materialized: table

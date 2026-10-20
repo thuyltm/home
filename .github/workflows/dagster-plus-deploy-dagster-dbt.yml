@@ -14,9 +14,9 @@ env:
   # The API token from https://dagster.cloud/ should be stored in Secrets
   DAGSTER_CLOUD_API_TOKEN: ${{ secrets.DAGSTER_CLOUD_API_TOKEN }}
   # Path to the root folder containing the dagster project
-  DAGSTER_PROJECT_DIR: "perimeter/dagster/dagster-dbt-quickstart"
+  DAGSTER_PROJECT_DIR: "${{ github.workspace }}/perimeter/dagster/dagster-dbt-quickstart"
   # Enable PEX-based fast deploys (set to "false" to use Docker builds instead)
-  ENABLE_FAST_DEPLOYS: "true"
+  ENABLE_FAST_DEPLOYS: "false"
   # Python version used to deploy the project
   PYTHON_VERSION: "3.10"
   # GitHub token for PR comments and branch deployments
@@ -26,6 +26,9 @@ jobs:
   dagster_cloud_default_deploy:
     name: Dagster Serverless Deploy
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/perimeter/dagster/dagster-dbt-quickstart
 
     steps:
       - name: Prerun Checks
@@ -60,7 +63,6 @@ jobs:
         run: ${{ steps.setup-python-version.outputs.python-path }} -m pip install uv
         shell: bash
 
-      # Sync all projects (workspace or single project)
       - name: Sync project dependencies
         if: steps.prerun.outputs.result != 'skip'
         run: |
@@ -70,41 +72,43 @@ jobs:
           done
         shell: bash
       
-      - name: Prepare dbt projects
-        working-directory: ${{ env.DAGSTER_PROJECT_DIR }}
-        run: |
-          cd src/dagster_dbt_quickstart/analytics
-          uv run dbt deps
-          uv run dbt parse
-          uv run dbt compile --profiles-dir /home/runner/work/home/home/perimeter/dagster/dagster-dbt-quickstart/src/dagster_dbt_quickstart/analytics
-          uv run dbt parse
-        shell: bash
+      #- name: Print current directory
+      #  run: |
+      #    echo "Using environment variable: $GITHUB_WORKSPACE"
+      #    echo "Using standard PWD command: $(pwd)"
+      
+      #- name: Print Tree Structure
+      #  run: |
+      #    sudo apt-get install -y tree
+      #    tree # Displays up to 3 levels deep
 
-      # Refresh state for any StateBackedComponents in the project
+      # The combination of 'uses and with' execute a pre-made action 
+      # and pass configuration parameters to it      
       - name: Refresh defs state
         if: steps.prerun.outputs.result != 'skip'
         uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.24
         with:
           command: "plus deploy refresh-defs-state --target-path=${{ env.DAGSTER_PROJECT_DIR }}"
-      
-      # If using fast build, install setuptools for PEX builds
-      - name: Install setuptools
-        if: steps.prerun.outputs.result == 'pex-deploy'
-        run: ${{ steps.setup-python-version.outputs.python-path }} -m pip install setuptools
-        shell: bash
-
-      # Otherwise, enable buildx for caching Docker builds
+            
+      # enable buildx for caching Docker builds
       - name: Set up Docker Buildx
         if: steps.prerun.outputs.result == 'docker-deploy'
         uses: docker/setup-buildx-action@v3
-
-      # Build and push (PEX or Docker based on project configuration)
+      
+      - name: Prepare dbt projects
+        working-directory: ${{ github.workspace }}/perimeter/dagster/dagster-dbt-quickstart/src/dagster_dbt_quickstart/analytics
+        run: |
+          uv run dbt deps
+          uv run dbt compile
+          uv run dbt parse
+        shell: bash
+      
+      # Build and push (Docker based on project configuration)
       - name: Build and push
         id: build-and-push
-        if: steps.prerun.outputs.result == 'pex-deploy' || steps.prerun.outputs.result == 'docker-deploy'
         uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.24
         with:
-          command: "plus deploy build-and-push --agent-type=serverless --python-version ${{ env.PYTHON_VERSION }} --build-strategy=${{ env.ENABLE_FAST_DEPLOYS == 'true' && 'python-executable' || 'docker' }}"
+          command: "plus deploy build-and-push --target-path=${{ env.DAGSTER_PROJECT_DIR }} --agent-type=serverless --python-version ${{ env.PYTHON_VERSION }} --build-strategy=docker"
 
       # Deploy all code locations in this build session to Dagster Cloud
       - name: Deploy to Dagster Cloud
@@ -112,7 +116,7 @@ jobs:
         if: steps.prerun.outputs.result != 'skip'
         uses: dagster-io/dagster-cloud-action/actions/utils/dg-cli@v1.13.24
         with:
-          command: "plus deploy finish"
+          command: "plus deploy finish --target-path=${{ env.DAGSTER_PROJECT_DIR }}"
 
       # Update a PR comment - this runs always() so the comment is updated on success and failure
       - name: Update PR comment for branch deployments
@@ -129,3 +133,5 @@ jobs:
         uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v1.13.24
         with:
           command: "ci status --output-format=markdown >> $GITHUB_STEP_SUMMARY"
+
+      
