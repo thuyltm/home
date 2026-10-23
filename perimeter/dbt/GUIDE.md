@@ -1,3 +1,2 @@
 [Guide](https://docs.getdbt.com/guides?level=Beginner)
-[Quickstart for dbt and BigQuery](https://docs.getdbt.com/guides/bigquery?step=2)
-https://zenn.dev/coji/articles/dbt_bigquery_duckdb?locale=en
+https://learn.getdbt.com/learn/course/dbt-fundamentals/models-60min/building-your-first-model?page=1

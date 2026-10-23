@@ -13,9 +13,9 @@ dbt_trips_selection = dg.define_asset_job(
     selection=build_dbt_asset_selection([dbt_analytics], "stg_trips+")
 )
 
-zone_update_job = dg.define_asset_job(
-    name="zone_update_job",
-    selection=build_dbt_asset_selection([dbt_analytics], "stg_zone+")
+trip_update_job = dg.define_asset_job(
+    name="trip_update_job",
+    selection=build_dbt_asset_selection([dbt_analytics], "stg_trips").downstream()
 )
 
 # the build_dbt_asset_selection function only selects dbt models and not Dagster assets
@@ -28,13 +28,13 @@ location_metrics_update_job = dg.define_asset_job(
 daily_metrics_update_job = dg.define_asset_job(
     name="daily_metrics_update_job",
     partitions_def=daily_partition,
-    selection=build_dbt_asset_selection([incremental_dbt_models], "daily_metrics+")
+    selection=build_dbt_asset_selection([incremental_dbt_models], "daily_metrics").downstream()
 )
 
 # the AssetSelection.all() call load your dbt project into your Dagster project
 # Dagster will recognize and treat all of your dbt models as assets
-trip_update_job = dg.define_asset_job(
-    name="trip_update_job",
+trip_update_job_exclude = dg.define_asset_job(
+    name="trip_update_job_exclude",
     partitions_def=monthly_partition,   
     selection=dg.AssetSelection.all() - adhoc_request - trips_by_week
     - build_dbt_asset_selection([dbt_analytics], "stg_trips+")
