@@ -1,16 +1,35 @@
 from io import BytesIO
+from pathlib import Path
 
 import dagster as dg
 import pandas as pd
 from dagster_duckdb import DuckDBResource
 from . import constants
+import os
+
+@dg.asset
+def list_and_process_files(context: dg.AssetExecutionContext):
+    # Get filenames of all files in the current directory
+    files = [f.name for f in Path('.').iterdir() if f.is_file()]
+    context.log.info(files)
+    folders = [f.name for f in Path('.').iterdir() if f.is_dir()]
+    context.log.info(folders)
+    data_folders = Path('.').joinpath("data").resolve()
+    sub_data_folders = [f.name for f in data_folders.iterdir() if f.is_dir()]
+    context.log.info(sub_data_folders)
+    for file_name in sub_data_folders:
+        folder_path = Path('.').joinpath("data", file_name).resolve()
+        for item in folder_path.iterdir():
+            if item.is_file():
+                context.log.info(item.name)
 
 @dg.asset(
     group_name="raw_files",
     kinds={"python"},
 )
 def taxi_zones_file() -> dg.MaterializeResult:
-    file_to_read = "data/source/taxi_zones.csv"
+    parent_dir = Path('.').joinpath("data").resolve()
+    file_to_read = parent_dir.joinpath("source/taxi_zones.csv").resolve()
     # 1. Open the source file in read mode ('r')
     with open(file_to_read, 'rb') as source:
         # source.read() outputs a 'str' containing the file's content
@@ -49,7 +68,8 @@ def taxi_zones(context: dg.AssetExecutionContext, database: DuckDBResource):
     kinds={"duckdb"},
 )
 def taxi_trips_file(context: dg.AssetExecutionContext) -> dg.MaterializeResult:
-    file_to_read = "data/source/taxi_trips.parquet"
+    parent_dir = Path('.').joinpath("data").resolve()
+    file_to_read = parent_dir.joinpath("source/taxi_trips.parquet").resolve()
 
     # 1. Open the source file in read mode ('r')
     with open(file_to_read, 'rb') as source:
