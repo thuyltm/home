@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+data:
+  init.sql: |
+    -- Your initialization SQL commands go here
+    -- 1. Create the database
+    CREATE DATABASE test_db;
+
+    -- 3. Grant privileges to the user for that database
+    GRANT ALL PRIVILEGES ON DATABASE test_db TO test_user;
+    
+    -- 4. Change the owner of database 
+    ALTER DATABASE test_db OWNER TO test_user;

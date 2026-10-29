@@ -33,3 +33,8 @@ docker run --network zerocode-instrumentation_zerocode-instrumentation_default b
 docker run --network zerocode-instrumentation_zerocode-instrumentation_default curlimages/curl curl http://flask-test:5000/rolldice
 docker network inspect zerocode-instrumentation_zerocode-instrumentation_default
 ```
+
+```sh
+# remove all exited containers via filter
+docker rm $(docker ps -a -f status=exited -q)
+```

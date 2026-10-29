@@ -1,0 +1,8 @@
+storage:
+  postgres:
+    postgres_db:
+      username: test_user
+      password: test_pass
+      hostname: my-postgres.default.svc.cluster.local
+      db_name: test_db
+      port: 5432

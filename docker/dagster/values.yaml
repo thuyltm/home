@@ -1,0 +1,43 @@
+# values.yaml
+# Use K8sRunLauncher to spin up a new K8s Job for each pipeline run
+runLauncher:
+  type: K8sRunLauncher
+  config:
+    k8sRunLauncher:
+      jobNamespace: dagster
+
+# Use an external PostgreSQL instance for run/event metadata storage
+
+global:
+  # 1. Provide an externally managed Kubernetes secret for the PG password
+  postgresqlSecretName: "my-dagster-postgresql-secret"
+
+postgresql:
+  # 2. Disable the built-in Bitnami PostgreSQL subchart
+  enabled: false
+  
+  # 3. Supply the external connection details
+  postgresqlHost: "my-postgres.default.svc.cluster.local"
+  postgresqlUsername: "test_user"
+  postgresqlDatabase: "test_db"
+  postgresqlPassword: "test_pass"
+  postgresqlParams: {} # Optional extra parameters
+  port: 5432
+
+workspace:
+  # Do NOT set this to false if you are using the subchart below
+  enabled: true 
+
+dagster-user-deployments:
+  enabled: true
+  enableSubchart: true
+  deployments:
+    - name: "my-dagster-quickstart"
+      image:
+        repository: "thuyltm2201/my-dagster-quickstart"
+        tag: "latest"
+        pullPolicy: IfNotPresent
+      port: 4000
+      dagsterApiGrpcArgs:
+        - "-m"
+        - "dagster_postgresql_quickstart.definitions"
