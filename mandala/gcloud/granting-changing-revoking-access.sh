@@ -15,3 +15,6 @@ gcloud projects add-iam-policy-binding articulate-run-306102 \
     --role="roles/iam.serviceAccountAdmin"
 #gcloud RESOURCE_TYPE remove-iam-policy-binding RESOURCE_ID
 #   --member=PRINCIPAL --role=ROLE_NAME
+# To see what roles a service account has inherited at the project level
+gcloud projects get-iam-policy articulate-run-306102 \
+    --filter="bindings.members:serviceAccount:thuy-le-thi-minh@articulate-run-306102.iam.gserviceaccount.com"

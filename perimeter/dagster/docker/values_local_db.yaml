@@ -4,13 +4,17 @@ runLauncher:
   type: K8sRunLauncher
   config:
     k8sRunLauncher:
-      jobNamespace: dagster
+      jobNamespace: default
 
 # Use an external PostgreSQL instance for run/event metadata storage
 
 global:
   # 1. Provide an externally managed Kubernetes secret for the PG password
   postgresqlSecretName: "my-dagster-postgresql-secret"
+  #serviceAccount:
+    #annotations:
+      #iam.gke.io/gcp-service-account: "dagster-gcp-sa@://gserviceaccount.com"
+
 
 postgresql:
   # 2. Disable the built-in Bitnami PostgreSQL subchart
@@ -34,10 +38,38 @@ dagster-user-deployments:
   deployments:
     - name: "my-dagster-quickstart"
       image:
-        repository: "thuyltm2201/my-dagster-quickstart"
+        repository: "docker.io/thuyltm2201/my-dagster-quickstart"
         tag: "latest"
         pullPolicy: IfNotPresent
       port: 4000
       dagsterApiGrpcArgs:
         - "-m"
         - "dagster_postgresql_quickstart.definitions"
+      workingDir: /dagster-postgresql-quickstart
+      env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+        - name: GOOGLE_API_USE_CLIENT_CERTIFICATE
+          value: "false"
+        - name: DAGSTER_HOME
+          value: "/dagster-postgresql-quickstart"
+        - name: DB_USER
+          value: test_user
+        - name: DB_PASSWORD
+          value: test_pass
+        - name: DB_HOST
+          value:  my-postgres.default.svc.cluster.local
+        - name: DB_NAME
+          value: test_db
+        - name: PYTHONPATH
+          value: "/dagster-postgresql-quickstart/src"
+      volumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+          readOnly: true
+      volumes:
+      - name: google-cloud-key
+        secret:
+          secretName: gcp-service-account-secret
+
+

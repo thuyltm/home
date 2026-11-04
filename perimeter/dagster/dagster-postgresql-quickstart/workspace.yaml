@@ -1,0 +1,4 @@
+load_from:
+  - python_file:
+      relative_path: "src/dagster_postgresql_quickstart/definitions.py"
+      working_directory: "."  # Explicitly sets the base path for imports

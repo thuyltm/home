@@ -1,8 +1,13 @@
 storage:
   postgres:
     postgres_db:
-      username: test_user
-      password: test_pass
-      hostname: my-postgres.default.svc.cluster.local
-      db_name: test_db
+      username:
+        env: DB_USER
+      password:
+        env: DB_PASSWORD
+      hostname:
+        env: DB_HOST
+      db_name:
+        env: DB_NAME
       port: 5432
+#service_account_name: my-gcp-authorized-k8s-sa

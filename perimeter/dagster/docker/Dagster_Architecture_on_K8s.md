@@ -1,0 +1,3 @@
+A major advantage of Dagster's architecture is the separation between the Webserver, Daemon and your Code Locations.
+- When your CI/CD pipeline pushes a new code location container image and redeployes, the Dagster daemon detects that a new gRPC server container has rolled out
+- The Dagster Webserver will automatically reload "Code Location updated" in the workspace without interrupting active, running pipelines

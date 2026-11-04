@@ -1,0 +1,10 @@
+dagster==1.13.27
+dagster-k8s>=0.29.27
+dagster-postgres>=0.29.27
+grpcio>=1.85.0
+grpcio-tools>=1.81.1
+pandas>=2.3.3
+sqlalchemy<2.1
+dagster-gcp>=0.29.26
+dagster-dg-cli
+dagster-webserver
