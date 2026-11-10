@@ -5,3 +5,6 @@
 [Store and manage data using a MySQL database with Cloud SQL](https://docs.cloud.google.com/sql/docs/mysql/cloud-sdk)
 [Make your applications and services available to your users with Cloud DNS](https://docs.cloud.google.com/dns/docs/set-up-dns-records-domain-name)
 [Google Cluster](https://docs.cloud.google.com/managed-spark/docs/quickstarts/create-cluster-console)
+[CI/CD](https://www.skills.google/course_templates/691)
+[Create Spark Clusters with Managed Service for Spark](https://www.skills.google/focuses/586?parent=catalog)
+[Professional Data Engineer Certification](https://www.skills.google/paths/16)
